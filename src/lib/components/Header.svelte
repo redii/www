@@ -25,7 +25,7 @@
 				<Menu />
 			</button>
 		</div>
-		<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+		<div class="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
 			<a
 				href="https://github.com/redii"
 				class="rounded-full p-2 text-gray-900 duration-200 hover:bg-muted"
