@@ -17,7 +17,7 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-	<meta name="theme-color" content="#F3F4F6" />
+	<meta name="theme-color" content="#FFFFFF" />
 </svelte:head>
 
 <Header />
