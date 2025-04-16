@@ -21,6 +21,9 @@ Diese Seite hier ist also keine simple statische Webseite bestehend aus einzelne
 
 <small>Eigentlich arbeite ich schon mehrere Jahre mit SvelteKit, allerdings habe mich bisher immer dagegen gesträubt es auch auf meiner persönlichen Webseite zu verwenden, da es diese unnötig komplex gemacht hätte.</small>
 
+![Svelte Hero](/posts/svelte-hero.jpg)
+_Ein ziemlich nichtssagendes aber cooles Svelte Marketing Bild_
+
 ## Content Management System
 
 In der letzten Version der Seite, welche noch einen Static Site Generator verwendet hatte, war mein CMS im Grund eine Ordnerstruktur mit darin enthaltenen [Markdown](https://www.markdownguide.org/getting-started/) Dateien. Eigentlich war das alles was ich brauche und wäre auch noch in dieser neuen Version meistens ausreichend - meistens aber eben nicht immer. Aus diesem Grund verwendet die neue Webseite nun ein CMS names [Directus](https://directus.io/).
@@ -39,3 +42,7 @@ Directus ist ein Open-Source Headless CMS, das es mir ziemlich einfach macht, di
 _Bearbeiten der ITADM Kursinhalte im Directus CMS_
 
 Das CMS ist Headless, was bedeutet, dass ich **lediglich die Inhalte** dieser Webseite darin verwalte, nicht aber das Design oder Layout. Die gesamte Struktur der Webseite habe ich händisch mit Svelte programmiert, mit der Hilfe von [TailwindCSS](https://tailwindcss.com/) und ein paar [Shadcn-Svelte](https://www.shadcn-svelte.com/) Komponenten. Der Code der diesen Blog-Post hier in eine Struktur bringt, findest du [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/posts/%5Bslug%5D/%2Bpage.svelte>), das übergeordnete Layout mit Header und Footer [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/%2Blayout.svelte>).
+
+## Fazit
+
+Mit dieser Version bin ich jetzt erstmal zufrieden aber das ist man wahrscheinlich immer mit einem frisch fertiggestellten Projekt. Auch für die Zukunft sollte die technische Grundlage erstmal mehr als ausreichen, um potenzielle Projekte umzusetzen. Mal schauen wie ich darüber in einem Jahr denke... Vielleicht schreibe ich nochmal ein kurzes Update aber wahrscheinlich eher nicht 😁

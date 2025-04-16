@@ -15,7 +15,7 @@
 				src="/images/waving-hand.png"
 				alt="Waving Hand 👋"
 				class="animate-wave relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right"
-				style="animation-delay: 2s;"
+				style="animation-delay: 1.5s;"
 			/>
 		</span>
 		<h1 class="sr-only">Henry Akmann</h1>
