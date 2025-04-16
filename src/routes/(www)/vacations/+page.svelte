@@ -28,7 +28,7 @@
 			title: v.title,
 			href: `/vacations/${v.id}`,
 			date: v.start_date,
-			image: v.image
+			imageId: v.image
 		};
 	})}
 />
