@@ -2,6 +2,7 @@
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Button } from '$lib/components/ui/button';
+	import { House } from 'lucide-svelte';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
@@ -12,10 +13,16 @@
 	const vacationYear = startDate.getFullYear();
 </script>
 
-<Breadcrumb.Root class="mb-4 sm:mb-8">
+<Breadcrumb.Root class="mb-8">
 	<Breadcrumb.List>
 		<Breadcrumb.Item>
-			<Breadcrumb.Link href="/vacations">Übersicht</Breadcrumb.Link>
+			<Breadcrumb.Link href="/">
+				<House size={16} />
+			</Breadcrumb.Link>
+		</Breadcrumb.Item>
+		<Breadcrumb.Separator />
+		<Breadcrumb.Item>
+			<Breadcrumb.Link href="/vacations">Urlaube</Breadcrumb.Link>
 		</Breadcrumb.Item>
 		<Breadcrumb.Separator />
 		<Breadcrumb.Item>
@@ -27,10 +34,10 @@
 <img
 	src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}`}
 	alt={data.vacation.title}
-	class="max-h-80 w-full rounded-2xl object-cover object-center sm:max-h-[400px]"
+	class="max-h-80 w-full rounded-2xl border border-gray-200 object-cover object-center shadow-sm sm:max-h-[400px]"
 />
 
-<section id="vacation-heading" class="my-10 lg:mb-14">
+<section id="vacation-heading" class="mb-16 mt-8">
 	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 		{data.vacation.title}
 	</h1>
@@ -40,7 +47,7 @@
 	</time>
 </section>
 
-<ul class="mb-10 flex flex-col gap-12 lg:gap-16">
+<ul class="mb-10 flex flex-col gap-16">
 	{#each data.vacationDays as day}
 		{@const dayDate = new Date(day.date)}
 		{@const longitude = day.location.coordinates[0]}
@@ -65,7 +72,7 @@
 				<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
 					{#each day.images as entry}
 						<a
-							data-fslightbox
+							data-fslightbox="gallery"
 							data-type="image"
 							href={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
 						>

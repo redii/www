@@ -1,6 +1,27 @@
 <script lang="ts">
+	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
+	import { House } from 'lucide-svelte';
+
 	export let data;
 </script>
+
+<Breadcrumb.Root class="mb-8">
+	<Breadcrumb.List>
+		<Breadcrumb.Item>
+			<Breadcrumb.Link href="/">
+				<House size={16} />
+			</Breadcrumb.Link>
+		</Breadcrumb.Item>
+		<Breadcrumb.Separator />
+		<Breadcrumb.Item>
+			<Breadcrumb.Link href="/posts">Blog</Breadcrumb.Link>
+		</Breadcrumb.Item>
+		<Breadcrumb.Separator />
+		<Breadcrumb.Item>
+			<Breadcrumb.Page>{data.meta.slug}</Breadcrumb.Page>
+		</Breadcrumb.Item>
+	</Breadcrumb.List>
+</Breadcrumb.Root>
 
 <section>
 	{#if data.meta.image}
@@ -19,6 +40,6 @@
 	</time>
 </section>
 
-<article class="prose lg:prose-lg mt-12 max-w-full">
+<article class="prose mt-12 max-w-full lg:prose-lg">
 	{@html data.content}
 </article>

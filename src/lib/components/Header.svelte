@@ -4,7 +4,7 @@
 	let mobileMenuOpen = $state(false);
 </script>
 
-<header class="sticky top-0 border-b border-gray-200">
+<header class="sticky top-0 z-50 border-b border-gray-200">
 	<nav
 		class="sticky top-0 mx-auto flex h-[64px] max-w-4xl items-center justify-between bg-background/75 px-6 backdrop-blur lg:px-8"
 		aria-label="Global"
@@ -44,9 +44,9 @@
 	<!-- Mobile menu, show/hide based on menu open state. -->
 	<div class="lg:hidden" class:hidden={!mobileMenuOpen} role="dialog" aria-modal="true">
 		<!-- Background backdrop, show/hide based on slide-over state. -->
-		<div class="fixed inset-0 z-10"></div>
+		<div class="z-60 fixed inset-0"></div>
 		<div
-			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-white px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 		>
 			<div class="flex items-center justify-between">
 				<a href="/" class="-m-1.5 p-1.5 sm:invisible">

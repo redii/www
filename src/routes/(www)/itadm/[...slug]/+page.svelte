@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
+	import PageList from '$lib/components/PageList.svelte';
 	import { House } from 'lucide-svelte';
 
 	export let data;
@@ -62,65 +63,20 @@
 	</time>
 </section>
 
-<article class="prose lg:prose-lg my-12 max-w-full">
+<article class="prose my-12 max-w-full lg:prose-lg">
 	{@html data.html.code
 		.replace(/>{@html `<code class="language-/g, '><code class="language-')
 		.replace(/<\/code>`}<\/pre>/g, '</code></pre>')}
 </article>
 
-{#if data.page.childs}
-	<section>
-		<h2 class="sr-only">Beiträge</h2>
-		<div class="grid auto-rows-fr grid-cols-1 gap-8">
-			{#each data.page.childs as child}
-				{@const childPath = [...data.path, child.slug].join('/')}
-				<article
-					class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-64 sm:pt-40"
-				>
-					{#if child.image}
-						<img
-							src={`https://cms.akmann.dev/assets/${child.image}`}
-							alt={child.title}
-							class="absolute inset-0 -z-10 size-full object-cover"
-						/>
-					{/if}
-					<div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-					<div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
-
-					<div class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm/6 text-muted">
-						<time datetime={child.date_updated}>
-							{new Date(child.date_updated).toLocaleDateString('de')}
-						</time>
-					</div>
-					<h3 class="mt-1 text-3xl font-semibold tracking-tight text-white transition-colors">
-						<a href={`/itadm/${childPath}`}>
-							<span class="absolute inset-0"></span>
-							{child.title}
-						</a>
-					</h3>
-					{#if child.description}
-						<p class="mt-2 leading-7 text-muted">{child.description}</p>
-					{/if}
-				</article>
-			{/each}
-		</div>
-	</section>
-{/if}
-
-<style>
-	:global(details > summary) {
-		font-size: 90%;
-		font-weight: 600;
-		cursor: pointer;
-		margin-bottom: 1rem;
-	}
-
-	:global(details > summary::-webkit-details-marker) {
-		display: none;
-	}
-
-	:global(details div:first-of-type) {
-		font-size: 90%;
-		@apply rounded-lg border bg-card p-6 text-card-foreground shadow-sm;
-	}
-</style>
+<PageList
+	pages={data.page.childs.map((c) => {
+		return {
+			title: c.title,
+			href: '/itadm/' + [...data.path, c.slug].join('/'),
+			date: c.date_updated,
+			description: c.description,
+			image: c.image
+		};
+	})}
+/>

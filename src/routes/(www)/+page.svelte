@@ -2,7 +2,7 @@
 	import * as Card from '$lib/components/ui/card';
 </script>
 
-<div class="mt-8 flex flex-col items-center gap-14 md:mt-12 lg:flex-row">
+<div class="flex flex-col items-center gap-14 md:mt-12 lg:flex-row">
 	<img src="/images/pp.jpg" alt="Henry Akmann" class="mx-auto h-64 w-64 rounded-full bg-muted" />
 	<div>
 		<span class="scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">Moin 👋</span>
