@@ -5,7 +5,16 @@
 <div class="flex flex-col items-center gap-14 md:mt-12 lg:flex-row">
 	<img src="/images/pp.jpg" alt="Henry Akmann" class="mx-auto h-64 w-64 rounded-full bg-muted" />
 	<div>
-		<span class="scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">Moin 👋</span>
+		<span class="scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl">
+			Moin
+			<img
+				src="/images/waving-hand.png"
+				alt="Waving Hand 👋"
+				class="animate-wave relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right"
+				style="animation-delay: 2s;"
+			/>
+		</span>
+		<h1 class="sr-only">Henry Akmann</h1>
 		<p class="leading-7 [&:not(:first-child)]:mt-6">
 			Ich bin Henry, komme aus Hannover und ich programmiere und baue gerne Dinge.
 		</p>

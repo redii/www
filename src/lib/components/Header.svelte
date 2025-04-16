@@ -4,9 +4,9 @@
 	let mobileMenuOpen = $state(false);
 </script>
 
-<header class="sticky top-0 z-50 border-b border-gray-200">
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-background/75">
 	<nav
-		class="sticky top-0 mx-auto flex h-[64px] max-w-4xl items-center justify-between bg-background/75 px-6 backdrop-blur lg:px-8"
+		class="sticky top-0 mx-auto flex h-[64px] max-w-4xl items-center justify-between px-6 backdrop-blur lg:px-8"
 		aria-label="Global"
 	>
 		<div class="flex lg:flex-1">

@@ -26,17 +26,38 @@
 	<meta name="theme-color" content="#FFFFFF" />
 </svelte:head>
 
+<div class="pattern"></div>
 <Header />
-
 <main
-	class="mx-auto min-h-[calc(100vh-64px-192px)] max-w-4xl px-4 pb-32 pt-12 sm:px-16 sm:px-6 lg:min-h-[calc(100vh-64px-128px)] lg:px-8 lg:pb-20 lg:pt-16"
+	class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-4 py-12 sm:px-16 sm:px-6 lg:min-h-[calc(100vh-64px-128px)] lg:px-8 lg:py-16"
 >
 	{@render children()}
 </main>
-
 <Footer />
 
 <style>
+	.pattern {
+		position: absolute;
+		z-index: -10;
+		width: 100vw;
+		height: 100vh;
+		background-color: #ffffff;
+		opacity: 0.5;
+		background-image:
+			repeating-radial-gradient(circle at 0 0, transparent 0, #ffffff 21px),
+			repeating-linear-gradient(#f4f4f555, #f4f4f5);
+	}
+
+	.pattern::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+	}
+
 	:global(.prose details > summary) {
 		font-size: 90%;
 		font-weight: 600;
