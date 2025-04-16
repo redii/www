@@ -46,7 +46,7 @@
 
 	{#if data.page.image}
 		<img
-			class="mb-12 w-full rounded-2xl border border-gray-200 object-contain md:mb-20"
+			class="mb-12 w-full rounded-2xl border border-gray-200 object-contain md:mb-16"
 			src={`https://cms.akmann.dev/assets/${data.page.image}`}
 			alt={data.page.title}
 		/>

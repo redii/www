@@ -8,6 +8,7 @@
 			date: string;
 			description?: string;
 			image?: string;
+			imageId?: string;
 		}[];
 	}
 
@@ -21,9 +22,11 @@
 				<article
 					class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-56 sm:pt-40"
 				>
-					{#if page.image}
+					{#if page.image || page.imageId}
 						<img
-							src={`${PUBLIC_DIRECTUS_URL}/assets/${page.image}`}
+							src={page.image
+								? page.image
+								: `${PUBLIC_DIRECTUS_URL}/assets/${page.imageId}?width=1024&quality=75`}
 							alt={page.title}
 							class="absolute inset-0 -z-10 size-full object-cover"
 						/>
