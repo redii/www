@@ -76,7 +76,7 @@
 			href: '/itadm/' + [...data.path, c.slug].join('/'),
 			date: c.date_updated,
 			description: c.description,
-			image: c.image
+			imageId: c.image
 		};
 	})}
 />
