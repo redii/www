@@ -63,7 +63,7 @@
 				</button>
 			</div>
 			<div class="mt-6 flow-root">
-				<div class="flex flex-col items-center gap-6 py-6">
+				<div class="flex min-h-96 flex-col items-center justify-center gap-6 py-6">
 					<a
 						href="https://github.com"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"

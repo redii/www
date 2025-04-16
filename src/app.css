@@ -3,6 +3,34 @@
 @tailwind utilities;
 @plugin "@tailwindcss/typography";
 
+/* Custom CSS start */
+
+.prose details > summary {
+  font-size: 90%;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.prose details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose details div:first-of-type {
+  font-size: 90%;
+  @apply rounded-lg border bg-card p-6 text-card-foreground shadow-sm;
+}
+
+.prose img {
+  @apply rounded-2xl border border-gray-200 object-contain shadow-sm;
+}
+
+.prose p:has(img) > em {
+  @apply -mt-4 block text-sm text-muted-foreground;
+}
+
+/* Custom CSS end */
+
 @layer base {
   :root {
     --background: 0 0% 100%;
