@@ -1,6 +1,6 @@
 ---
 title: Hello World 👀
-description: Ein Post darüber, wie diese Webseite hier funktioniert.
+description: Ein Post darüber, wie diese Webseite funktioniert.
 date: 2025-4-16
 image: /posts/hello-world.jpg
 ---
