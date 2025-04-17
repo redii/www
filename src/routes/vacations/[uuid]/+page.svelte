@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Button } from '$lib/components/ui/button';
@@ -11,6 +12,10 @@
 	const startDate = new Date(data.vacation.start_date);
 	const vacationMonth = startDate.toLocaleString('de', { month: 'long' });
 	const vacationYear = startDate.getFullYear();
+
+	onMount(async () => {
+		(await import('fslightbox')).default;
+	});
 </script>
 
 <Breadcrumb.Root class="mb-8">

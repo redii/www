@@ -1,13 +1,8 @@
 <script lang="ts">
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Pattern from '$lib/components/Pattern.svelte';
-
-	onMount(async () => {
-		(await import('fslightbox')).default;
-	});
 
 	let { children } = $props();
 </script>
