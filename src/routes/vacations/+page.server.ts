@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit';
 import { readItems } from '$lib/utils/directus';
 import type { PageServerLoad } from './$types';
 

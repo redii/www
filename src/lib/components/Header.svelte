@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { Menu, X, Github, Mail } from '@lucide/svelte';
+	import { page } from '$app/state';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Button } from '$lib/components/ui/button';
+	import { Menu, X, Github, Mail, LogIn, LogOut } from '@lucide/svelte';
 
 	let mobileMenuOpen = $state(false);
 </script>
@@ -38,6 +42,36 @@
 			>
 				<Mail />
 			</a>
+			{#if page?.data?.session}
+				{@const user = page?.data?.session?.user}
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger class="ml-2">
+						<Avatar.Root>
+							<Avatar.Image
+								src={page?.data?.session?.user?.image}
+								alt={page?.data?.session?.user?.name}
+							/>
+							<Avatar.Fallback>
+								{user?.name?.split(' ')[0].split('')[0]}{user?.name?.split(' ')[1].split('')[0]}
+							</Avatar.Fallback>
+						</Avatar.Root>
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Group>
+							<DropdownMenu.Item>
+								<a href="/app">Dashboard</a>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item>
+								<form action="/logout" method="POST">
+									<button type="submit">Logout</button>
+								</form>
+							</DropdownMenu.Item>
+						</DropdownMenu.Group>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			{:else}
+				<Button variant="secondary" href="/login" class="ml-2">Einloggen</Button>
+			{/if}
 		</div>
 	</nav>
 
@@ -64,9 +98,52 @@
 			</div>
 			<div class="mt-6 flow-root">
 				<div class="flex min-h-96 flex-col items-center justify-center gap-6 py-6">
+					{#if page?.data?.session}
+						{@const user = page?.data?.session?.user}
+						<div class="mb-12 flex flex-row items-center gap-3">
+							<Avatar.Root class="h-24 w-24">
+								<Avatar.Image
+									src={page?.data?.session?.user?.image}
+									alt={page?.data?.session?.user?.name}
+								/>
+								<Avatar.Fallback>
+									{user?.name?.split(' ')[0].split('')[0]}{user?.name?.split(' ')[1].split('')[0]}
+								</Avatar.Fallback>
+							</Avatar.Root>
+							<div>
+								<p class="text-xl font-semibold text-gray-900">
+									{user?.name}
+								</p>
+								<p class="text-sm text-muted-foreground">{page?.data?.session?.user?.email}</p>
+								<form action="/logout" method="POST" class="mt-2">
+									<Button variant="outline" size="sm" type="submit">
+										<LogOut />
+										Logout
+									</Button>
+								</form>
+							</div>
+						</div>
+						<a
+							href="/app"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+							onclick={() => (mobileMenuOpen = false)}
+						>
+							Dashboard
+						</a>
+					{:else}
+						<a
+							href="/login"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+							onclick={() => (mobileMenuOpen = false)}
+						>
+							<LogIn class="mr-2 inline" size={24} />
+							Einloggen
+						</a>
+					{/if}
 					<a
 						href="https://github.com"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Github class="mr-2 inline" size={24} />
 						Github
@@ -74,6 +151,7 @@
 					<a
 						href="moin@akmann.dev"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Mail class="mr-2 inline" size={24} />
 						Email
