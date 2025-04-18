@@ -13,7 +13,7 @@ Die Webseite die du gerade siehst, habe ich schon mehrfach neugebaut und werde d
 
 ### Ein "neues" Framework
 
-Also habe ich meine Webseite mal wieder neu aufgebaut... dieses Mal allerdings mit [SvelteKit](https://svelte.dev/). Um zu verstehen, welche Vorteile SvelteKit gegenüber Hugo hat, lohnt sich ein Blick auf die Webseite des Frameworks, dort wird es wie folgt beschrieben:
+Also habe ich meine Webseite mal wieder neu aufgebaut. Dieses Mal aber mit [SvelteKit](https://svelte.dev/). Um zu verstehen, welche Vorteile SvelteKit gegenüber Hugo bietet, lohnt sich ein Blick auf die Webseite des Frameworks, dort wird es wie folgt beschrieben:
 
 > SvelteKit is a framework for rapidly developing robust, performant web applications using Svelte.
 
@@ -26,22 +26,22 @@ _Ein ziemlich nichtssagendes aber cooles Svelte Marketing Bild_
 
 ## Content Management System
 
-In der letzten Version der Seite, welche noch einen Static Site Generator verwendet hatte, war mein CMS im Grund eine Ordnerstruktur mit darin enthaltenen [Markdown](https://www.markdownguide.org/getting-started/) Dateien. Eigentlich war das alles was ich brauche und wäre auch noch in dieser neuen Version meistens ausreichend - meistens aber eben nicht immer. Aus diesem Grund verwendet die neue Webseite nun ein CMS names [Directus](https://directus.io/).
+In der letzten Version, für die ich noch einen Static Site Generator verwendet hatte, war mein CMS im Grund eine Ordnerstruktur mit darin enthaltenen [Markdown](https://www.markdownguide.org/getting-started/) Dateien. Eigentlich wäre das auch für die neue Version in den meisten Fällen ausreichend gewesen - meistens aber eben nicht immer. Aus diesem Grund verwendet die neue Webseite nun ein CMS names [Directus](https://directus.io/).
 
 <small>
 
-Weil ich das Arbeiten mit einfachen Markdown-Dateien im Repository der Webseite aber so schön fand, habe ich mich doch nicht ganz davon getrennt. Meine Blog Posts - [wie dieser hier gerade](https://github.com/redii/www/blob/main/src/content/posts/hello-world.md) - schreibe ich auch in der aktuellen Version noch in einfachen Markdown Dateien und nicht über das Directus CMS. Eigentlich überflüssig aber why not...
+Weil ich das Arbeiten mit einfachen Markdown-Dateien im Repository der Webseite aber so schön fand, habe ich mich doch nicht ganz davon getrennt. Meine Blog Posts - [wie diesen](https://github.com/redii/www/blob/main/src/content/posts/hello-world.md) - schreibe ich auch in der aktuellen Version noch in einfachen Markdown Dateien und nicht über das Directus CMS. Eigentlich überflüssig aber why not...
 
 </small>
 
 ### Directus
 
-Directus ist ein Open-Source Headless CMS, das es mir ziemlich einfach macht, die Inhalte meiner Webseite in echtzeit zu verwalten. Dafür muss ich mich nun nur noch auf [cms.akmann.dev](https://cms.akmann.dev) einloggen und kann dort (fast) alle Inhalte meiner Webseite über ein schönes Dashboard bearbeiten. Das CMS hoste ich selbst auf dem selben Server auf dem auch diese Webseite gerade läuft in einem Docker Container.
+Directus ist ein Open-Source Headless CMS, das es mir ziemlich einfach macht, die Inhalte meiner Webseite in echtzeit zu verwalten. Dafür muss ich mich nur auf [cms.akmann.dev](https://cms.akmann.dev) einloggen und kann dort (fast) alle Inhalte meiner Webseite über ein schönes Dashboard bearbeiten. Das CMS hoste ich in einem Docker Container auf dem selben Server auf dem auch die Webapp läuft.
 
 ![Directus Dashboard](/posts/directus_editing_itadm.png)
 _Bearbeiten der ITADM Kursinhalte im Directus CMS_
 
-Das CMS ist Headless, was bedeutet, dass ich **lediglich die Inhalte** dieser Webseite darin verwalte, nicht aber das Design oder Layout. Die gesamte Struktur der Webseite habe ich händisch mit Svelte programmiert, mit der Hilfe von [TailwindCSS](https://tailwindcss.com/) und ein paar [Shadcn-Svelte](https://www.shadcn-svelte.com/) Komponenten. Der Code der diesen Blog-Post hier in eine Struktur bringt, findest du [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/posts/%5Bslug%5D/%2Bpage.svelte>), das übergeordnete Layout mit Header und Footer [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/%2Blayout.svelte>).
+Das CMS ist Headless, was bedeutet, dass ich **lediglich die Inhalte dieser Webseite** darin verwalte, nicht aber das Design oder Layout. Die gesamte Struktur der Webseite (bestehend aus Header, Footer usw.) habe ich händisch mit Svelte programmiert - mit der Hilfe von [TailwindCSS](https://tailwindcss.com/) und ein paar [Shadcn-Svelte](https://www.shadcn-svelte.com/) Komponenten. Der Code der diesen Blog-Post hier in eine Struktur bringt, findest du in [dieser Datei](<https://github.com/redii/www/blob/main/src/routes/(www)/posts/%5Bslug%5D/%2Bpage.svelte>), das übergeordnete Layout mit Header und Footer [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/%2Blayout.svelte>).
 
 ## Fazit
 
