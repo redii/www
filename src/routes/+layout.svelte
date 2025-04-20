@@ -3,6 +3,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Pattern from '$lib/components/Pattern.svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	let { children } = $props();
 </script>
@@ -30,3 +31,4 @@
 	{@render children()}
 </main>
 <Footer />
+<Toaster richColors />

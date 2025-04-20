@@ -1,9 +1,10 @@
 import { error } from '@sveltejs/kit';
 import { compile } from 'mdsvex';
 import { readItems, readItem } from '$lib/utils/directus';
+import { getDropletsByTag } from '$lib/utils/digitalocean';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, cookies }) => {
 	const slug = params.slug ? params.slug.split('/').pop() : '/';
 
 	const pageList = await readItems('itadm_content', {
@@ -27,9 +28,41 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const html = await compile(page.text);
 
+	let droplet = null;
+	let totalDropletsCount = 0;
+	let freeDropletsCount = 0;
+	const claimCode = cookies.get('dropletClaimCode');
+
+	if (claimCode) {
+		const result = await getDropletsByTag(claimCode);
+		if (result.droplets.length) {
+			droplet = {
+				id: result.droplets[0].id,
+				status: result.droplets[0].status,
+				name: result.droplets[0].name,
+				region: result.droplets[0].region.slug,
+				size: result.droplets[0].size.slug,
+				ipv4: result.droplets[0].networks.v4.find((a) => !a.ip_address.startsWith('10.'))
+					.ip_address,
+				claimCode
+			};
+		} else {
+			cookies.delete('dropletClaimCode', { path: '/' });
+		}
+	}
+
+	if (!droplet) {
+		const allDroplets = (await getDropletsByTag('itadm'))?.droplets || [];
+		totalDropletsCount = allDroplets.length;
+		freeDropletsCount = allDroplets.filter((d) => d.tags.length === 1).length;
+	}
+
 	return {
 		path,
 		page,
-		html
+		html,
+		droplet,
+		totalDropletsCount,
+		freeDropletsCount
 	};
 };
