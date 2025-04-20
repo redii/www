@@ -4,7 +4,7 @@
 
 <div class="flex flex-col items-center gap-14 md:mt-12 lg:flex-row">
 	<img
-		src="/images/pp.jpg"
+		src="/images/pp.jpeg"
 		alt="Henry Akmann"
 		class="mx-auto h-64 w-64 rounded-full border border-gray-200 bg-muted shadow-sm"
 	/>
@@ -14,7 +14,7 @@
 			<img
 				src="/images/waving-hand.png"
 				alt="Waving Hand 👋"
-				class="animate-wave relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right"
+				class="relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right animate-wave"
 				style="animation-delay: 1.5s;"
 			/>
 		</span>
