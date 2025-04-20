@@ -11,7 +11,7 @@
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">ITADM Droplets</h1>
 
 <p class="leading-7 [&:not(:first-child)]:mt-6">
-	Übersicht aller aktiven Server bei DigitalOcean für den ITADM Kurs.
+	Übersicht aller aktiven DigitalOcean Server für den ITADM Kurs.
 </p>
 
 <Card.Root class="mt-8">
