@@ -55,7 +55,7 @@
 		<Terminal class="size-4" />
 		<Alert.Title>Einen Server anfordern</Alert.Title>
 		<Alert.Description class="text-muted-foreground">
-			Du kannst dir einen Server anfordern, um die Aufgaben im ITADM Kurs damit zu bearbeiten.<br />
+			Du kannst einen Server anfordern, um damit die Aufgaben im ITADM Kurs zu bearbeiten.<br />
 			Es sind aktuell {data.freeDropletsCount} von {data.totalDropletsCount} Server verfügbar.
 		</Alert.Description>
 		<div class="mt-2">
