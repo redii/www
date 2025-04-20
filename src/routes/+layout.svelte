@@ -31,7 +31,7 @@
 <main
 	class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-4 py-12 sm:px-16 sm:px-6 lg:min-h-[calc(100vh-64px-128px)] lg:px-8 lg:py-16"
 >
-	{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true}
+	{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true && !page.error}
 		<Breadcrumb.Root class="mb-8">
 			<Breadcrumb.List>
 				<Breadcrumb.Item>
