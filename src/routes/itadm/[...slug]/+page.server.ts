@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { compile } from 'mdsvex';
-import { readItems, readItem } from '$lib/utils/directus';
+import { readItems } from '$lib/utils/directus';
 import { getDropletsByTag } from '$lib/utils/digitalocean';
 import type { PageServerLoad } from './$types';
 
@@ -15,17 +15,6 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	});
 	if (!pageList.length) throw error(404, 'Content not found');
 	const page = pageList[0];
-
-	let path = page.slug === '/' ? [] : [page.slug];
-	let hasParent = Boolean(page.parent);
-	let tmpPage = page;
-	while (hasParent) {
-		const p = await readItem('itadm_content', tmpPage.parent);
-		if (p.slug !== '/') path.unshift(p.slug);
-		if (!p.parent) break;
-		tmpPage = p;
-	}
-
 	const html = await compile(page.text);
 
 	let droplet = null;
@@ -58,7 +47,6 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	}
 
 	return {
-		path,
 		page,
 		html,
 		droplet,

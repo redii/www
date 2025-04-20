@@ -1,6 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
+import { PRIVATE_AUTH_ADMIN_EMAIL } from '$env/static/private';
+
 export const load: LayoutServerLoad = async (event) => {
 	const session = await event.locals.auth();
 
@@ -8,7 +10,9 @@ export const load: LayoutServerLoad = async (event) => {
 		throw redirect(302, '/login');
 	}
 
-	return {
-		session
-	};
+	if (event.url.pathname !== '/app/hello' && session.user.email !== PRIVATE_AUTH_ADMIN_EMAIL) {
+		throw redirect(302, '/app/hello');
+	}
+
+	return { session };
 };

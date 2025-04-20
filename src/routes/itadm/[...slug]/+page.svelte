@@ -1,12 +1,12 @@
 <script lang="ts">
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
+	import { page } from '$app/state';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
 	import Form from '$lib/components/Form.svelte';
 	import PageList from '$lib/components/PageList.svelte';
-	import { House, Terminal, Unplug } from 'lucide-svelte';
+	import { Terminal, Unplug } from 'lucide-svelte';
 
 	export let data;
 </script>
@@ -64,58 +64,23 @@
 	</Alert.Root>
 {/if}
 
-<section>
-	<Breadcrumb.Root class="mb-8">
-		<Breadcrumb.List>
-			<Breadcrumb.Item>
-				<Breadcrumb.Link href="/">
-					<House size={16} />
-				</Breadcrumb.Link>
-			</Breadcrumb.Item>
-			<Breadcrumb.Separator />
-			{#if data.path.length}
-				<Breadcrumb.Item>
-					<Breadcrumb.Link href="/itadm">itadm</Breadcrumb.Link>
-				</Breadcrumb.Item>
-				<Breadcrumb.Separator />
-			{:else}
-				<Breadcrumb.Item>
-					<Breadcrumb.Page>itadm</Breadcrumb.Page>
-				</Breadcrumb.Item>
-			{/if}
-			{#each data.path as item, index}
-				{@const itemUrl = '/itadm/' + [...data.path.slice(0, index), item].join('/')}
-				{@const isLastItem = index === data.path.length - 1}
-				{#if isLastItem}
-					<Breadcrumb.Page>{item}</Breadcrumb.Page>
-				{:else}
-					<Breadcrumb.Item>
-						<Breadcrumb.Link href={itemUrl}>{item}</Breadcrumb.Link>
-					</Breadcrumb.Item>
-					<Breadcrumb.Separator />
-				{/if}
-			{/each}
-		</Breadcrumb.List>
-	</Breadcrumb.Root>
+{#if data.page.image}
+	<img
+		class="mb-12 w-full rounded-2xl border border-gray-200 object-contain md:mb-16"
+		src={`https://cms.akmann.dev/assets/${data.page.image}`}
+		alt={data.page.title}
+	/>
+{/if}
 
-	{#if data.page.image}
-		<img
-			class="mb-12 w-full rounded-2xl border border-gray-200 object-contain md:mb-16"
-			src={`https://cms.akmann.dev/assets/${data.page.image}`}
-			alt={data.page.title}
-		/>
-	{/if}
-
-	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-		{data.page.title}
-	</h1>
-	<time
-		datetime={data.page.date_updated}
-		class="mt-4 inline-block text-sm font-medium leading-none text-muted-foreground"
-	>
-		Letztes Update am {new Date(data.page.date_updated).toLocaleDateString('de')}
-	</time>
-</section>
+<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+	{data.page.title}
+</h1>
+<time
+	datetime={data.page.date_updated}
+	class="mt-4 inline-block text-sm font-medium leading-none text-muted-foreground"
+>
+	Letztes Update am {new Date(data.page.date_updated).toLocaleDateString('de')}
+</time>
 
 <article class="prose my-12 max-w-full lg:prose-lg">
 	{@html data.html.code
@@ -127,7 +92,7 @@
 	pages={data.page.childs.map((c) => {
 		return {
 			title: c.title,
-			href: '/itadm/' + [...data.path, c.slug].join('/'),
+			href: `${page.url.pathname}/${c.slug}`,
 			date: c.date_updated,
 			description: c.description,
 			imageId: c.image

@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Button } from '$lib/components/ui/button';
-	import { House } from 'lucide-svelte';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
@@ -17,24 +15,6 @@
 		(await import('fslightbox')).default;
 	});
 </script>
-
-<Breadcrumb.Root class="mb-8">
-	<Breadcrumb.List>
-		<Breadcrumb.Item>
-			<Breadcrumb.Link href="/">
-				<House size={16} />
-			</Breadcrumb.Link>
-		</Breadcrumb.Item>
-		<Breadcrumb.Separator />
-		<Breadcrumb.Item>
-			<Breadcrumb.Link href="/vacations">Urlaube</Breadcrumb.Link>
-		</Breadcrumb.Item>
-		<Breadcrumb.Separator />
-		<Breadcrumb.Item>
-			<Breadcrumb.Page>{data.vacation.title}</Breadcrumb.Page>
-		</Breadcrumb.Item>
-	</Breadcrumb.List>
-</Breadcrumb.Root>
 
 <img
 	src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?width=1024`}

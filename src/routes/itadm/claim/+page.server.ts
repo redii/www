@@ -1,5 +1,9 @@
 import { claimDroplet, getDropletsByTag } from '$lib/utils/digitalocean';
-import type { Actions } from './$types';
+import type { PageServerLoad, Actions } from './$types';
+
+export const load: PageServerLoad = async () => {
+	return { hideBreadcrumbs: true };
+};
 
 export const actions = {
 	claimDroplet: async ({ cookies }) => {
@@ -10,7 +14,7 @@ export const actions = {
 					success: false,
 					notification: {
 						type: 'warning',
-						title: 'Fehler beim claimen',
+						title: 'Fehler beim Zuweisen des Servers',
 						description: 'Es ist aktuell kein freier Server vorhanden'
 					}
 				};

@@ -8,7 +8,13 @@
 	export let data;
 </script>
 
-<Card.Root class="Root">
+<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">ITADM Droplets</h1>
+
+<p class="leading-7 [&:not(:first-child)]:mt-6">
+	Übersicht aller aktiven Server bei DigitalOcean für den ITADM Kurs.
+</p>
+
+<Card.Root class="mt-8">
 	<Table.Root>
 		<Table.Header>
 			<Table.Row>
@@ -17,7 +23,6 @@
 				<Table.Head>Benutzer</Table.Head>
 				<Table.Head>Password</Table.Head>
 				<Table.Head>Claim Code</Table.Head>
-				<Table.Head class="text-right"></Table.Head>
 			</Table.Row>
 		</Table.Header>
 		<Table.Body>
@@ -41,7 +46,6 @@
 								{server.tags.find((t) => t !== 'itadm')}
 							</Badge>
 						</Table.Cell>
-						<Table.Cell class="text-right"></Table.Cell>
 					</Table.Row>
 				{/each}
 			{/if}

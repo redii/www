@@ -8,14 +8,22 @@ export const load: PageServerLoad = async ({ params }) => {
 		const vacation = await readItem('vacations', params.uuid);
 		if (!vacation) redirect(302, '/vacations');
 
+		const today = new Date().toISOString().split('T')[0];
+		const sort = today <= vacation.end_date ? 'sort' : '-sort';
+
 		const vacationDays = await readItems('vacation_days', {
 			filter: {
 				vacation: { _eq: vacation.id }
 			},
+			sort: [sort],
 			fields: ['*.*']
 		});
 
-		return { vacation, vacationDays };
+		return {
+			title: vacation.title,
+			vacation,
+			vacationDays
+		};
 	} catch (error) {
 		console.error(error);
 		redirect(302, '/vacations');
