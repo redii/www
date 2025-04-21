@@ -32,15 +32,15 @@
 			</div>
 			{data.droplet.name}
 		</Alert.Title>
-		<Alert.Description class="text-muted-foreground">
-			<span class="font-mono">{data.droplet.ipv4}</span> &nbsp;·&nbsp;
-			<span class="font-mono">{data.droplet.region}</span> &nbsp;·&nbsp;
-			<span class="font-mono">{data.droplet.size}</span> &nbsp;·&nbsp;
+		<Alert.Description class="font-mono text-muted-foreground">
+			{data.droplet.ipv4} ·
+			{data.droplet.region} ·
+			{data.droplet.size} ·
 
 			<Tooltip.Provider>
 				<Tooltip.Root>
 					<Tooltip.Trigger>
-						<Badge variant="secondary" class="font-mono">{data.droplet.claimCode}</Badge>
+						<Badge variant="secondary">{data.droplet.claimCode}</Badge>
 					</Tooltip.Trigger>
 					<Tooltip.Content>
 						<p class="text-xs">Der Claim Code deines Servers</p>
