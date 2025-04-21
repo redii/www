@@ -34,7 +34,9 @@
 					<div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
 					<div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
 
-					<div class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm/6 text-muted">
+					<div
+						class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm/6 text-muted dark:text-muted-foreground"
+					>
 						<time datetime={page.date}>
 							{new Date(page.date).toLocaleDateString('de')}
 						</time>
@@ -46,7 +48,7 @@
 						</a>
 					</h3>
 					{#if page.description}
-						<p class="mt-2 leading-7 text-muted">{page.description}</p>
+						<p class="mt-2 leading-7 text-muted dark:text-muted-foreground">{page.description}</p>
 					{/if}
 				</article>
 			{/each}

@@ -28,7 +28,7 @@ export const actions = {
 					claimCode: result.claimCode,
 					id: result.droplet.id,
 					name: result.droplet.name,
-					ipv4: result.droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.')).ip_address,
+					ipv4: result.droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
 					region: result.droplet.region.name
 				},
 				notification: {

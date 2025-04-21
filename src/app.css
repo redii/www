@@ -18,11 +18,11 @@
 
 .prose details div:first-of-type {
   font-size: 90%;
-  @apply rounded-lg border bg-card p-6 text-card-foreground shadow-sm;
+  @apply rounded-lg border border-foreground/50 bg-card p-6 text-card-foreground shadow-sm;
 }
 
 .prose img {
-  @apply rounded-2xl border border-gray-200 object-contain shadow-sm;
+  @apply rounded-2xl border border-foreground/10 object-contain shadow-sm;
 }
 
 .prose p:has(img) > em {

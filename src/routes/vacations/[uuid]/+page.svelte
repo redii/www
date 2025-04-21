@@ -19,7 +19,7 @@
 <img
 	src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?width=1024`}
 	alt={data.vacation.title}
-	class="max-h-80 w-full rounded-2xl border border-gray-200 object-cover object-center shadow-sm sm:max-h-[400px]"
+	class="max-h-80 w-full rounded-2xl border border-foreground/10 bg-muted object-cover object-center shadow-sm sm:max-h-[400px]"
 />
 
 <section id="vacation-heading" class="mb-16 mt-8">

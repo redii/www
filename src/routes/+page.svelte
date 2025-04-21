@@ -6,7 +6,7 @@
 	<img
 		src="/images/pp.jpeg"
 		alt="Henry Akmann"
-		class="mx-auto h-64 w-64 rounded-full border border-gray-200 bg-muted shadow-sm"
+		class="mx-auto h-64 w-64 rounded-full border border-foreground/10 bg-muted shadow-sm"
 	/>
 	<div>
 		<span class="scroll-m-20 text-7xl font-extrabold tracking-tight">

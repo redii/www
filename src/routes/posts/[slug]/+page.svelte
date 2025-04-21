@@ -4,7 +4,7 @@
 
 {#if data.meta.image}
 	<img
-		class="mb-12 w-full rounded-2xl border border-gray-200 object-contain md:mb-16"
+		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain md:mb-16"
 		src={data.meta.image}
 		alt={data.meta.title}
 	/>
@@ -18,6 +18,6 @@
 	{new Date(data.meta.date).toLocaleDateString('de')}
 </time>
 
-<article class="prose mt-12 max-w-full lg:prose-lg">
+<article class="prose mt-12 max-w-full dark:prose-invert lg:prose-lg">
 	{@html data.content}
 </article>

@@ -6,6 +6,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Pattern from '$lib/components/Pattern.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import { ModeWatcher } from 'mode-watcher';
 	import { House } from 'lucide-svelte';
 
 	let { children } = $props();
@@ -27,6 +28,9 @@
 </svelte:head>
 
 <Pattern />
+<ModeWatcher />
+<Toaster richColors />
+
 <Header />
 <main
 	class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-4 py-12 sm:px-16 sm:px-6 lg:min-h-[calc(100vh-64px-128px)] lg:px-8 lg:py-16"
@@ -58,4 +62,3 @@
 	{@render children()}
 </main>
 <Footer />
-<Toaster richColors />

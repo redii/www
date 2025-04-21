@@ -3,12 +3,13 @@
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Button } from '$lib/components/ui/button';
-	import { Menu, X, Github, Mail, LogIn, LogOut } from '@lucide/svelte';
+	import { Menu, X, Github, Mail, LogIn, LogOut, Sun, Moon } from '@lucide/svelte';
+	import { toggleMode } from 'mode-watcher';
 
 	let mobileMenuOpen = $state(false);
 </script>
 
-<header class="sticky top-0 z-50 border-b border-gray-200 bg-background/75">
+<header class="sticky top-0 z-50 border-b border-foreground/10 bg-background/75">
 	<nav
 		class="sticky top-0 mx-auto flex h-[64px] max-w-4xl items-center justify-between px-6 backdrop-blur lg:px-8"
 		aria-label="Global"
@@ -16,13 +17,14 @@
 		<div class="flex lg:flex-1">
 			<a href="/" class="-m-1.5 p-1.5">
 				<span class="sr-only">Henry Akmann</span>
-				<img src="/images/tilde.svg" alt="Akmann Tilde Emblem" class="w-10" />
+				<img src="/images/tilde-black.svg" alt="Tilde Emblem" class="block w-10 dark:hidden" />
+				<img src="/images/tilde-white.svg" alt="Tilde Emblem" class="hidden w-10 dark:block" />
 			</a>
 		</div>
 		<div class="flex lg:hidden">
 			<button
 				type="button"
-				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+				class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
 				onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 			>
 				<span class="sr-only">Menü öffnen</span>
@@ -30,22 +32,27 @@
 			</button>
 		</div>
 		<div class="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
-			<a
-				href="https://github.com/redii"
-				class="rounded-full p-2 text-gray-900 duration-200 hover:bg-muted"
-			>
+			<Button href="https://github.com/redii" variant="ghost" size="icon">
+				<span class="sr-only">Github</span>
 				<Github />
-			</a>
-			<a
-				href="mailto:moin@akmann.dev"
-				class="rounded-full p-2 text-gray-900 duration-200 hover:bg-muted"
-			>
+			</Button>
+			<Button href="mailto:moin@akmann.dev" variant="ghost" size="icon">
+				<span class="sr-only">Email</span>
 				<Mail />
-			</a>
+			</Button>
+			<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
+				<Sun
+					class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+				/>
+				<Moon
+					class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+				/>
+				<span class="sr-only">Theme umschalten</span>
+			</Button>
 			{#if page?.data?.session}
 				{@const user = page?.data?.session?.user}
 				<DropdownMenu.Root>
-					<DropdownMenu.Trigger class="ml-2">
+					<DropdownMenu.Trigger>
 						<Avatar.Root>
 							<Avatar.Image
 								src={page?.data?.session?.user?.image}
@@ -74,7 +81,7 @@
 					</DropdownMenu.Content>
 				</DropdownMenu.Root>
 			{:else}
-				<Button variant="secondary" href="/login" class="ml-2">Einloggen</Button>
+				<Button variant="secondary" href="/login">Einloggen</Button>
 			{/if}
 		</div>
 	</nav>
@@ -84,16 +91,17 @@
 		<!-- Background backdrop, show/hide based on slide-over state. -->
 		<div class="z-60 fixed inset-0"></div>
 		<div
-			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-white px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/90"
 		>
 			<div class="flex items-center justify-between">
 				<a href="/" class="-m-1.5 p-1.5 sm:invisible">
 					<span class="sr-only">Henry Akmann</span>
-					<img src="/images/tilde.svg" alt="Akmann Tilde Emblem" class="w-10" />
+					<img src="/images/tilde-black.svg" alt="Tilde Emblem" class="block w-10 dark:hidden" />
+					<img src="/images/tilde-white.svg" alt="Tilde Emblem" class="hidden w-10 dark:block" />
 				</a>
 				<button
 					type="button"
-					class="-m-2.5 rounded-md p-2.5 text-gray-700"
+					class="-m-2.5 rounded-md p-2.5 text-foreground"
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 				>
 					<span class="sr-only">Menü schließen</span>
@@ -105,7 +113,7 @@
 					{#if page?.data?.session}
 						<a
 							href="/app"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 							onclick={() => (mobileMenuOpen = false)}
 						>
 							Dashboard
@@ -113,7 +121,7 @@
 					{:else}
 						<a
 							href="/login"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 							onclick={() => (mobileMenuOpen = false)}
 						>
 							<LogIn class="mr-2 inline" size={24} />
@@ -122,7 +130,7 @@
 					{/if}
 					<a
 						href="https://github.com"
-						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Github class="mr-2 inline" size={24} />
@@ -130,7 +138,7 @@
 					</a>
 					<a
 						href="moin@akmann.dev"
-						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-gray-900 hover:bg-gray-50"
+						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Mail class="mr-2 inline" size={24} />
@@ -149,7 +157,7 @@
 								</Avatar.Fallback>
 							</Avatar.Root>
 							<div>
-								<p class="text-xl font-semibold text-gray-900">
+								<p class="text-xl font-semibold text-foreground">
 									{user?.name}
 								</p>
 								<p class="text-sm text-muted-foreground">{page?.data?.session?.user?.email}</p>
