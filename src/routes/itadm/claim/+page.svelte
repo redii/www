@@ -29,19 +29,19 @@
 			<Card.Content class="grid gap-4 md:grid-cols-2">
 				<div class="flex flex-col gap-1.5">
 					<Label for="droplet-name">Servername</Label>
-					<Input type="text" id="droplet-name" disabled value={form.droplet?.name} />
+					<Input type="text" id="droplet-name" readonly value={form.droplet?.name} />
 				</div>
 				<div class="flex flex-col gap-1.5">
 					<Label for="droplet-ip-address">IP-Adresse</Label>
-					<Input type="text" id="droplet-ip-address" disabled value={form.droplet?.ipv4} />
+					<Input type="text" id="droplet-ip-address" readonly value={form.droplet?.ipv4} />
 				</div>
 				<div class="flex flex-col gap-1.5">
 					<Label for="droplet-username">Benutzer</Label>
-					<Input type="text" id="droplet-username" disabled value="root" />
+					<Input type="text" id="droplet-username" readonly value="root" />
 				</div>
 				<div class="flex flex-col gap-1.5">
 					<Label for="droplet-password">Passwort</Label>
-					<Input type="text" id="droplet-password" disabled value={PUBLIC_DO_VPS_PASSWORD} />
+					<Input type="text" id="droplet-password" readonly value={PUBLIC_DO_VPS_PASSWORD} />
 				</div>
 			</Card.Content>
 		</Card.Root>
@@ -61,7 +61,7 @@
 
 				<Dialog.Root>
 					<Dialog.Trigger class="mt-2 w-full text-center">
-						<Button variant="link">Du hast bereits einen Server?</Button>
+						<Button variant="link">Du hast einen Claim Code?</Button>
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>
