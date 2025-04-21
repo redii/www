@@ -20,7 +20,10 @@ export const actions = {
 				};
 			}
 
-			cookies.set('dropletClaimCode', result.claimCode, { path: '/' });
+			cookies.set('dropletClaimCode', result.claimCode, {
+				path: '/',
+				maxAge: 60 * 60 * 24 * 3 // 3 days
+			});
 
 			return {
 				success: true,
@@ -73,9 +76,12 @@ export const actions = {
 						description: 'Kein Server mit diesem Claim-Code gefunden'
 					}
 				};
-			} else {
-				cookies.set('dropletClaimCode', String(data.get('claimCode')), { path: '/' });
 			}
+
+			cookies.set('dropletClaimCode', String(data.get('claimCode')), {
+				path: '/',
+				maxAge: 60 * 60 * 24 * 3 // 3 days
+			});
 
 			return {
 				success: true,
@@ -84,7 +90,7 @@ export const actions = {
 					id: result.droplets[0].id,
 					name: result.droplets[0].name,
 					ipv4: result.droplets[0].networks.v4.find((a) => !a.ip_address.startsWith('10.'))
-						.ip_address,
+						?.ip_address,
 					region: result.droplets[0].region.name
 				},
 				notification: {

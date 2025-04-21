@@ -59,7 +59,8 @@
 								alt={page?.data?.session?.user?.name}
 							/>
 							<Avatar.Fallback>
-								{user?.name?.split(' ')[0].split('')[0]}{user?.name?.split(' ')[1].split('')[0]}
+								{user?.name?.split(' ')[0]?.split('')[0]}
+								{user?.name?.split(' ')[1]?.split('')[0]}
 							</Avatar.Fallback>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
@@ -153,7 +154,8 @@
 									alt={page?.data?.session?.user?.name}
 								/>
 								<Avatar.Fallback>
-									{user?.name?.split(' ')[0].split('')[0]}{user?.name?.split(' ')[1].split('')[0]}
+									{user?.name?.split(' ')[0]?.split('')[0]}
+									{user?.name?.split(' ')[1]?.split('')[0]}
 								</Avatar.Fallback>
 							</Avatar.Root>
 							<div>
