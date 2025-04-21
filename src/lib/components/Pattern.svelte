@@ -28,11 +28,11 @@
 		z-index: -10;
 		height: 100vh;
 		width: 100vw;
-		background-color: #000;
+		background-color: rgb(9, 9, 11);
 		opacity: 0.6;
 		background-image:
-			repeating-radial-gradient(circle at 0 0, transparent 0, #000 21px),
-			repeating-linear-gradient(#30303055, #171717);
+			repeating-radial-gradient(circle at 0 0, transparent 0, rgb(9, 9, 11) 21px),
+			repeating-linear-gradient(rgb(16, 16, 16), rgb(12, 12, 12));
 	}
 
 	:global(.dark .pattern::after) {
@@ -42,6 +42,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgb(0, 0, 0) 100%);
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgb(9, 9, 11) 100%);
 	}
 </style>
