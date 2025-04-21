@@ -20,13 +20,16 @@
 </svelte:head>
 
 {#if data.droplet}
-	<Alert.Root class="mb-12 flex-row justify-between shadow-sm lg:flex">
-		<Alert.Title>
+	<Alert.Root class="mb-12 flex-row items-center justify-between shadow-sm lg:flex">
+		<Alert.Title class="flex flex-row items-center gap-2 lg:mb-0">
 			<div
-				class="relative top-0.5 mr-1 inline-block rounded-full border border-4 border-green-200 bg-green-500 p-[0.25rem]"
-				class:border-red-200={data.droplet.status !== 'active'}
-				class:bg-red-500={data.droplet.status !== 'active'}
-			></div>
+				class={`inline-block rounded-full p-[4px] ${data.droplet.status !== 'active' ? 'bg-red-500/40' : 'bg-green-500/40'}`}
+			>
+				<div
+					class="rounded-full bg-green-500 p-[4px]"
+					class:bg-red-500={data.droplet.status !== 'active'}
+				></div>
+			</div>
 			{data.droplet.name}
 		</Alert.Title>
 		<Alert.Description class="text-muted-foreground">
