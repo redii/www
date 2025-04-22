@@ -22,7 +22,7 @@ export const actions = {
 
 			cookies.set('dropletClaimCode', result.claimCode, {
 				path: '/',
-				maxAge: 60 * 60 * 24 * 3 // 3 days
+				maxAge: 60 * 60 * 24 * 7 // 7 days
 			});
 
 			return {

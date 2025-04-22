@@ -21,7 +21,10 @@ export const actions = {
 		}
 
 		if (data.get('password') === PRIVATE_VACATIONS_PASSWORD) {
-			cookies.set('vacations_password', PRIVATE_VACATIONS_PASSWORD, { path: '/' });
+			cookies.set('vacations_password', PRIVATE_VACATIONS_PASSWORD, {
+				path: '/',
+				maxAge: 60 * 60 * 24 * 30 // 30 days
+			});
 			throw redirect(302, '/vacations');
 		} else {
 			return {
