@@ -34,6 +34,7 @@
 				</Table.Row>
 			{:else}
 				{#each data.servers as server}
+					{@const claimCode = server.tags.find((t) => t !== 'itadm')}
 					<Table.Row>
 						<Table.Cell class="font-medium">{server.name}</Table.Cell>
 						<Table.Cell>
@@ -42,9 +43,13 @@
 						<Table.Cell>root</Table.Cell>
 						<Table.Cell>{PUBLIC_DO_VPS_PASSWORD}</Table.Cell>
 						<Table.Cell>
-							<Badge variant="secondary" class="font-mono">
-								{server.tags.find((t) => t !== 'itadm')}
-							</Badge>
+							{#if claimCode}
+								<Badge variant="secondary" class="font-mono">
+									{claimCode}
+								</Badge>
+							{:else}
+								<Badge variant="outline">Frei</Badge>
+							{/if}
 						</Table.Cell>
 					</Table.Row>
 				{/each}
