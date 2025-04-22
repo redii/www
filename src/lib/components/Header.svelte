@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import { Button } from '$lib/components/ui/button';
+	import * as Avatar from '$lib/components/ui/avatar';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { Menu, X, Github, Mail, LogIn, LogOut, Sun, Moon } from '@lucide/svelte';
 	import { toggleMode } from 'mode-watcher';
+	import publicKey from '$lib/public_key.asc?raw';
 
 	let mobileMenuOpen = $state(false);
 </script>
@@ -32,14 +35,32 @@
 			</button>
 		</div>
 		<div class="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
-			<Button href="https://github.com/redii" variant="ghost" size="icon">
+			<Button href="https://github.com/redii" target="_blank" variant="ghost" size="icon">
 				<span class="sr-only">Github</span>
 				<Github />
 			</Button>
-			<Button href="mailto:moin@akmann.dev" variant="ghost" size="icon">
-				<span class="sr-only">Email</span>
-				<Mail />
-			</Button>
+			<Dialog.Root>
+				<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+					<span class="sr-only">Kontakt</span>
+					<Mail />
+				</Dialog.Trigger>
+				<Dialog.Content>
+					<Dialog.Header>
+						<Dialog.Title>Kontaktdaten</Dialog.Title>
+						<Dialog.Description>
+							Schreib mir gerne eine Nachricht an
+							<span class="font-semibold">henry@akmann.dev</span>
+						</Dialog.Description>
+					</Dialog.Header>
+					<ScrollArea class="h-48 rounded-md border">
+						<pre class="p-4 text-xs">{publicKey}</pre>
+					</ScrollArea>
+					<Button href="mailto:henry@akmann.dev" variant="secondary">
+						<Mail class="mr-1 inline" size={24} />
+						Schreib mir eine Email
+					</Button>
+				</Dialog.Content>
+			</Dialog.Root>
 			<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
 				<Sun
 					class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -131,6 +152,7 @@
 					{/if}
 					<a
 						href="https://github.com"
+						target="_blank"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
@@ -138,7 +160,7 @@
 						Github
 					</a>
 					<a
-						href="moin@akmann.dev"
+						href="mailto:henry@akmann.dev"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
