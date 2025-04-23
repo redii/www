@@ -3,6 +3,7 @@
 	import { invalidateAll, goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
 
+	import type { Notification } from '$lib/types';
 	interface Props {
 		form?: HTMLFormElement | undefined;
 		method: 'POST' | 'dialog' | 'get' | 'post' | 'DIALOG' | 'GET' | null | undefined;
@@ -31,7 +32,7 @@
 				}
 
 				// display notification if returned
-				const notification = result.data?.notification;
+				const notification: Notification = result.data?.notification;
 				if (notification) {
 					if (notification.type === 'success') {
 						toast.success(notification.title, {

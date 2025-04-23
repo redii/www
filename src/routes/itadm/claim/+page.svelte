@@ -58,7 +58,6 @@
 				<Form action="/itadm/claim?/claimDroplet" method="POST">
 					<Button type="submit" class="w-full">Server anfragen</Button>
 				</Form>
-
 				<Dialog.Root>
 					<Dialog.Trigger class="mt-2 w-full text-center">
 						<Button variant="link">Du hast einen Claim Code?</Button>
@@ -71,7 +70,7 @@
 								Bitte gib deinen Claim Code ein, um den Server zu verknüpfen.
 							</Dialog.Description>
 						</Dialog.Header>
-						<Form action="/itadm/claim?/connectDroplet" method="POST">
+						<Form action="/itadm/claim?/claimDroplet" method="POST">
 							<div class="mb-3 flex flex-col gap-1.5">
 								<Label for="claim-code">Claim Code</Label>
 								<Input type="text" id="claim-code" name="claimCode" required />

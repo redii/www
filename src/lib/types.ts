@@ -1,3 +1,9 @@
+export type Notification = {
+	type: 'default' | 'info' | 'success' | 'warning' | 'error';
+	title: string;
+	description: string;
+};
+
 export type Post = {
 	slug: string;
 	title: string;
@@ -16,4 +22,14 @@ export type ItadmContent = {
 	title: string;
 	description?: string;
 	text?: string;
+};
+
+export type Droplet = {
+	id: number;
+	status: string;
+	name: string;
+	ipv4: string;
+	region: string;
+	size: string;
+	claimCode: string;
 };

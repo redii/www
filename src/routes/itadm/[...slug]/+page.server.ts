@@ -3,6 +3,7 @@ import { compile } from 'mdsvex';
 import { readItems } from '$lib/utils/directus';
 import { getDropletsByTag } from '$lib/utils/digitalocean';
 import type { PageServerLoad } from './$types';
+import type { Droplet } from '$lib/types';
 
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const slug = params.slug ? params.slug.split('/').pop() : '/';
@@ -20,8 +21,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	let droplet = null;
 	let totalDropletsCount = 0;
 	let freeDropletsCount = 0;
-	const claimCode = cookies.get('dropletClaimCode');
-
+	const claimCode = cookies.get('droplet_claimCode');
 	if (claimCode) {
 		const result = await getDropletsByTag(claimCode);
 		if (result.droplets.length) {
@@ -32,11 +32,11 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 				region: result.droplets[0].region.slug,
 				size: result.droplets[0].size.slug,
 				ipv4: result.droplets[0].networks.v4.find((a) => !a.ip_address.startsWith('10.'))
-					.ip_address,
+					?.ip_address,
 				claimCode
-			};
+			} satisfies Droplet;
 		} else {
-			cookies.delete('dropletClaimCode', { path: '/' });
+			cookies.delete('droplet_claimCode', { path: '/' });
 		}
 	}
 

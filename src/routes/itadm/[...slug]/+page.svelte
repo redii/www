@@ -88,9 +88,9 @@
 					<Dialog.Header>
 						<Dialog.Title>Server wirklich trennen?</Dialog.Title>
 						<Dialog.Description>
-							Dadurch wird dir der Server hier nicht mehr angezeigt, er bleibt aber weiterhin in der
-							Cloud bestehen. Du kannst ihn später anhand des Claim Codes
-							<Badge variant="secondary" class="font-mono">{data.droplet.claimCode}</Badge> wieder verknüpfen.
+							Durch das Trennen wird dir der Server hier nicht mehr angezeigt, er bleibt aber
+							weiterhin in der Cloud bestehen. Du kannst ihn später anhand des Claim Codes
+							<Badge variant="secondary" class="font-mono">{data.droplet.claimCode}</Badge> wieder verbinden.
 						</Dialog.Description>
 					</Dialog.Header>
 					<Form action="/itadm/claim?/disconnectDroplet" method="POST" class="inline">
