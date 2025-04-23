@@ -1,7 +1,7 @@
 ---
 title: Hello World 👀
 description: Ein Post darüber, wie diese Webseite funktioniert.
-date: 2025-4-16
+date: 2025-04-16
 image: /posts/hello-world.jpg
 ---
 
