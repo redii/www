@@ -146,3 +146,20 @@ export async function tagDroplet(dropletId: number | string, tagName: string) {
 		throw error;
 	}
 }
+
+export async function deleteDropletsByTag(tagName: string) {
+	try {
+		const response = await fetch(`${PRIVATE_DO_URL}/droplets?tag_name=${tagName}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${PRIVATE_DO_TOKEN}`
+			}
+		});
+		if (!response.ok) throw new Error(`Error deleting droplets: ${response.statusText}`);
+		return response.ok;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+}

@@ -1,7 +1,11 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table';
 	import * as Card from '$lib/components/ui/card';
+	import * as Dialog from '$lib/components/ui/dialog';
 	import { Badge } from '$lib/components/ui/badge';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import { Trash } from 'lucide-svelte';
+	import Form from '$lib/components/Form.svelte';
 
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 
@@ -14,7 +18,34 @@
 	Übersicht aller aktiven DigitalOcean Server für den ITADM Kurs.
 </p>
 
-<Card.Root class="mt-8">
+<div class="mt-8 flex flex-row items-end">
+	<Dialog.Root>
+		<Dialog.Trigger
+			class={buttonVariants({ variant: 'destructive' })}
+			disabled={data.servers.length === 0}
+		>
+			<Trash />
+			Server löschen
+		</Dialog.Trigger>
+		<Dialog.Content>
+			<Dialog.Header>
+				<Dialog.Title>ITADM Server löschen</Dialog.Title>
+				<Dialog.Description>
+					Sollen wirklich alle ITADM Server gelöscht werden? Dies kann nicht rückgängig gemacht
+					werden.
+				</Dialog.Description>
+			</Dialog.Header>
+			<Form action="?/deleteDroplets" method="POST">
+				<Button type="submit" variant="destructive" class="w-full">
+					<Trash class="mr-1 inline" size={24} />
+					Alle Server löschen
+				</Button>
+			</Form>
+		</Dialog.Content>
+	</Dialog.Root>
+</div>
+
+<Card.Root class="mt-2">
 	<Table.Root>
 		<Table.Header>
 			<Table.Row>
