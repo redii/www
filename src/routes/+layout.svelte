@@ -12,6 +12,14 @@
 	import { House } from 'lucide-svelte';
 
 	let { children } = $props();
+
+	// track lastPathname to adjust transition i.e.
+	// from /itadm to /itadm/linux: fly left
+	// from /itadm/linux to /itadm: fly right
+	let lastPathname = $state(page.url.pathname);
+	$effect(() => {
+		if (lastPathname !== page.url.pathname) lastPathname = page.url.pathname;
+	});
 </script>
 
 <svelte:head>
@@ -33,8 +41,15 @@
 {#key page.url.pathname}
 	<main
 		class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-6 py-12 sm:px-8 lg:min-h-[calc(100vh-64px-128px)] lg:px-10 lg:py-16"
-		in:fly={{ x: 200, duration: 200, delay: 200 }}
-		out:fly={{ x: -200, duration: 200 }}
+		in:fly={{
+			x: lastPathname.length >= page.url.pathname.length ? -200 : 200,
+			duration: 200,
+			delay: 200
+		}}
+		out:fly={{
+			x: lastPathname.length >= page.url.pathname.length ? 200 : -200,
+			duration: 200
+		}}
 	>
 		{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true && !page.error}
 			<Breadcrumb.Root class="mb-8">
