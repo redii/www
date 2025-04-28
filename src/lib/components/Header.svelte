@@ -1,14 +1,21 @@
 <script lang="ts">
 	import { page, navigating } from '$app/state';
 
+	import publicKey from '$lib/public_key.asc?raw';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
-	import { Menu, X, Github, Mail, LogIn, LogOut, Sun, Moon } from '@lucide/svelte';
 	import { toggleMode } from 'mode-watcher';
-	import publicKey from '$lib/public_key.asc?raw';
+	import Menu from '@lucide/svelte/icons/menu';
+	import X from '@lucide/svelte/icons/x';
+	import Github from '@lucide/svelte/icons/github';
+	import Mail from '@lucide/svelte/icons/mail';
+	import LogIn from '@lucide/svelte/icons/log-in';
+	import LogOut from '@lucide/svelte/icons/log-out';
+	import Sun from '@lucide/svelte/icons/sun';
+	import Moon from '@lucide/svelte/icons/moon';
 
 	let mobileMenuOpen = $state(false);
 

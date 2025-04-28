@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { Mail, Github, Linkedin } from '@lucide/svelte';
+	import Mail from '@lucide/svelte/icons/mail';
+	import Github from '@lucide/svelte/icons/github';
+	import Linkedin from '@lucide/svelte/icons/linkedin';
 </script>
 
 <footer>
