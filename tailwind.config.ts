@@ -83,20 +83,26 @@ const config: Config = {
 					'0%,70%,100%': { opacity: '1' },
 					'20%,50%': { opacity: '0' }
 				},
-				wave: {
+				'waving-hand': {
 					'0%, 60%, 100%': { transform: 'rotate(0deg)' },
 					'10%': { transform: 'rotate(14deg)' },
 					'20%': { transform: 'rotate(-8deg)' },
 					'30%': { transform: 'rotate(14deg)' },
 					'40%': { transform: 'rotate(-4deg)' },
 					'50%': { transform: 'rotate(10deg)' }
+				},
+				'pulsating-tilde': {
+					'0%': { transform: 'scale(1)', stroke: 'currentColor', fill: 'currentColor' },
+					'50%': { transform: 'scale(1.05)', stroke: '#10b981', fill: '#10b981' },
+					'100%': { transform: 'scale(1)', stroke: 'currentColor', fill: 'currentColor' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'caret-blink': 'caret-blink 1.25s ease-out infinite',
-				wave: 'wave 3s ease-in-out'
+				'waving-hand': 'waving-hand 3s ease-in-out',
+				'pulsating-tilde': 'pulsating-tilde 0.65s ease-in-out 2'
 			}
 		}
 	}

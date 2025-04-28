@@ -14,7 +14,7 @@
 			<img
 				src="/images/waving-hand.png"
 				alt="Waving Hand 👋"
-				class="relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right animate-wave"
+				class="animate-waving-hand relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right"
 				style="animation-delay: 1.5s;"
 			/>
 		</span>
