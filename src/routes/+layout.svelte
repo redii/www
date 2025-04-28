@@ -16,7 +16,7 @@
 
 <svelte:head>
 	<title>Henry Akmann</title>
-	<meta name="description" content="Henry Akmann - Meine Webseite für verschiedenes Zeug..." />
+	<meta name="description" content="Henry Akmann - Meine Webseite für alles mögliche..." />
 	<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
 	<link rel="shortcut icon" href="/favicon/favicon.ico" />
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
