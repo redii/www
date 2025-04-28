@@ -92,9 +92,9 @@ const config: Config = {
 					'50%': { transform: 'rotate(10deg)' }
 				},
 				'pulsating-tilde': {
-					'0%': { transform: 'scale(1)', stroke: 'currentColor', fill: 'currentColor' },
-					'50%': { transform: 'scale(1.05)', stroke: '#10b981', fill: '#10b981' },
-					'100%': { transform: 'scale(1)', stroke: 'currentColor', fill: 'currentColor' }
+					'0%': { stroke: 'currentColor', fill: 'currentColor' },
+					'50%': { stroke: '#10b981', fill: '#10b981' },
+					'100%': { stroke: 'currentColor', fill: 'currentColor' }
 				}
 			},
 			animation: {
