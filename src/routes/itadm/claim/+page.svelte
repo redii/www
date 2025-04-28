@@ -50,8 +50,7 @@
 			<Card.Header>
 				<Card.Title>Einen Server anfragen</Card.Title>
 				<Card.Description>
-					Hier kannst du einen Server beanspruchen, um die folgenden Aufgaben im ITADM Kurs damit zu
-					bearbeiten.
+					Hier kannst du einen Server anfragen, um die Aufgaben im ITADM Kurs damit zu bearbeiten.
 				</Card.Description>
 			</Card.Header>
 			<Card.Content>
