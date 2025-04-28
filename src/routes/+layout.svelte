@@ -1,10 +1,12 @@
 <script lang="ts">
-	import '../app.css';
 	import { page } from '$app/state';
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb/index.js';
+	import { fly } from 'svelte/transition';
+
+	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Pattern from '$lib/components/Pattern.svelte';
+	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import { House } from 'lucide-svelte';
@@ -27,38 +29,42 @@
 	<meta name="theme-color" content="#FFFFFF" />
 </svelte:head>
 
+<Header />
+{#key page.url.pathname}
+	<main
+		class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-6 py-12 sm:px-8 lg:min-h-[calc(100vh-64px-128px)] lg:px-10 lg:py-16"
+		in:fly={{ x: 200, duration: 200, delay: 200 }}
+		out:fly={{ x: -200, duration: 200 }}
+	>
+		{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true && !page.error}
+			<Breadcrumb.Root class="mb-8">
+				<Breadcrumb.List>
+					<Breadcrumb.Item>
+						<Breadcrumb.Link href="/">
+							<House size={16} />
+						</Breadcrumb.Link>
+					</Breadcrumb.Item>
+					<Breadcrumb.Separator />
+					{#each page.url.pathname.split('/').slice(1) as slug, index}
+						{@const itemUrl = '/' + [...page.url.pathname.split('/').slice(1, index + 2)].join('/')}
+						{@const isLastItem = index === page.url.pathname.split('/').length - 2}
+						{#if isLastItem}
+							<Breadcrumb.Page>{page.data.title || slug}</Breadcrumb.Page>
+						{:else}
+							<Breadcrumb.Item>
+								<Breadcrumb.Link href={itemUrl}>{slug}</Breadcrumb.Link>
+							</Breadcrumb.Item>
+							<Breadcrumb.Separator />
+						{/if}
+					{/each}
+				</Breadcrumb.List>
+			</Breadcrumb.Root>
+		{/if}
+		{@render children()}
+	</main>
+{/key}
+<Footer />
+
 <Pattern />
 <ModeWatcher />
 <Toaster richColors />
-
-<Header />
-<main
-	class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-4 py-12 sm:px-16 sm:px-6 lg:min-h-[calc(100vh-64px-128px)] lg:px-8 lg:py-16"
->
-	{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true && !page.error}
-		<Breadcrumb.Root class="mb-8">
-			<Breadcrumb.List>
-				<Breadcrumb.Item>
-					<Breadcrumb.Link href="/">
-						<House size={16} />
-					</Breadcrumb.Link>
-				</Breadcrumb.Item>
-				<Breadcrumb.Separator />
-				{#each page.url.pathname.split('/').slice(1) as slug, index}
-					{@const itemUrl = '/' + [...page.url.pathname.split('/').slice(1, index + 2)].join('/')}
-					{@const isLastItem = index === page.url.pathname.split('/').length - 2}
-					{#if isLastItem}
-						<Breadcrumb.Page>{page.data.title || slug}</Breadcrumb.Page>
-					{:else}
-						<Breadcrumb.Item>
-							<Breadcrumb.Link href={itemUrl}>{slug}</Breadcrumb.Link>
-						</Breadcrumb.Item>
-						<Breadcrumb.Separator />
-					{/if}
-				{/each}
-			</Breadcrumb.List>
-		</Breadcrumb.Root>
-	{/if}
-	{@render children()}
-</main>
-<Footer />
