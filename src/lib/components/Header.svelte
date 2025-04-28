@@ -17,7 +17,7 @@
 			document.getElementById('tilde')?.classList.add('animate-pulsating-tilde');
 			setTimeout(() => {
 				document.getElementById('tilde')?.classList.remove('animate-pulsating-tilde');
-			}, 2000);
+			}, 1500);
 		}
 	});
 </script>

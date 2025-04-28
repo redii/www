@@ -102,7 +102,7 @@ const config: Config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'caret-blink': 'caret-blink 1.25s ease-out infinite',
 				'waving-hand': 'waving-hand 3s ease-in-out',
-				'pulsating-tilde': 'pulsating-tilde 0.65s ease-in-out 2'
+				'pulsating-tilde': 'pulsating-tilde 1s ease-in-out'
 			}
 		}
 	}
