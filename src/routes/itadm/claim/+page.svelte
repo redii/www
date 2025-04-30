@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
-	import Form from '$lib/components/Form.svelte';
+	import Form from '$lib/components/form.svelte';
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 	import type { PageProps } from './$types';
 

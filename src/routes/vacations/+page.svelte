@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PageList from '$lib/components/PageList.svelte';
+	import PageList from '$lib/components/page-list.svelte';
 
 	export let data;
 </script>

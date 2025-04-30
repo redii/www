@@ -3,7 +3,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
-	import Form from '$lib/components/Form.svelte';
+	import Form from '$lib/components/form.svelte';
 </script>
 
 <div class="mx-auto max-w-lg">

@@ -1,15 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/state';
-
 	import '../app.css';
-	import Header from '$lib/components/Header.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import Pattern from '$lib/components/Pattern.svelte';
-	import PageTransition from '$lib/components/PageTransition.svelte';
-	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
+	import Header from '$lib/components/header.svelte';
+	import Footer from '$lib/components/footer.svelte';
+	import Pattern from '$lib/components/pattern.svelte';
+	import PageTransition from '$lib/components/page-transition.svelte';
+	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
-	import { House } from 'lucide-svelte';
 
 	let { children } = $props();
 </script>
@@ -34,30 +31,7 @@
 	<main
 		class="mx-auto min-h-[calc(100vh-64px-256px)] max-w-4xl px-6 py-12 sm:px-8 lg:min-h-[calc(100vh-64px-128px)] lg:px-10 lg:py-16"
 	>
-		{#if page.url.pathname !== '/' && page.data.hideBreadcrumbs !== true && !page.error}
-			<Breadcrumb.Root class="mb-8">
-				<Breadcrumb.List>
-					<Breadcrumb.Item>
-						<Breadcrumb.Link href="/">
-							<House size={16} />
-						</Breadcrumb.Link>
-					</Breadcrumb.Item>
-					<Breadcrumb.Separator />
-					{#each page.url.pathname.split('/').slice(1) as slug, index}
-						{@const itemUrl = '/' + [...page.url.pathname.split('/').slice(1, index + 2)].join('/')}
-						{@const isLastItem = index === page.url.pathname.split('/').length - 2}
-						{#if isLastItem}
-							<Breadcrumb.Page>{page.data.title || slug}</Breadcrumb.Page>
-						{:else}
-							<Breadcrumb.Item>
-								<Breadcrumb.Link href={itemUrl}>{slug}</Breadcrumb.Link>
-							</Breadcrumb.Item>
-							<Breadcrumb.Separator />
-						{/if}
-					{/each}
-				</Breadcrumb.List>
-			</Breadcrumb.Root>
-		{/if}
+		<Breadcrumbs />
 		{@render children()}
 	</main>
 </PageTransition>

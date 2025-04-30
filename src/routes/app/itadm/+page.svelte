@@ -4,8 +4,8 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
-	import { Trash } from 'lucide-svelte';
-	import Form from '$lib/components/Form.svelte';
+	import Form from '$lib/components/form.svelte';
+	import Trash from '@lucide/svelte/icons/trash';
 
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 

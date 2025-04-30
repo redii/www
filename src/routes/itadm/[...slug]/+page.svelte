@@ -7,9 +7,11 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
-	import Form from '$lib/components/Form.svelte';
-	import PageList from '$lib/components/PageList.svelte';
-	import { Terminal, Lock, Unplug } from 'lucide-svelte';
+	import Form from '$lib/components/form.svelte';
+	import PageList from '$lib/components/page-list.svelte';
+	import Terminal from '@lucide/svelte/icons/terminal';
+	import Lock from '@lucide/svelte/icons/lock';
+	import Unplug from '@lucide/svelte/icons/unplug';
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 
 	export let data;
