@@ -1,7 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { getDropletsByTag, deleteDropletsByTag } from '$lib/utils/digitalocean';
 import type { PageServerLoad, Actions } from './$types';
-import type { Notification } from '$lib/types';
 
 export const load: PageServerLoad = async () => {
 	try {

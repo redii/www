@@ -1,7 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { claimDroplet } from '$lib/utils/digitalocean';
 import type { PageServerLoad, Actions } from './$types';
-import type { Notification } from '$lib/types';
 
 export const load: PageServerLoad = async () => {
 	return { hideBreadcrumbs: true };

@@ -7,6 +7,11 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
+		interface Notification {
+			type: 'default' | 'info' | 'success' | 'warning' | 'error';
+			title: string;
+			description: string;
+		}
 	}
 }
 

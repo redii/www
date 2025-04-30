@@ -3,7 +3,6 @@
 	import { invalidateAll, goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
 
-	import type { Notification } from '$lib/types';
 	interface Props {
 		form?: HTMLFormElement | undefined;
 		method: 'POST' | 'dialog' | 'get' | 'post' | 'DIALOG' | 'GET' | null | undefined;

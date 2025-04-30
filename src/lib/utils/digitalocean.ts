@@ -1,5 +1,5 @@
 import { PRIVATE_DO_URL, PRIVATE_DO_TOKEN } from '$env/static/private';
-import type { Notification, Droplet } from '$lib/types';
+import type { Droplet } from '$lib/types';
 
 export async function getDropletsByTag(tag: string) {
 	try {
