@@ -14,7 +14,7 @@
 			<img
 				src="/images/waving-hand.png"
 				alt="Waving Hand 👋"
-				class="animate-waving-hand relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right"
+				class="relative bottom-2 ml-4 inline h-20 w-20 origin-bottom-right animate-waving-hand"
 				style="animation-delay: 1.5s;"
 			/>
 		</span>
@@ -30,7 +30,7 @@
 		<a href="/posts" class="group">
 			<Card.Root>
 				<Card.Header>
-					<Card.Title>Blog Posts</Card.Title>
+					<Card.Title aria-level={2}>Blog Posts</Card.Title>
 					<Card.Description>
 						Wenn ich mal was zu berichten habe, könnte es sein, dass ich hier einen Post schreibe.
 					</Card.Description>
@@ -47,7 +47,7 @@
 		<a href="/itadm" class="group">
 			<Card.Root>
 				<Card.Header>
-					<Card.Title>ITADM Kursinhalte</Card.Title>
+					<Card.Title aria-level={2}>ITADM Kursinhalte</Card.Title>
 					<Card.Description>
 						Wenn du Teilnehmer einer meiner Kurse bist, findest du hier alle Unterlagen.
 					</Card.Description>
