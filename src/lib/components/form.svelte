@@ -30,28 +30,28 @@
 					await invalidateAll(); // causes reloading data from the server
 				}
 
-				// display notification if returned
-				const toast: Toast = result.data?.notification;
-				if (notification) {
-					if (notification.type === 'success') {
-						toast.success(notification.title, {
-							description: notification.description
+				// display toast if returned
+				const toastData: Toast = result.data?.toast;
+				if (toastData) {
+					if (toastData.type === 'success') {
+						toast.success(toastData.title, {
+							description: toastData.description
 						});
-					} else if (notification.type === 'info') {
-						toast.info(notification.title, {
-							description: notification.description
+					} else if (toastData.type === 'info') {
+						toast.info(toastData.title, {
+							description: toastData.description
 						});
-					} else if (notification.type === 'warning') {
-						toast.warning(notification.title, {
-							description: notification.description
+					} else if (toastData.type === 'warning') {
+						toast.warning(toastData.title, {
+							description: toastData.description
 						});
-					} else if (notification.type === 'error') {
-						toast.error(notification.title, {
-							description: notification.description
+					} else if (toastData.type === 'error') {
+						toast.error(toastData.title, {
+							description: toastData.description
 						});
 					} else {
-						toast(notification.title, {
-							description: notification.description
+						toast(toastData.title, {
+							description: toastData.description
 						});
 					}
 				}
