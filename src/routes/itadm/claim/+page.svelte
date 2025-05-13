@@ -5,6 +5,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
 	import Form from '$lib/components/form.svelte';
+	import Terminal from '@lucide/svelte/icons/terminal';
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 	import type { PageProps } from './$types';
 
@@ -20,7 +21,7 @@
 	{#if form?.success}
 		<Card.Root>
 			<Card.Header>
-				<Card.Title>✅&nbsp; Server zugewiesen</Card.Title>
+				<Card.Title>✅ Server zugewiesen</Card.Title>
 				<Card.Description>
 					Ein Server wurde dir erfolgreich zugewiesen! Du kannst ihn jetzt für die Aufgaben im ITADM
 					Kurs benutzen.
@@ -48,14 +49,16 @@
 	{:else}
 		<Card.Root>
 			<Card.Header>
-				<Card.Title>Einen Server anfragen</Card.Title>
+				<Card.Title>
+					<Terminal class="relative bottom-0.5 mr-1 inline" /> Einen Server anfordern
+				</Card.Title>
 				<Card.Description>
-					Hier kannst du einen Server anfragen, um die Aufgaben im ITADM Kurs damit zu bearbeiten.
+					Hier kannst du einen Server anfordern, um die Aufgaben im ITADM Kurs damit zu bearbeiten.
 				</Card.Description>
 			</Card.Header>
 			<Card.Content>
 				<Form action="/itadm/claim?/claimDroplet" method="POST">
-					<Button type="submit" class="w-full">Server anfragen</Button>
+					<Button type="submit" class="w-full">Server anfordern</Button>
 				</Form>
 				<Dialog.Root>
 					<Dialog.Trigger class="mt-2 w-full text-center">

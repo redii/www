@@ -1,5 +1,6 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { claimDroplet } from '$lib/utils/digitalocean';
+import { Mutex } from 'async-mutex';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async () => {
@@ -9,18 +10,23 @@ export const load: PageServerLoad = async () => {
 export const actions = {
 	claimDroplet: async ({ request, cookies }) => {
 		try {
-			if (cookies.get('droplet_claimCode')) return redirect(302, '/itadm');
 			const data = await request.formData();
 			const claimCode = data.get('claimCode') as string;
 
-			const result = await claimDroplet(claimCode);
+			// create resourceLock to prevent droplets to be tagged multiple times
+			const resourceLock = new Mutex();
+			const release = await resourceLock.acquire();
 
+			const result = await claimDroplet(claimCode);
 			if (result.success && result.droplet) {
 				cookies.set('droplet_claimCode', result.droplet.claimCode, {
 					path: '/',
-					maxAge: 60 * 60 * 24 * 7 // 7 days
+					maxAge: 60 * 60 * 24 * 14 // 14 days
 				});
 			}
+
+			// release resourceLock
+			release();
 
 			return result;
 		} catch (error) {

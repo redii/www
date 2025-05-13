@@ -22,6 +22,9 @@
 
 	async function handleSubmit() {
 		try {
+			// disable submitButtons
+			setSubmitButtonDisableState(true);
+
 			return async ({ result }) => {
 				if (result.type === 'redirect') {
 					goto(result.location);
@@ -29,6 +32,9 @@
 					await applyAction(result); // updates form variable
 					await invalidateAll(); // causes reloading data from the server
 				}
+
+				// enable submitButtons after form action
+				setSubmitButtonDisableState(false);
 
 				// display toast if returned
 				const toastData: Toast = result.data?.toast;
@@ -61,6 +67,16 @@
 				description: 'Ein unerwarteter Fehler ist aufgetreten'
 			});
 			console.error(err);
+		}
+	}
+
+	function setSubmitButtonDisableState(disabled: boolean) {
+		if (form) {
+			const submitButtons: NodeListOf<HTMLButtonElement> =
+				form.querySelectorAll('button[type="submit"]');
+			submitButtons.forEach((button) => {
+				button.disabled = disabled;
+			});
 		}
 	}
 </script>

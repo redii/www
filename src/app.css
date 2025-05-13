@@ -22,7 +22,7 @@
 }
 
 .prose img {
-  @apply rounded-2xl border border-foreground/10 object-contain shadow-sm;
+  @apply rounded-2xl border border-foreground/10 bg-muted object-contain shadow-sm;
 }
 
 .prose p:has(img) > em {

@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@auth/sveltekit": "^1.8.0",
 		"@directus/sdk": "^19.1.0",
+		"async-mutex": "^0.5.0",
 		"fslightbox": "^3.5.1",
 		"tailwind-variants": "^1.0.0",
 		"tailwindcss-animate": "^1.0.7"
