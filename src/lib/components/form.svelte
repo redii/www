@@ -31,7 +31,7 @@
 				}
 
 				// display notification if returned
-				const notification: Notification = result.data?.notification;
+				const toast: Toast = result.data?.notification;
 				if (notification) {
 					if (notification.type === 'success') {
 						toast.success(notification.title, {

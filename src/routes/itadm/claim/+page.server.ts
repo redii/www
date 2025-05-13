@@ -27,11 +27,11 @@ export const actions = {
 			console.error('Error in claimDroplet action:', error);
 			return fail(500, {
 				success: false,
-				notification: {
+				toast: {
 					type: 'error',
 					title: 'Fehler beim Zuweisen des Servers',
 					description: 'Es ist ein unerwarteter Fehler aufgetreten.'
-				} satisfies Notification
+				} satisfies Toast
 			});
 		}
 	},
@@ -41,7 +41,7 @@ export const actions = {
 
 			return {
 				success: true,
-				notification: {
+				toast: {
 					type: 'info',
 					title: 'Server wurde getrennt'
 				}
@@ -50,11 +50,11 @@ export const actions = {
 			console.error('Error in disconnectDroplet action:', error);
 			return fail(500, {
 				success: false,
-				notification: {
+				toast: {
 					type: 'error',
 					title: 'Fehler beim Trennen des Servers',
 					description: 'Es ist ein unerwarteter Fehler aufgetreten.'
-				} satisfies Notification
+				} satisfies Toast
 			});
 		}
 	}

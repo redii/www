@@ -12,7 +12,7 @@ export const actions = {
 		if (!data.get('password')) {
 			return {
 				success: false,
-				notification: {
+				toast: {
 					type: 'warning',
 					title: 'Fehler beim Login',
 					description: 'Bitte ein Passwort eingeben'
@@ -23,13 +23,13 @@ export const actions = {
 		if (data.get('password') === PRIVATE_VACATIONS_PASSWORD) {
 			cookies.set('vacations_password', PRIVATE_VACATIONS_PASSWORD, {
 				path: '/',
-				maxAge: 60 * 60 * 24 * 30 // 30 days
+				maxAge: 60 * 60 * 24 * 365 // 365 days
 			});
 			throw redirect(302, '/vacations');
 		} else {
 			return {
 				success: false,
-				notification: {
+				toast: {
 					type: 'warning',
 					title: 'Computer sagt nein 👀',
 					description: 'Das angegebene Passwort ist falsch'

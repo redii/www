@@ -20,21 +20,21 @@ export const actions = {
 
 			return {
 				success: true,
-				notification: {
+				toast: {
 					type: 'success',
 					title: 'Server gelöscht',
 					description: 'Alle ITADM Server wurden erfolgreich gelöscht.'
-				} satisfies Notification
+				} satisfies Toast
 			};
 		} catch (error) {
 			console.error('Error in deleteDroplets action:', error);
 			return fail(500, {
 				success: false,
-				notification: {
+				toast: {
 					type: 'error',
 					title: 'Fehler beim Löschen der Server',
 					description: 'Es ist ein unerwarteter Fehler aufgetreten.'
-				} satisfies Notification
+				} satisfies Toast
 			});
 		}
 	}

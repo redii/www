@@ -22,7 +22,7 @@ export async function getDropletsByTag(tag: string) {
 
 export async function claimDroplet(claimCode?: string): Promise<{
 	success: boolean;
-	notification: Notification;
+	toast: Toast;
 	droplet?: Droplet;
 }> {
 	try {
@@ -34,11 +34,11 @@ export async function claimDroplet(claimCode?: string): Promise<{
 			if (!droplet) {
 				return {
 					success: false,
-					notification: {
+					toast: {
 						type: 'warning',
 						title: 'Fehler beim Zuweisen',
 						description: 'Kein Server mit diesem Claim-Code gefunden'
-					} satisfies Notification
+					} satisfies Toast
 				};
 			} else {
 				return {
@@ -52,11 +52,11 @@ export async function claimDroplet(claimCode?: string): Promise<{
 						ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
 						claimCode
 					} satisfies Droplet,
-					notification: {
+					toast: {
 						type: 'success',
 						title: 'Server erfolgreich zugewiesen',
 						description: 'Viel Spaß im Unterricht 🎉'
-					} satisfies Notification
+					} satisfies Toast
 				};
 			}
 		}
@@ -65,11 +65,11 @@ export async function claimDroplet(claimCode?: string): Promise<{
 		if (!droplet) {
 			return {
 				success: false,
-				notification: {
+				toast: {
 					type: 'warning',
 					title: 'Fehler beim Zuweisen',
 					description: 'Es ist aktuell kein freier Server vorhanden'
-				} satisfies Notification
+				} satisfies Toast
 			};
 		}
 
@@ -88,11 +88,11 @@ export async function claimDroplet(claimCode?: string): Promise<{
 				ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
 				claimCode
 			} satisfies Droplet,
-			notification: {
+			toast: {
 				type: 'success',
 				title: 'Server erfolgreich zugewiesen',
 				description: 'Viel Spaß im Unterricht 🎉'
-			} satisfies Notification
+			} satisfies Toast
 		};
 	} catch (error) {
 		console.error(error);
