@@ -3,6 +3,8 @@ import { claimDroplet } from '$lib/utils/digitalocean';
 import { Mutex } from 'async-mutex';
 import type { PageServerLoad, Actions } from './$types';
 
+const claimDropletLock = new Mutex();
+
 export const load: PageServerLoad = async () => {
 	return { hideBreadcrumbs: true };
 };
@@ -13,22 +15,20 @@ export const actions = {
 			const data = await request.formData();
 			const claimCode = data.get('claimCode') as string;
 
-			// create resourceLock to prevent droplets to be tagged multiple times
-			const resourceLock = new Mutex();
-			const release = await resourceLock.acquire();
-
-			const result = await claimDroplet(claimCode);
-			if (result.success && result.droplet) {
-				cookies.set('droplet_claimCode', result.droplet.claimCode, {
-					path: '/',
-					maxAge: 60 * 60 * 24 * 14 // 14 days
-				});
+			// create lock to prevent droplets to be tagged multiple times
+			const release = await claimDropletLock.acquire();
+			try {
+				const result = await claimDroplet(claimCode);
+				if (result.success && result.droplet) {
+					cookies.set('droplet_claimCode', result.droplet.claimCode, {
+						path: '/',
+						maxAge: 60 * 60 * 24 * 14 // 14 days
+					});
+				}
+				return result;
+			} finally {
+				release();
 			}
-
-			// release resourceLock
-			release();
-
-			return result;
 		} catch (error) {
 			console.error('Error in claimDroplet action:', error);
 			return fail(500, {
