@@ -8,10 +8,13 @@
 
 <PageList
 	pages={data.vacations.map((v) => {
+		const startDate = new Date(v.start_date);
+		const vacationMonth = startDate.toLocaleString('de', { month: 'long' });
+		const vacationYear = startDate.getFullYear();
 		return {
 			title: v.title,
 			href: `/vacations/${v.id}`,
-			date: v.start_date,
+			date: `${vacationMonth} ${vacationYear}`,
 			imageId: v.image
 		};
 	})}

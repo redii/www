@@ -35,8 +35,8 @@
 <ul class="mb-10 flex flex-col gap-16">
 	{#each data.vacationDays as day}
 		{@const dayDate = new Date(day.date)}
-		{@const longitude = day.location.coordinates[0]}
-		{@const latitude = day.location.coordinates[1]}
+		{@const longitude = day.location?.coordinates[0]}
+		{@const latitude = day.location?.coordinates[1]}
 		<li>
 			<div class="mb-4 border-b">
 				<time datetime={day.date} class="text-muted-foreground">
@@ -74,27 +74,29 @@
 				</div>
 			{/if}
 
-			<div class="mt-4">
-				<Button
-					variant="outline"
-					data-fslightbox="maps"
-					data-class="!block"
-					href={`#map-${day.id}`}
-				>
-					📍 Karte anzeigen
-				</Button>
-				<iframe
-					id={`map-${day.id}`}
-					title={`Karte für ${day.title}`}
-					width="1080px"
-					height="1080px"
-					scrolling="no"
-					allow="autoplay; fullscreen"
-					allowFullScreen
-					src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
-					class="hidden"
-				></iframe>
-			</div>
+			{#if longitude && latitude}
+				<div class="mt-4">
+					<Button
+						variant="outline"
+						data-fslightbox="maps"
+						data-class="!block"
+						href={`#map-${day.id}`}
+					>
+						📍 Karte anzeigen
+					</Button>
+					<iframe
+						id={`map-${day.id}`}
+						title={`Karte für ${day.title}`}
+						width="1080px"
+						height="1080px"
+						scrolling="no"
+						allow="autoplay; fullscreen"
+						allowFullScreen
+						src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
+						class="hidden"
+					></iframe>
+				</div>
+			{/if}
 		</li>
 	{/each}
 </ul>
