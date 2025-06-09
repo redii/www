@@ -50,7 +50,7 @@
 			</div>
 
 			<p class="leading-7 [&:not(:first-child)]:mt-6">
-				{@html day.text.replace(/\n/g, '<br>')}
+				{@html day.text.trim().replace(/\n/g, '<br>')}
 			</p>
 
 			{#if day.images.length}
