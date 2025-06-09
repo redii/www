@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
 	if (password === PRIVATE_VACATIONS_PASSWORD) {
 		cookies.set('vacations_password', password, {
 			path: '/',
-			maxAge: 60 * 60 * 24 * 30 // 30 days
+			maxAge: 60 * 60 * 24 * 365 // 365 days
 		});
 		return;
 	}
