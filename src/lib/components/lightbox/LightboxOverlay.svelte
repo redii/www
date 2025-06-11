@@ -48,7 +48,9 @@
 				</div>
 				<Carousel.Content id="lightbox-carousel-content">
 					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item class="flex max-h-[80dvh] max-w-[100vw] justify-center md:max-w-5xl">
+						<Carousel.Item
+							class="flex h-fit max-h-[70dvh] max-w-[100vw] justify-center md:max-w-5xl"
+						>
 							{@render element?.()}
 						</Carousel.Item>
 					{/each}

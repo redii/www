@@ -52,7 +52,7 @@
 			{#if day.images.length}
 				<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
 					{#each day.images as entry}
-						<LightboxItem>
+						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1} class="bg-muted">
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=512&width=512&quality=75`}
@@ -75,7 +75,7 @@
 
 			{#if longitude && latitude}
 				<div class="mt-4">
-					<LightboxItem gallery="locations">
+					<LightboxItem gallery={`locations-${data.vacation.id}`}>
 						<Button variant="outline">📍 Karte anzeigen</Button>
 						{#snippet lightboxContent()}
 							<iframe
