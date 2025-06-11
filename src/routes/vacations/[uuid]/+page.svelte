@@ -65,6 +65,7 @@
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
 									alt={entry.description}
+									class="h-full w-full object-contain"
 								/>
 							{/snippet}
 						</LightboxItem>
