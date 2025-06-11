@@ -28,7 +28,7 @@
 		class="fixed inset-0 z-50 bg-black/80"
 		transition:fade={{ duration: 200 }}
 	>
-		<div class="flex h-full items-center justify-center md:px-16">
+		<div class="mx-auto flex h-full items-center justify-center sm:max-w-5xl">
 			<Carousel.Root
 				setApi={(emblaApi) => (api = emblaApi)}
 				opts={{
@@ -46,11 +46,10 @@
 						</Button>
 					</div>
 				</div>
+
 				<Carousel.Content id="lightbox-carousel-content">
 					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item
-							class="flex h-fit max-h-[70dvh] max-w-[100vw] justify-center md:max-w-5xl"
-						>
+						<Carousel.Item class="h-fit max-h-[75dvh] max-w-[100vw] sm:max-w-[90vw]">
 							{@render element?.()}
 						</Carousel.Item>
 					{/each}
