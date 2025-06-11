@@ -65,7 +65,6 @@
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
 									alt={entry.description}
-									loading="lazy"
 								/>
 							{/snippet}
 						</LightboxItem>
