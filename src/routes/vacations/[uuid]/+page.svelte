@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Button } from '$lib/components/ui/button';
+	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
@@ -10,10 +10,6 @@
 	const startDate = new Date(data.vacation.start_date);
 	const vacationMonth = startDate.toLocaleString('de', { month: 'long' });
 	const vacationYear = startDate.getFullYear();
-
-	onMount(async () => {
-		(await import('fslightbox')).default;
-	});
 </script>
 
 <img
@@ -56,11 +52,7 @@
 			{#if day.images.length}
 				<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
 					{#each day.images as entry}
-						<a
-							data-fslightbox="gallery"
-							data-type="image"
-							href={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
-						>
+						<LightboxItem>
 							<AspectRatio ratio={1} class="bg-muted">
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=512&width=512&quality=75`}
@@ -69,32 +61,42 @@
 									class="h-full w-full rounded-xl object-cover"
 								/>
 							</AspectRatio>
-						</a>
+							{#snippet lightboxContent()}
+								<img
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
+									alt={entry.description}
+								/>
+							{/snippet}
+						</LightboxItem>
 					{/each}
 				</div>
 			{/if}
 
 			{#if longitude && latitude}
 				<div class="mt-4">
-					<Button
-						variant="outline"
-						data-fslightbox="maps"
-						data-class="!block"
-						href={`#map-${day.id}`}
-					>
-						📍 Karte anzeigen
-					</Button>
-					<iframe
-						id={`map-${day.id}`}
-						title={`Karte für ${day.title}`}
-						width="1080px"
-						height="1080px"
-						scrolling="no"
-						allow="autoplay; fullscreen"
-						allowFullScreen
-						src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
-						class="hidden"
-					></iframe>
+					<LightboxItem gallery="locations">
+						<Button
+							variant="outline"
+							data-fslightbox="maps"
+							data-class="!block"
+							href={`#map-${day.id}`}
+						>
+							📍 Karte anzeigen
+						</Button>
+						{#snippet lightboxContent()}
+							<iframe
+								id={`map-${day.id}`}
+								title={`Karte für ${day.title}`}
+								width="1080px"
+								height="1080px"
+								scrolling="no"
+								allow="autoplay; fullscreen"
+								allowFullScreen
+								src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
+								class="hidden"
+							></iframe>
+						{/snippet}
+					</LightboxItem>
 				</div>
 			{/if}
 		</li>

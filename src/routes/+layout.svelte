@@ -5,6 +5,7 @@
 	import Pattern from '$lib/components/pattern.svelte';
 	import PageTransition from '$lib/components/page-transition.svelte';
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
+	import LightboxOverlay from '$lib/components/lightbox/LightboxOverlay.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
 
@@ -40,3 +41,4 @@
 <Pattern />
 <ModeWatcher />
 <Toaster richColors />
+<LightboxOverlay />
