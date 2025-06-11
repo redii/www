@@ -16,7 +16,6 @@
 	$effect(() => {
 		if (api) {
 			api.on('select', (i) => {
-				console.log('select', i.selectedScrollSnap());
 				currentElementIndex.set(i.selectedScrollSnap());
 			});
 		}
@@ -49,7 +48,9 @@
 				</div>
 				<Carousel.Content id="lightbox-carousel-content">
 					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item class="flex max-h-[80vh] max-w-[80vw] justify-center">
+						<Carousel.Item
+							class="flex max-h-[80vh] max-w-full justify-center pl-8 pr-4 md:max-w-5xl md:px-0"
+						>
 							{@render element?.()}
 						</Carousel.Item>
 					{/each}

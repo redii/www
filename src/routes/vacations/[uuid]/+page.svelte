@@ -65,6 +65,7 @@
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
 									alt={entry.description}
+									loading="lazy"
 								/>
 							{/snippet}
 						</LightboxItem>
@@ -75,25 +76,16 @@
 			{#if longitude && latitude}
 				<div class="mt-4">
 					<LightboxItem gallery="locations">
-						<Button
-							variant="outline"
-							data-fslightbox="maps"
-							data-class="!block"
-							href={`#map-${day.id}`}
-						>
-							📍 Karte anzeigen
-						</Button>
+						<Button variant="outline">📍 Karte anzeigen</Button>
 						{#snippet lightboxContent()}
 							<iframe
 								id={`map-${day.id}`}
 								title={`Karte für ${day.title}`}
-								width="1080px"
-								height="1080px"
 								scrolling="no"
 								allow="autoplay; fullscreen"
 								allowFullScreen
 								src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
-								class="hidden"
+								class="h-[60vh] w-full"
 							></iframe>
 						{/snippet}
 					</LightboxItem>
