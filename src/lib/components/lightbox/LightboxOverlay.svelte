@@ -49,7 +49,7 @@
 
 				<Carousel.Content id="lightbox-carousel-content">
 					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item class="h-fit max-h-[75dvh] max-w-[100vw] sm:max-w-[90vw]">
+						<Carousel.Item class="max-h-[75dvh] max-w-[100vw] sm:max-w-[90vw]">
 							{@render element?.()}
 						</Carousel.Item>
 					{/each}
