@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		if (!vacation) redirect(302, '/vacations');
 
 		const today = new Date().toISOString().split('T')[0];
-		const sort = today <= vacation.end_date ? '-sort' : 'sort';
+		const sort = today <= vacation.end_date ? '-date' : 'date';
 
 		const vacationDays = await readItems('vacation_days', {
 			filter: {
