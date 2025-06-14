@@ -37,7 +37,8 @@
 
 <div class="mb-12 hidden sm:block">
 	<Gmaps
-		location={{ lat: 20, lng: 0 }}
+		variant="grayscale"
+		location={{ lat: 20, lng: 10 }}
 		zoom={1.7}
 		markers={data.vacations.map((v) => {
 			if (v.location)
@@ -47,7 +48,7 @@
 					href: `/vacations/${v.id}`
 				};
 		})}
-		class="h-96 w-full rounded-2xl border bg-muted-foreground"
+		class="h-96 w-full rounded-2xl border"
 	/>
 </div>
 
