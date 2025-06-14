@@ -50,7 +50,7 @@
 								lng: vd.location.coordinates[0]
 							};
 					})}
-					class="mx-auto h-[60vh] w-96 max-w-4xl sm:w-[70vw]"
+					class="mx-auto h-[60vh] w-full max-w-4xl"
 				/>
 			{/snippet}
 		</LightboxItem>
