@@ -32,8 +32,7 @@
 			<Carousel.Root
 				setApi={(emblaApi) => (api = emblaApi)}
 				opts={{
-					startIndex: $currentElementIndex,
-					loop: true
+					startIndex: $currentElementIndex
 				}}
 			>
 				<div class="fixed left-0 top-0 w-full p-6">
