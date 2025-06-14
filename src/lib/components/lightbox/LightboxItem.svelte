@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
-	import { registerElement, openLightbox } from '$lib/components/lightbox/lightboxStore';
+	import { onMount, onDestroy, type Snippet } from 'svelte';
+	import { browser } from '$app/environment';
+	import { registerElement, removeElement, openLightbox } from '$lib/components/lightbox';
 
 	interface Props {
 		gallery?: string;
@@ -13,6 +14,10 @@
 
 	onMount(() => {
 		elementIndex = registerElement(lightboxContent || children, gallery);
+	});
+
+	onDestroy(() => {
+		if (browser) removeElement(elementIndex);
 	});
 </script>
 

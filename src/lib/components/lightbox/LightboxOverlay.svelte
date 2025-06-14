@@ -5,7 +5,7 @@
 		currentElementIndex,
 		currentGalleryIndex,
 		closeLightbox
-	} from '$lib/components/lightbox/lightboxStore';
+	} from '$lib/components/lightbox';
 
 	import { type CarouselAPI } from '$lib/components/ui/carousel/context';
 	import * as Carousel from '$lib/components/ui/carousel';

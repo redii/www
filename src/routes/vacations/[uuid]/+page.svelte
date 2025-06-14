@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Button } from '$lib/components/ui/button';
+	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
+	import Gmaps from '$lib/components/gmaps.svelte';
+	import MapPinned from '@lucide/svelte/icons/map-pinned';
 
-	import { PUBLIC_DIRECTUS_URL, PUBLIC_GMAPS_API_KEY } from '$env/static/public';
+	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
 	export let data;
 
@@ -19,13 +21,40 @@
 />
 
 <section id="vacation-heading" class="mb-16 mt-8">
-	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-		{data.vacation.title}
-	</h1>
-	<time datetime={data.vacation.start_date} class="mt-1 text-lg lg:mt-2">
-		{vacationMonth}
-		{vacationYear}
-	</time>
+	<div class="flex flex-row items-start items-center justify-between gap-4">
+		<div>
+			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+				{data.vacation.title}
+			</h1>
+			<time datetime={data.vacation.start_date} class="mt-1 block text-lg md:mt-2">
+				{vacationMonth}
+				{vacationYear}
+			</time>
+		</div>
+		<LightboxItem gallery={`locations-${data.vacation.id}`}>
+			<Button variant="secondary" size="icon" class="size-12">
+				<MapPinned />
+				<span class="sr-only">Übersichtskarte anzeigen</span>
+			</Button>
+			{#snippet lightboxContent()}
+				<Gmaps
+					location={{
+						lat: data.vacation.location.coordinates[1],
+						lng: data.vacation.location.coordinates[0]
+					}}
+					zoom={data.vacation.location_zoom}
+					markers={data.vacationDays.map((vd) => {
+						if (vd.location)
+							return {
+								lat: vd.location.coordinates[1],
+								lng: vd.location.coordinates[0]
+							};
+					})}
+					class="mx-auto h-[60vh] w-96 max-w-4xl sm:w-[70vw]"
+				/>
+			{/snippet}
+		</LightboxItem>
+	</div>
 </section>
 
 <ul class="mb-10 flex flex-col gap-16">
@@ -78,15 +107,15 @@
 					<LightboxItem gallery={`locations-${data.vacation.id}`}>
 						<Button variant="outline">📍 Karte anzeigen</Button>
 						{#snippet lightboxContent()}
-							<iframe
-								id={`map-${day.id}`}
-								title={`Karte für ${day.title}`}
-								scrolling="no"
-								allow="autoplay; fullscreen"
-								allowFullScreen
-								src={`https://www.google.com/maps/embed/v1/place?key=${PUBLIC_GMAPS_API_KEY}&zoom=8&q=${latitude},${longitude}`}
-								class="h-[60vh] w-full"
-							></iframe>
+							<Gmaps
+								location={{
+									lat: day.location.coordinates[1],
+									lng: day.location.coordinates[0]
+								}}
+								locationMarker={true}
+								zoom={12}
+								class="mx-auto h-[60vh] w-96 max-w-4xl sm:w-[70vw]"
+							/>
 						{/snippet}
 					</LightboxItem>
 				</div>

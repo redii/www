@@ -23,6 +23,12 @@ export function registerElement(element: Function, galleryName: string = 'defaul
 	}
 }
 
+export function removeElement(elementIndex: number, galleryName: string = 'default'): void {
+	const registeredLightboxes: LightboxGallery[] = get(lightboxGalleries);
+	const galleryIndex = getGalleryIndex(galleryName);
+	delete registeredLightboxes[galleryIndex].elements[elementIndex];
+}
+
 export async function openLightbox(elementIndex: number, galleryName: string = 'default') {
 	const galleryIndex = getGalleryIndex(galleryName);
 	currentGalleryIndex.set(galleryIndex);
