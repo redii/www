@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 
-	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
+	import { PUBLIC_DIRECTUS_URL, PUBLIC_GMAPS_API_KEY } from '$env/static/public';
 
 	export let data;
 
@@ -84,7 +84,7 @@
 								scrolling="no"
 								allow="autoplay; fullscreen"
 								allowFullScreen
-								src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBdanO51ibHQTi0fFcyug3upt2I3SqCVVI&zoom=8&q=${latitude},${longitude}`}
+								src={`https://www.google.com/maps/embed/v1/place?key=${PUBLIC_GMAPS_API_KEY}&zoom=8&q=${latitude},${longitude}`}
 								class="h-[60vh] w-full"
 							></iframe>
 						{/snippet}
