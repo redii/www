@@ -21,7 +21,7 @@
 						href: `/vacations/${v.id}`
 					};
 			})}
-			class="h-48 w-full rounded-2xl border"
+			class="h-48 w-full rounded-2xl border bg-muted-foreground"
 		/>
 	</div>
 	<div class="hidden sm:block">
@@ -37,7 +37,7 @@
 						href: `/vacations/${v.id}`
 					};
 			})}
-			class="h-96 w-full rounded-2xl border"
+			class="h-96 w-full rounded-2xl border bg-muted-foreground"
 		/>
 	</div>
 </div>
