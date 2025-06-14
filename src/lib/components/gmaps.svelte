@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { closeLightbox } from '$lib/components/lightbox';
 	import loadGoogleMapsAPI from 'load-google-maps-api';
 
 	import { PUBLIC_GMAPS_API_KEY } from '$env/static/public';
@@ -385,7 +386,8 @@
 				const marker = new googleMaps.Marker({ position: m, map });
 				if (m.href) {
 					marker.addListener('click', () => {
-						window.location.href = String(m.href);
+						closeLightbox();
+						goto(String(m.href));
 					});
 				}
 			});
