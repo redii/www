@@ -50,7 +50,7 @@
 								lng: vd.location.coordinates[0]
 							};
 					})}
-					class="mx-auto h-[60vh] w-96 sm:w-[500px] md:w-[700px] lg:w-[920px] xl:w-[1000px]"
+					class="h-[60vh] w-full"
 				/>
 			{/snippet}
 		</LightboxItem>
@@ -114,7 +114,7 @@
 								}}
 								locationMarker={true}
 								zoom={12}
-								class="mx-auto h-[60vh] w-96 sm:w-[500px] md:w-[700px] lg:w-[920px] xl:w-[1000px]"
+								class="h-[60vh] w-full"
 							/>
 						{/snippet}
 					</LightboxItem>
