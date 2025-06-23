@@ -35,10 +35,10 @@ export async function openLightbox(elementIndex: number, galleryName: string = '
 	currentElementIndex.set(elementIndex);
 	await tick();
 	document.body.style.overflow = 'hidden';
-	const overlay = document.getElementById('lightbox-overlay');
-	overlay?.addEventListener('click', (event) => {
-		const lightboxCarouselContent = document.getElementById('lightbox-carousel-content');
-		if (!lightboxCarouselContent?.contains(event.target as Node)) closeLightbox();
+	const overlayOverlay = document.getElementById('lightbox-overlay');
+	const lightboxContent = document.getElementById('lightbox-content');
+	overlayOverlay?.addEventListener('click', (event) => {
+		if (!lightboxContent?.contains(event.target as Node)) closeLightbox();
 	});
 }
 

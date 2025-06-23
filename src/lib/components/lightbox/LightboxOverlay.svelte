@@ -23,34 +23,36 @@
 </script>
 
 {#if typeof $currentElementIndex === 'number'}
-	<div class="fixed inset-0 z-50 bg-black/80" transition:fade={{ duration: 200 }}>
-		<div class="h-[100dvh] w-[100vw]">
-			<Carousel.Root
-				setApi={(emblaApi) => (api = emblaApi)}
-				opts={{
-					startIndex: $currentElementIndex
-				}}
-				class="mx-auto max-w-5xl"
-			>
-				<div class="flex items-center justify-between p-6">
-					<p class="font-mono tracking-wider text-white">
-						{$currentElementIndex + 1}/{$lightboxGalleries[$currentGalleryIndex].elements.length}
-					</p>
-					<Button size="icon" onclick={closeLightbox}>
-						<X />
-					</Button>
-				</div>
+	<div
+		id="lightbox-overlay"
+		class="fixed inset-0 z-50 h-[100dvh] w-[100vw] bg-black/80"
+		transition:fade={{ duration: 200 }}
+	>
+		<Carousel.Root
+			setApi={(emblaApi) => (api = emblaApi)}
+			opts={{
+				startIndex: $currentElementIndex
+			}}
+			class="mx-auto max-w-5xl"
+		>
+			<div class="flex items-center justify-between p-6">
+				<p class="font-mono tracking-wider text-white">
+					{$currentElementIndex + 1}/{$lightboxGalleries[$currentGalleryIndex].elements.length}
+				</p>
+				<Button size="icon" onclick={closeLightbox}>
+					<X />
+				</Button>
+			</div>
 
-				<Carousel.Content class="max-h-[calc(100dvh-200px)] px-2">
-					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item>
-							{@render element?.()}
-						</Carousel.Item>
-					{/each}
-				</Carousel.Content>
-				<Carousel.Previous />
-				<Carousel.Next />
-			</Carousel.Root>
-		</div>
+			<Carousel.Content id="lightbox-content" class="mt-8 max-h-[calc(100dvh-200px)] px-2">
+				{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
+					<Carousel.Item>
+						{@render element?.()}
+					</Carousel.Item>
+				{/each}
+			</Carousel.Content>
+			<Carousel.Previous />
+			<Carousel.Next />
+		</Carousel.Root>
 	</div>
 {/if}
