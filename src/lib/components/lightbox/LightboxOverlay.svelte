@@ -23,32 +23,27 @@
 </script>
 
 {#if typeof $currentElementIndex === 'number'}
-	<div
-		id="lightbox-overlay"
-		class="fixed inset-0 z-50 bg-black/80"
-		transition:fade={{ duration: 200 }}
-	>
-		<div class="mx-auto flex h-full items-center justify-center sm:max-w-5xl">
+	<div class="fixed inset-0 z-50 bg-black/80" transition:fade={{ duration: 200 }}>
+		<div class="h-[100dvh] w-[100vw]">
 			<Carousel.Root
 				setApi={(emblaApi) => (api = emblaApi)}
 				opts={{
 					startIndex: $currentElementIndex
 				}}
+				class="mx-auto max-w-5xl"
 			>
-				<div class="fixed left-0 top-0 w-full p-6">
-					<div class="flex items-center justify-between">
-						<p class="font-mono tracking-wider text-white">
-							{$currentElementIndex + 1}/{$lightboxGalleries[$currentGalleryIndex].elements.length}
-						</p>
-						<Button size="icon" onclick={closeLightbox}>
-							<X />
-						</Button>
-					</div>
+				<div class="flex items-center justify-between p-6">
+					<p class="font-mono tracking-wider text-white">
+						{$currentElementIndex + 1}/{$lightboxGalleries[$currentGalleryIndex].elements.length}
+					</p>
+					<Button size="icon" onclick={closeLightbox}>
+						<X />
+					</Button>
 				</div>
 
-				<Carousel.Content id="lightbox-carousel-content">
+				<Carousel.Content class="max-h-[calc(100dvh-200px)] px-2">
 					{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
-						<Carousel.Item class="max-h-[75dvh] w-full max-w-[100vw] sm:max-w-5xl">
+						<Carousel.Item>
 							{@render element?.()}
 						</Carousel.Item>
 					{/each}
