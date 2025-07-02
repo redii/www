@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page, navigating } from '$app/state';
 
-	import publicKey from '$lib/public_key.asc?raw';
+	import publicKey from '$lib/public-key.asc?raw';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Dialog from '$lib/components/ui/dialog';
