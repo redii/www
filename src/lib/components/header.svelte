@@ -10,6 +10,7 @@
 	import { toggleMode } from 'mode-watcher';
 	import Menu from '@lucide/svelte/icons/menu';
 	import X from '@lucide/svelte/icons/x';
+	import TreePalm from '@lucide/svelte/icons/tree-palm';
 	import Github from '@lucide/svelte/icons/github';
 	import Mail from '@lucide/svelte/icons/mail';
 	import LogIn from '@lucide/svelte/icons/log-in';
@@ -61,6 +62,12 @@
 			</button>
 		</div>
 		<div class="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
+			{#if page?.data?.showVacationLink}
+				<Button href="/vacations" variant="ghost" size="icon">
+					<span class="sr-only">Urlaube</span>
+					<TreePalm />
+				</Button>
+			{/if}
 			<Button href="https://github.com/redii" target="_blank" variant="ghost" size="icon">
 				<span class="sr-only">Github</span>
 				<Github />
@@ -142,7 +149,7 @@
 			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/90"
 		>
 			<div class="flex items-center justify-between">
-				<a href="/" class="-m-1.5 p-1.5 sm:invisible">
+				<a href="/" class="-m-1.5 p-1.5 sm:invisible" onclick={() => (mobileMenuOpen = false)}>
 					<span class="sr-only">Henry Akmann</span>
 					<svg
 						viewBox="0 0 148 42"
@@ -165,23 +172,15 @@
 				</button>
 			</div>
 			<div class="mt-16 flow-root">
-				<div class="flex min-h-96 flex-col items-center justify-center gap-6 py-6">
-					{#if page?.data?.session}
+				<div class="flex min-h-[60dvh] flex-col items-center justify-center gap-6 py-6">
+					{#if page?.data?.showVacationLink}
 						<a
-							href="/app"
+							href="/vacations"
 							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 							onclick={() => (mobileMenuOpen = false)}
 						>
-							Dashboard
-						</a>
-					{:else}
-						<a
-							href="/login"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
-							onclick={() => (mobileMenuOpen = false)}
-						>
-							<LogIn class="mr-2 inline" size={24} />
-							Einloggen
+							<TreePalm class="mr-2 inline" size={24} />
+							Urlaube
 						</a>
 					{/if}
 					<a
@@ -201,9 +200,25 @@
 						<Mail class="mr-2 inline" size={24} />
 						Email
 					</a>
-					{#if page?.data?.session}
+					{#if !page?.data?.session}
+						<a
+							href="/login"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+							onclick={() => (mobileMenuOpen = false)}
+						>
+							<LogIn class="mr-2 inline" size={24} />
+							Einloggen
+						</a>
+					{:else}
 						{@const user = page?.data?.session?.user}
-						<div class="mt-16 flex flex-row items-center gap-3">
+						<a
+							href="/app"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+							onclick={() => (mobileMenuOpen = false)}
+						>
+							Dashboard
+						</a>
+						<div class="mt-8 flex flex-row items-center gap-3">
 							<Avatar.Root class="h-24 w-24">
 								<Avatar.Image
 									src={page?.data?.session?.user?.image}
