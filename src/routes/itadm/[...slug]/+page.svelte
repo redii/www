@@ -7,6 +7,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
+	import { Switch } from '$lib/components/ui/switch';
 	import Form from '$lib/components/form.svelte';
 	import PageList from '$lib/components/page-list.svelte';
 	import Terminal from '@lucide/svelte/icons/terminal';
@@ -15,6 +16,8 @@
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 
 	export let data;
+
+	let confirmDropletDisconnect = false;
 </script>
 
 <svelte:head>
@@ -87,16 +90,32 @@
 					<Unplug size={14} class="relative top-1 ml-1" />
 				</Dialog.Trigger>
 				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title>Server wirklich trennen?</Dialog.Title>
-						<Dialog.Description>
-							Durch das Trennen wird dir der Server hier nicht mehr angezeigt, er bleibt aber
-							weiterhin in der Cloud bestehen. Du kannst ihn später anhand des Claim Codes
-							<Badge variant="secondary" class="font-mono">{data.droplet.claimCode}</Badge> wieder verbinden.
-						</Dialog.Description>
-					</Dialog.Header>
 					<Form action="/itadm/claim?/disconnectDroplet" method="POST" class="inline">
-						<Button variant="destructive" type="submit" class="w-full">Server trennen</Button>
+						<Dialog.Header>
+							<Dialog.Title>Server trennen</Dialog.Title>
+							<Dialog.Description>
+								Durch das Trennen wird dir der Server hier nicht mehr angezeigt, er bleibt aber
+								weiterhin in der Cloud bestehen.
+								<br /><br />
+								Notiere dir den Claim Code
+								<Badge variant="secondary" class="font-mono">{data.droplet.claimCode}</Badge>
+								anhand dessen du ihn wieder verbinden kannst.
+							</Dialog.Description>
+						</Dialog.Header>
+						<div class="flex items-center space-x-2 py-6">
+							<Switch id="are-you-sure" bind:checked={confirmDropletDisconnect} />
+							<Label for="are-you-sure">Bist du sicher?</Label>
+						</div>
+						<Dialog.Footer>
+							<Button
+								variant="destructive"
+								type="submit"
+								class="w-full"
+								disabled={!confirmDropletDisconnect}
+							>
+								Server trennen
+							</Button>
+						</Dialog.Footer>
 					</Form>
 				</Dialog.Content>
 			</Dialog.Root>

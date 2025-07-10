@@ -20,5 +20,17 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 	pages: {
 		signIn: '/login',
 		signOut: '/logout'
+	},
+	callbacks: {
+		async session({ session, token }) {
+			// Add github id to session
+			session.user.id = String(token.id);
+			return session;
+		},
+		async jwt({ token, account }) {
+			// Persist custom claims to the token
+			if (account) token.id = account.providerAccountId;
+			return token;
+		}
 	}
 });
