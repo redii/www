@@ -23,7 +23,7 @@
 				<span class="sr-only">GitHub</span>
 				<Github />
 			</Button>
-			<Button href="mailto:henry@akmann.dev" variant="ghost" size="icon">
+			<Button href="mailto:moin@akmann.dev" variant="ghost" size="icon">
 				<span class="sr-only">Email</span>
 				<Mail />
 			</Button>

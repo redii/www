@@ -82,13 +82,13 @@
 						<Dialog.Title>Kontaktdaten</Dialog.Title>
 						<Dialog.Description>
 							Schreib mir gerne eine Nachricht an
-							<span class="font-semibold">henry@akmann.dev</span>
+							<span class="font-semibold">moin@akmann.dev</span>
 						</Dialog.Description>
 					</Dialog.Header>
 					<ScrollArea class="h-48 rounded-md border">
 						<pre class="p-4 text-xs">{publicKey}</pre>
 					</ScrollArea>
-					<Button href="mailto:henry@akmann.dev" variant="secondary">
+					<Button href="mailto:moin@akmann.dev" variant="secondary">
 						<Mail class="mr-1 inline" size={24} />
 						Schreib mir eine Email
 					</Button>
@@ -193,7 +193,7 @@
 						Github
 					</a>
 					<a
-						href="mailto:henry@akmann.dev"
+						href="mailto:moin@akmann.dev"
 						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
