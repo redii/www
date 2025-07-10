@@ -11,6 +11,6 @@
 </p>
 
 <details class="mt-6 font-mono text-sm">
-	<summary>Account</summary>
+	<summary>Session</summary>
 	<pre>{JSON.stringify(data.session, null, 2)}</pre>
 </details>
