@@ -2,8 +2,8 @@ import {
 	createDirectus,
 	staticToken,
 	rest,
-	readItem as readItemD,
-	readItems as readItemsD
+	readItem as d_readItem,
+	readItems as d_readItems
 } from '@directus/sdk';
 
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
@@ -15,7 +15,7 @@ const client = createDirectus(PUBLIC_DIRECTUS_URL)
 
 async function readItem(collection: string, id: number | string) {
 	try {
-		return await client.request(readItemD(collection, id));
+		return await client.request(d_readItem(collection, id));
 	} catch (error) {
 		console.error('Error reading item:', error);
 		throw error;
@@ -24,7 +24,7 @@ async function readItem(collection: string, id: number | string) {
 
 async function readItems(collection: string, options = {}) {
 	try {
-		return await client.request(readItemsD(collection, options));
+		return await client.request(d_readItems(collection, options));
 	} catch (error) {
 		console.error('Error reading items:', error);
 		throw error;
