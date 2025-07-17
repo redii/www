@@ -18,15 +18,26 @@
 
 .prose details div:first-of-type {
   font-size: 90%;
-  @apply rounded-lg border border-foreground/50 bg-card p-6 text-card-foreground shadow-sm;
+  @apply rounded-lg border border-foreground/50 bg-card p-6 text-card-foreground shadow-md;
 }
 
 .prose img {
-  @apply rounded-2xl border border-foreground/10 bg-muted object-contain shadow-sm;
+  @apply rounded-2xl border border-foreground/10 bg-muted object-contain shadow-md;
 }
 
 .prose p:has(img) > em {
   @apply -mt-4 block text-sm text-muted-foreground;
+}
+
+.prose code {
+  color: var(--tw-prose-pre-code);
+  background-color: var(--tw-prose-pre-bg);
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.prose code::before, .prose code::after {
+  content: "";
 }
 
 /* Custom CSS end */

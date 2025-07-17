@@ -20,7 +20,7 @@
 		<div class="grid auto-rows-fr grid-cols-1 gap-8 sm:gap-12">
 			{#each pages as page}
 				<article
-					class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl border-2 border-transparent bg-zinc-900 px-8 py-8 duration-200 hover:border-emerald-500"
+					class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-zinc-900 px-8 py-8 duration-200 hover:scale-[101%]"
 					class:pt-56={page.image || page.imageId}
 					class:sm:pt-40={page.image || page.imageId}
 				>
