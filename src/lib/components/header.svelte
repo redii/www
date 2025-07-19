@@ -118,7 +118,7 @@
 							</Avatar.Fallback>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
-					<DropdownMenu.Content>
+					<DropdownMenu.Content class="mr-2">
 						<DropdownMenu.Group>
 							<DropdownMenu.GroupHeading>
 								{page?.data?.session?.user?.name}
@@ -146,7 +146,7 @@
 		<!-- Background backdrop, show/hide based on slide-over state. -->
 		<div class="z-60 fixed inset-0"></div>
 		<div
-			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/90"
+			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/10"
 		>
 			<div class="flex items-center justify-between">
 				<a href="/" class="-m-1.5 p-1.5 sm:invisible" onclick={() => (mobileMenuOpen = false)}>

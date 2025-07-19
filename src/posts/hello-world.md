@@ -2,7 +2,7 @@
 title: Hello World 👀
 description: Ein Post darüber, wie diese Webseite funktioniert.
 date: 2025-04-16
-image: /posts/hello-world.jpg
+image: /posts/hello-world/hello-world.jpg
 ---
 
 Um diese Webseite ein bisschen mit Leben zu füllen, dachte ich mir, ich schreibe mal einen Post darüber, wie sie funktioniert. Wer sich den Code der Webseite im Detail angucken möchte, kann das in [diesem Repository](https://github.com/redii/www) auf Github tun.
@@ -21,7 +21,7 @@ Diese Seite hier ist also keine simple statische Webseite bestehend aus einzelne
 
 <small>Eigentlich arbeite ich schon mehrere Jahre mit SvelteKit, allerdings habe mich bisher immer dagegen gesträubt es auch auf meiner persönlichen Webseite zu verwenden, da es diese unnötig komplex gemacht hätte.</small>
 
-![Svelte Hero](/posts/svelte-hero.jpg)
+![Svelte Hero](/posts/hello-world/svelte-hero.jpg)
 _Ein ziemlich nichtssagendes aber cooles Svelte Marketing Bild_
 
 ## Content Management System
@@ -38,7 +38,7 @@ Weil ich das Arbeiten mit einfachen Markdown-Dateien im Repository der Webseite 
 
 Directus ist ein Open-Source Headless CMS, das es mir ziemlich einfach macht, die Inhalte meiner Webseite in echtzeit zu verwalten. Dafür muss ich mich nur auf [cms.akmann.dev](https://cms.akmann.dev) einloggen und kann dort (fast) alle Inhalte meiner Webseite über ein schönes Dashboard bearbeiten. Das CMS hoste ich in einem Docker Container auf dem selben Server auf dem auch die Webapp läuft.
 
-![Directus Dashboard](/posts/directus_editing_itadm.png)
+![Directus Dashboard](/posts/hello-world/directus_editing_itadm.png)
 _Bearbeiten der ITADM Kursinhalte im Directus CMS_
 
 Das CMS ist Headless, was bedeutet, dass ich **lediglich die Inhalte dieser Webseite** darin verwalte, nicht aber das Design oder Layout. Die gesamte Struktur der Webseite (bestehend aus Header, Footer usw.) habe ich händisch mit Svelte programmiert - mit der Hilfe von [TailwindCSS](https://tailwindcss.com/) und ein paar [Shadcn-Svelte](https://www.shadcn-svelte.com/) Komponenten. Der Code der diesen Blog-Post hier in eine Struktur bringt, findest du in [dieser Datei](<https://github.com/redii/www/blob/main/src/routes/(www)/posts/%5Bslug%5D/%2Bpage.svelte>), das übergeordnete Layout mit Header und Footer [hier](<https://github.com/redii/www/blob/main/src/routes/(www)/%2Blayout.svelte>).

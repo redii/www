@@ -1,4 +1,4 @@
-import { signIn } from '../../../auth';
+import { signIn } from '../../../../auth';
 import type { PageServerLoad, Actions } from './$types';
 export const actions: Actions = { default: signIn };
 
