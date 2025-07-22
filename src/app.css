@@ -29,7 +29,7 @@
   @apply -mt-4 block text-sm text-muted-foreground;
 }
 
-.prose code {
+.prose :not(pre) > code {
   color: var(--tw-prose-pre-code);
   background-color: var(--tw-prose-pre-bg);
   padding: 0.1rem 0.5rem;
