@@ -96,41 +96,38 @@
 			</Dialog.Root>
 			<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
 				<Sun
-					class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+					class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
 				/>
 				<Moon
-					class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+					class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
 				/>
 				<span class="sr-only">Theme umschalten</span>
 			</Button>
 			{#if page?.data?.session}
 				{@const user = page?.data?.session?.user}
+				{@const firstInitial = user?.name?.split(' ')[0]?.charAt(0) || ''}
+				{@const secondInitial = user?.name?.split(' ')[1]?.charAt(0) || ''}
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>
 						<Avatar.Root>
-							<Avatar.Image
-								src={page?.data?.session?.user?.image}
-								alt={page?.data?.session?.user?.name}
-							/>
+							<Avatar.Image src={user?.image} alt={user?.name} />
 							<Avatar.Fallback>
-								{user?.name?.split(' ')[0]?.split('')[0]}
-								{user?.name?.split(' ')[1]?.split('')[0]}
+								{firstInitial}
+								{secondInitial}
 							</Avatar.Fallback>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content class="mr-2">
 						<DropdownMenu.Group>
-							<DropdownMenu.GroupHeading>
-								{page?.data?.session?.user?.name}
-							</DropdownMenu.GroupHeading>
+							<DropdownMenu.Label>
+								{user?.name}
+							</DropdownMenu.Label>
 							<DropdownMenu.Separator />
 							<DropdownMenu.Item>
 								<a href="/app">Dashboard</a>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item>
-								<form action="/logout" method="POST">
-									<button type="submit">Logout</button>
-								</form>
+								<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
 							</DropdownMenu.Item>
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
@@ -144,9 +141,9 @@
 	<!-- Mobile menu, show/hide based on menu open state. -->
 	<div class="lg:hidden" class:hidden={!mobileMenuOpen} role="dialog" aria-modal="true">
 		<!-- Background backdrop, show/hide based on slide-over state. -->
-		<div class="z-60 fixed inset-0"></div>
+		<div class="fixed inset-0 z-60"></div>
 		<div
-			class="z-60 fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/10"
+			class="fixed inset-y-0 right-0 z-60 w-full overflow-y-auto bg-background px-6 py-5 sm:max-w-sm sm:ring-1 sm:ring-foreground/10"
 		>
 			<div class="flex items-center justify-between">
 				<a href="/" class="-m-1.5 p-1.5 sm:invisible" onclick={() => (mobileMenuOpen = false)}>

@@ -122,6 +122,10 @@
 
 /* Custom CSS start */
 
+button, a {
+  @apply cursor-pointer;
+}
+
 .prose details > summary {
 	font-size: 90%;
 	font-weight: 600;

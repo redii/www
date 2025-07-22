@@ -12,32 +12,29 @@
 	<Sidebar.Trigger size="icon" />
 	{#if page?.data?.session}
 		{@const user = page?.data?.session?.user}
+		{@const firstInitial = user?.name?.split(' ')[0]?.charAt(0) || ''}
+		{@const secondInitial = user?.name?.split(' ')[1]?.charAt(0) || ''}
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
 				<Avatar.Root>
-					<Avatar.Image
-						src={page?.data?.session?.user?.image}
-						alt={page?.data?.session?.user?.name}
-					/>
+					<Avatar.Image src={user?.image} alt={user?.name} />
 					<Avatar.Fallback>
-						{user?.name?.split(' ')[0]?.split('')[0]}
-						{user?.name?.split(' ')[1]?.split('')[0]}
+						{firstInitial}
+						{secondInitial}
 					</Avatar.Fallback>
 				</Avatar.Root>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content class="mr-2">
 				<DropdownMenu.Group>
 					<DropdownMenu.GroupHeading>
-						{page?.data?.session?.user?.name}
+						{user?.name}
 					</DropdownMenu.GroupHeading>
 					<DropdownMenu.Separator />
 					<DropdownMenu.Item>
 						<a href="/">Startseite</a>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
-						<form action="/logout" method="POST">
-							<button type="submit">Logout</button>
-						</form>
+						<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 			</DropdownMenu.Content>

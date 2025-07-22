@@ -12,10 +12,10 @@
 	export let data;
 </script>
 
-<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">ITADM Droplets</h1>
+<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">ITADM Server</h1>
 
 <p class="leading-7 [&:not(:first-child)]:mt-6">
-	Übersicht aller aktiven DigitalOcean Server für den ITADM Kurs.
+	Übersicht aller aktiven DigitalOcean Droplets für den ITADM Kurs.
 </p>
 
 <div class="mt-8 flex flex-row items-end">
@@ -45,7 +45,7 @@
 	</Dialog.Root>
 </div>
 
-<Card.Root class="mt-2">
+<Card.Root class="mt-2 p-0">
 	<Table.Root>
 		<Table.Header>
 			<Table.Row>
