@@ -18,7 +18,7 @@
 	Übersicht aller aktiven DigitalOcean Droplets für den ITADM Kurs.
 </p>
 
-<div class="mt-8 flex flex-row items-end">
+<div class="mt-8 flex flex-row justify-end">
 	<Dialog.Root>
 		<Dialog.Trigger
 			class={buttonVariants({ variant: 'destructive' })}
@@ -45,7 +45,7 @@
 	</Dialog.Root>
 </div>
 
-<Card.Root class="mt-2 p-0">
+<Card.Root class="mt-4 p-0">
 	<Table.Root>
 		<Table.Header>
 			<Table.Row>

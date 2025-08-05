@@ -36,7 +36,7 @@
 					</Card.Description>
 				</Card.Header>
 				<Card.Content>
-					<span class="text-sm font-medium leading-none duration-200 group-hover:text-emerald-500">
+					<span class="text-sm leading-none font-medium duration-200 group-hover:text-emerald-500">
 						Zu meinen Posts <span aria-hidden="true">&rarr;</span>
 					</span>
 				</Card.Content>
@@ -53,7 +53,7 @@
 					</Card.Description>
 				</Card.Header>
 				<Card.Content>
-					<span class="text-sm font-medium leading-none duration-200 group-hover:text-emerald-500">
+					<span class="text-sm leading-none font-medium duration-200 group-hover:text-emerald-500">
 						Zu den Unterlagen <span aria-hidden="true">&rarr;</span>
 					</span>
 				</Card.Content>

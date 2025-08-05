@@ -3,6 +3,7 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Pattern from '$lib/components/pattern.svelte';
 	import PageTransition from '$lib/components/page-transition.svelte';
+	import RedirectToast from '$lib/components/redirect-toast.svelte';
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
 	import LightboxOverlay from '$lib/components/lightbox/LightboxOverlay.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
@@ -24,5 +25,6 @@
 
 <Pattern />
 <ModeWatcher />
-<Toaster richColors />
+<Toaster />
+<RedirectToast />
 <LightboxOverlay />
