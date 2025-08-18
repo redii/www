@@ -6,9 +6,7 @@
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 </script>
 
-<header
-	class="sticky flex h-[64px] w-full flex-row items-center justify-between border-b bg-sidebar px-8"
->
+<header class="sticky flex h-[64px] w-full flex-row items-center justify-between border-b px-8">
 	<Sidebar.Trigger size="icon" />
 	{#if page?.data?.session}
 		{@const user = page?.data?.session?.user}
@@ -31,10 +29,12 @@
 					</DropdownMenu.GroupHeading>
 					<DropdownMenu.Separator />
 					<DropdownMenu.Item>
-						<a href="/">Startseite</a>
+						<a href="/" class="w-full">Startseite</a>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
-						<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
+						<a href="/logout" class="w-full font-semibold" data-sveltekit-preload-data="off">
+							Logout
+						</a>
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 			</DropdownMenu.Content>

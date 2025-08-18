@@ -3,9 +3,12 @@
 
 	import Tilde from '$lib/components/tilde.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import HouseIcon from '@lucide/svelte/icons/house';
 	import GraduationCap from '@lucide/svelte/icons/graduation-cap';
 	import Sprout from '@lucide/svelte/icons/sprout';
+	import ChevronUp from '@lucide/svelte/icons/chevron-up';
 
 	const items = [
 		{
@@ -62,4 +65,45 @@
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 	</Sidebar.Content>
+	<Sidebar.Footer>
+		<Sidebar.Menu>
+			<Sidebar.MenuItem>
+				{#if page?.data?.session}
+					{@const user = page?.data?.session?.user}
+					{@const firstInitial = user?.name?.split(' ')[0]?.charAt(0) || ''}
+					{@const secondInitial = user?.name?.split(' ')[1]?.charAt(0) || ''}
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger>
+							{#snippet child({ props })}
+								<Sidebar.MenuButton
+									{...props}
+									class="py-6 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+								>
+									<Avatar.Root class="h-8 w-8 rounded-md">
+										<Avatar.Image src={user?.image} alt={user?.name} />
+										<Avatar.Fallback>{firstInitial} {secondInitial}</Avatar.Fallback>
+									</Avatar.Root>
+									<div>
+										<p class="text-sidebar-foreground">{user?.name}</p>
+										<small class="text-xs text-sidebar-foreground/70">{user?.email}</small>
+									</div>
+									<ChevronUp class="ml-auto" />
+								</Sidebar.MenuButton>
+							{/snippet}
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content side="top" class="w-(--bits-dropdown-menu-anchor-width)">
+							<DropdownMenu.Item class="cursor-pointer">
+								<a href="/" class="w-full">Startseite</a>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item class="cursor-pointer">
+								<a href="/logout" data-sveltekit-preload-data="off" class="w-full font-semibold">
+									Logout
+								</a>
+							</DropdownMenu.Item>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
+				{/if}
+			</Sidebar.MenuItem>
+		</Sidebar.Menu>
+	</Sidebar.Footer>
 </Sidebar.Root>
