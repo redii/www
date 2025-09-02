@@ -22,8 +22,8 @@
 	/>
 {/if}
 
-<section id="vacation-heading" class="mb-16 mt-8">
-	<div class="flex flex-row items-start items-center justify-between gap-4">
+<section id="vacation-heading" class="mt-8 mb-16">
+	<div class="flex flex-row items-center items-start justify-between gap-4">
 		<div>
 			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 				{data.vacation.title}
@@ -86,10 +86,10 @@
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1} class="bg-muted">
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=512&width=512&quality=75`}
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=512&width=512&quality=50`}
 									alt={entry.description}
-									loading="lazy"
 									class="h-full w-full rounded-xl object-cover"
+									loading="lazy"
 								/>
 							</AspectRatio>
 							{#snippet lightboxContent()}
@@ -97,6 +97,7 @@
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
 									alt={entry.description}
 									class="h-full w-full object-contain"
+									loading="lazy"
 								/>
 							{/snippet}
 						</LightboxItem>
