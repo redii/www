@@ -2,7 +2,6 @@
 	import { page } from '$app/state';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Label } from '$lib/components/ui/label';
@@ -37,25 +36,18 @@
 			</div>
 			{data.droplet.name}
 		</Alert.Title>
-		<Alert.Description class="font-mono text-muted-foreground">
-			{data.droplet.ipv4} ·
-			{data.droplet.region} ·
-			{data.droplet.size} ·
+		<Alert.Description class="flex flex-row items-center">
+			<span class="font-mono text-muted-foreground">
+				{data.droplet.ipv4} ·
+				{data.droplet.region} ·
+				{data.droplet.size} ·
+			</span>
 
-			<Tooltip.Provider>
-				<Tooltip.Root>
-					<Tooltip.Trigger>
-						<Badge variant="secondary">{data.droplet.claimCode}</Badge>
-					</Tooltip.Trigger>
-					<Tooltip.Content>
-						<p class="text-xs">Der Claim Code deines Servers</p>
-					</Tooltip.Content>
-				</Tooltip.Root>
-			</Tooltip.Provider>
+			<Badge variant="secondary" class="ml-1">{data.droplet.claimCode}</Badge>
 
 			<Dialog.Root>
 				<Dialog.Trigger class="duration-200 hover:text-foreground">
-					<Lock size={14} class="relative top-1 ml-1" />
+					<Lock size={14} class="ml-1" />
 				</Dialog.Trigger>
 				<Dialog.Content>
 					<Dialog.Header>
@@ -87,7 +79,7 @@
 
 			<Dialog.Root>
 				<Dialog.Trigger class="duration-200 hover:text-red-500">
-					<Unplug size={14} class="relative top-1 ml-1" />
+					<Unplug size={14} class="ml-1" />
 				</Dialog.Trigger>
 				<Dialog.Content>
 					<Form action="/itadm/claim?/disconnectDroplet" method="POST" class="inline">
@@ -148,12 +140,12 @@
 </h1>
 <time
 	datetime={data.page.date_updated}
-	class="mt-4 inline-block text-sm font-medium leading-none text-muted-foreground"
+	class="mt-4 inline-block text-sm leading-none font-medium text-muted-foreground"
 >
 	Letztes Update am {new Date(data.page.date_updated).toLocaleDateString('de')}
 </time>
 
-<article class="prose my-12 max-w-full dark:prose-invert lg:prose-lg">
+<article class="my-12 prose max-w-full lg:prose-lg dark:prose-invert">
 	{@html data.html.code
 		.replace(/>{@html `<code class="language-/g, '><code class="language-')
 		.replace(/<\/code>`}<\/pre>/g, '</code></pre>')}
