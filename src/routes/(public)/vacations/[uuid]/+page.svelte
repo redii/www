@@ -94,7 +94,7 @@
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1} class="bg-muted">
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=512&width=512&quality=50`}
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=320&width=320`}
 									alt={entry.description}
 									class="h-full w-full rounded-xl object-cover"
 									loading="lazy"
