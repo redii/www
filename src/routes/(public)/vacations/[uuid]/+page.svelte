@@ -14,6 +14,14 @@
 	const vacationYear = startDate.getFullYear();
 </script>
 
+<svelte:head>
+	<title>
+		{data.vacation.title} ·
+		{vacationMonth}
+		{vacationYear}
+	</title>
+</svelte:head>
+
 {#if data.vacation.image}
 	<img
 		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?width=1024`}

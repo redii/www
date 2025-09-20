@@ -5,6 +5,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>Urlaube</title>
+</svelte:head>
+
 <h1 class="mb-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Urlaube</h1>
 
 <div class="mb-12">
