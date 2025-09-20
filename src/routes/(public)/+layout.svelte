@@ -24,7 +24,7 @@
 <Footer />
 
 <Pattern />
-<ModeWatcher />
+<ModeWatcher defaultMode="light" />
 <Toaster />
 <RedirectToast />
 <LightboxOverlay />
