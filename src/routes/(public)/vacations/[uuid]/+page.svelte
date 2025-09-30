@@ -4,7 +4,7 @@
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 	import Gmaps from '$lib/components/gmaps.svelte';
-	import Share from '@lucide/svelte/icons/share';
+	import Share2 from '@lucide/svelte/icons/share-2';
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
@@ -33,7 +33,7 @@
 {/if}
 
 <section id="vacation-heading" class="mt-8 mb-16">
-	<div class="flex flex-row items-center items-start justify-between gap-4">
+	<div class="flex flex-col items-center items-start justify-between gap-4 sm:flex-row">
 		<div>
 			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 				{data.vacation.title}
@@ -63,12 +63,12 @@
 					}
 				}}
 			>
-				<Share />
+				<Share2 class="size-5" />
 				<span class="sr-only">Teilen</span>
 			</Button>
 			<LightboxItem gallery={`locations-${data.vacation.id}`}>
 				<Button variant="secondary" size="icon" class="size-12">
-					<MapPinned />
+					<MapPinned class="size-5" />
 					<span class="sr-only">Übersichtskarte anzeigen</span>
 				</Button>
 				{#snippet lightboxContent()}
