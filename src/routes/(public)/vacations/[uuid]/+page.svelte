@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
 	import { Button } from '$lib/components/ui/button';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 	import Gmaps from '$lib/components/gmaps.svelte';
+	import Share from '@lucide/svelte/icons/share';
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
@@ -41,29 +43,53 @@
 				{vacationYear}
 			</time>
 		</div>
-		<LightboxItem gallery={`locations-${data.vacation.id}`}>
-			<Button variant="secondary" size="icon" class="size-12">
-				<MapPinned />
-				<span class="sr-only">Übersichtskarte anzeigen</span>
+		<div class="flex flex-row gap-2">
+			<Button
+				variant="secondary"
+				size="icon"
+				class="size-12"
+				onclick={async () => {
+					const url = new URL(window.location.href);
+					url.search = '';
+					url.searchParams.set('password', data.vacationPassword);
+					if (navigator.share) {
+						await navigator.share({
+							title: `${data.vacation.title} · ${vacationMonth} ${vacationYear}`,
+							url: url.toString()
+						});
+					} else {
+						navigator.clipboard.writeText(url.toString());
+						toast.success('Link zum teilen wurde in die Zwischenablage gelegt');
+					}
+				}}
+			>
+				<Share />
+				<span class="sr-only">Teilen</span>
 			</Button>
-			{#snippet lightboxContent()}
-				<Gmaps
-					location={{
-						lat: data.vacation.location.coordinates[1],
-						lng: data.vacation.location.coordinates[0]
-					}}
-					zoom={data.vacation.location_zoom}
-					markers={data.vacationDays.map((vd) => {
-						if (vd.location)
-							return {
-								lat: vd.location.coordinates[1],
-								lng: vd.location.coordinates[0]
-							};
-					})}
-					class="h-[60vh] w-full"
-				/>
-			{/snippet}
-		</LightboxItem>
+			<LightboxItem gallery={`locations-${data.vacation.id}`}>
+				<Button variant="secondary" size="icon" class="size-12">
+					<MapPinned />
+					<span class="sr-only">Übersichtskarte anzeigen</span>
+				</Button>
+				{#snippet lightboxContent()}
+					<Gmaps
+						location={{
+							lat: data.vacation.location.coordinates[1],
+							lng: data.vacation.location.coordinates[0]
+						}}
+						zoom={data.vacation.location_zoom}
+						markers={data.vacationDays.map((vd) => {
+							if (vd.location)
+								return {
+									lat: vd.location.coordinates[1],
+									lng: vd.location.coordinates[0]
+								};
+						})}
+						class="h-[60vh] w-full"
+					/>
+				{/snippet}
+			</LightboxItem>
+		</div>
 	</div>
 </section>
 

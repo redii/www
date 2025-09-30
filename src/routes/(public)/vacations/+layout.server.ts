@@ -10,7 +10,6 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
 			path: '/',
 			maxAge: 60 * 60 * 24 * 365 // 365 days
 		});
-		return;
 	}
 
 	if (
@@ -18,5 +17,9 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
 		url.pathname !== '/vacations/password'
 	) {
 		throw redirect(302, '/vacations/password');
+	} else {
+		return {
+			vacationPassword: PRIVATE_VACATIONS_PASSWORD
+		};
 	}
 };
