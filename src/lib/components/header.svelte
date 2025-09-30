@@ -6,6 +6,7 @@
 	import * as Avatar from '$lib/components/ui/avatar';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { toggleMode } from 'mode-watcher';
@@ -44,20 +45,41 @@
 			</button>
 		</div>
 		<div class="hidden gap-2 lg:flex lg:flex-1 lg:justify-end">
-			{#if page?.data?.showVacationLink}
-				<Button href="/vacations" variant="ghost" size="icon">
-					<span class="sr-only">Urlaube</span>
-					<TreePalm />
-				</Button>
-			{/if}
-			<Button href="https://github.com/redii" target="_blank" variant="ghost" size="icon">
-				<span class="sr-only">Github</span>
-				<Github />
-			</Button>
+			<Tooltip.Provider>
+				<Tooltip.Root>
+					<Tooltip.Trigger>
+						<Button href="/vacations" variant="ghost" size="icon">
+							<span class="sr-only">Urlaube</span>
+							<TreePalm />
+						</Button>
+					</Tooltip.Trigger>
+					<Tooltip.Content>Urlaube</Tooltip.Content>
+				</Tooltip.Root>
+			</Tooltip.Provider>
+			<Tooltip.Provider>
+				<Tooltip.Root>
+					<Tooltip.Trigger>
+						<Button href="https://github.com/redii" target="_blank" variant="ghost" size="icon">
+							<span class="sr-only">Github Profil</span>
+							<Github />
+						</Button>
+					</Tooltip.Trigger>
+					<Tooltip.Content>Github Profil</Tooltip.Content>
+				</Tooltip.Root>
+			</Tooltip.Provider>
 			<Dialog.Root>
-				<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
-					<span class="sr-only">Kontakt</span>
-					<Mail />
+				<Dialog.Trigger>
+					<Tooltip.Provider>
+						<Tooltip.Root>
+							<Tooltip.Trigger>
+								<Button variant="ghost" size="icon">
+									<span class="sr-only">Kontaktdaten</span>
+									<Mail />
+								</Button>
+							</Tooltip.Trigger>
+							<Tooltip.Content>Kontaktdaten</Tooltip.Content>
+						</Tooltip.Root>
+					</Tooltip.Provider>
 				</Dialog.Trigger>
 				<Dialog.Content>
 					<Dialog.Header>
@@ -76,15 +98,25 @@
 					</Button>
 				</Dialog.Content>
 			</Dialog.Root>
-			<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
-				<Sun
-					class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-				/>
-				<Moon
-					class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-				/>
-				<span class="sr-only">Theme umschalten</span>
-			</Button>
+			<Tooltip.Provider>
+				<Tooltip.Root>
+					<Tooltip.Trigger>
+						<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
+							<Sun
+								class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+							/>
+							<Moon
+								class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+							/>
+							<span class="sr-only">Theme umschalten</span>
+						</Button>
+					</Tooltip.Trigger>
+					<Tooltip.Content>
+						<span class="dark:hidden">Lightmode</span>
+						<span class="hidden dark:block">Darkmode</span>
+					</Tooltip.Content>
+				</Tooltip.Root>
+			</Tooltip.Provider>
 			{#if page?.data?.session}
 				{@const user = page?.data?.session?.user}
 				{@const firstInitial = user?.name?.split(' ')[0]?.charAt(0) || ''}
@@ -143,16 +175,14 @@
 			</div>
 			<div class="mt-16 flow-root">
 				<div class="flex min-h-[60dvh] flex-col items-center justify-center gap-6 py-6">
-					{#if page?.data?.showVacationLink}
-						<a
-							href="/vacations"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
-							onclick={() => (mobileMenuOpen = false)}
-						>
-							<TreePalm class="mr-2 inline" size={24} />
-							Urlaube
-						</a>
-					{/if}
+					<a
+						href="/vacations"
+						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+						onclick={() => (mobileMenuOpen = false)}
+					>
+						<TreePalm class="mr-2 inline" size={24} />
+						Urlaube
+					</a>
 					<a
 						href="https://github.com"
 						target="_blank"

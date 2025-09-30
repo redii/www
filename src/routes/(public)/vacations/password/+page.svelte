@@ -4,6 +4,8 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import Form from '$lib/components/form.svelte';
+
+	export let data;
 </script>
 
 <div class="mx-auto max-w-lg">
@@ -14,6 +16,7 @@
 					<Label for="password">Passwort</Label>
 					<Input type="password" id="password" name="password" />
 				</div>
+				<input type="hidden" name="vacationUuid" value={data.vacationUuid} />
 				<Button type="submit" class="w-full">Speichern</Button>
 			</Form>
 		</Card.Content>
