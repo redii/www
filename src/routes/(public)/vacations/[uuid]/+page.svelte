@@ -92,11 +92,11 @@
 				<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
 					{#each day.images as entry}
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
-							<AspectRatio ratio={1} class="bg-muted">
+							<AspectRatio ratio={1}>
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=320&width=320`}
 									alt={entry.description}
-									class="h-full w-full rounded-xl object-cover"
+									class="h-full w-full rounded-xl bg-muted object-cover"
 									loading="lazy"
 								/>
 							</AspectRatio>
