@@ -379,11 +379,32 @@
 				styles: styles[variant]
 			});
 
-			if (locationMarker) new googleMaps.Marker({ position: location, map });
+			if (locationMarker)
+				new googleMaps.Marker({
+					position: {
+						lat: location.lat,
+						lng: location.lng
+					},
+					icon: {
+						url: '/images/round-pushpin.png',
+						scaledSize: new google.maps.Size(22, 22)
+					},
+					map
+				});
 
 			markers.forEach((m) => {
 				if (!m) return;
-				const marker = new googleMaps.Marker({ position: m, map });
+				const marker = new googleMaps.Marker({
+					position: {
+						lat: m.lat,
+						lng: m.lng
+					},
+					icon: {
+						url: '/images/round-pushpin.png',
+						scaledSize: new google.maps.Size(22, 22)
+					},
+					map
+				});
 				if (m.href) {
 					marker.addListener('click', () => {
 						closeLightbox();
