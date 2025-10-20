@@ -26,7 +26,7 @@
 
 {#if data.vacation.image}
 	<img
-		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?width=1024`}
+		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?format=webp&width=1024`}
 		alt={data.vacation.title}
 		class="max-h-80 w-full rounded-2xl border border-foreground/10 bg-muted object-cover object-center shadow-sm sm:max-h-[400px]"
 	/>
@@ -120,7 +120,7 @@
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1}>
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?height=320&width=320`}
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&height=320&width=320`}
 									alt={entry.description}
 									class="h-full w-full rounded-xl bg-muted object-cover"
 									loading="lazy"
@@ -128,7 +128,7 @@
 							</AspectRatio>
 							{#snippet lightboxContent()}
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?quality=75`}
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
 									alt={entry.description}
 									class="h-full w-full object-contain"
 									loading="lazy"

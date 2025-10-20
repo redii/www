@@ -7,7 +7,7 @@
 			href: string;
 			date: string;
 			description?: string;
-			image?: string;
+			imageSrc?: string;
 			imageId?: string;
 		}[];
 	}
@@ -21,20 +21,20 @@
 			{#each pages as page}
 				<article
 					class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-zinc-900 px-8 py-8 duration-200 hover:scale-[101%]"
-					class:pt-56={page.image || page.imageId}
-					class:sm:pt-40={page.image || page.imageId}
+					class:pt-56={page.imageSrc || page.imageId}
+					class:sm:pt-40={page.imageSrc || page.imageId}
 				>
-					{#if page.image || page.imageId}
+					{#if page.imageSrc || page.imageId}
 						<img
-							src={page.image
-								? page.image
-								: `${PUBLIC_DIRECTUS_URL}/assets/${page.imageId}?width=1024&quality=75`}
+							src={page.imageSrc
+								? page.imageSrc
+								: `${PUBLIC_DIRECTUS_URL}/assets/${page.imageId}?format=webp&quality=75&width=1024`}
 							alt={page.title}
 							class="absolute inset-0 -z-10 size-full object-cover"
 						/>
 					{/if}
 					<div class="absolute inset-0 -z-10 bg-gradient-to-t from-zinc-900 via-zinc-900/40"></div>
-					<div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-zinc-900/10"></div>
+					<div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-zinc-900/10 ring-inset"></div>
 
 					<h3 class="text-3xl font-semibold tracking-tight text-white transition-colors">
 						<a href={page.href}>

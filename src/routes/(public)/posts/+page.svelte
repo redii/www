@@ -17,7 +17,7 @@
 			href: `/posts/${p.slug}`,
 			date: p.date,
 			description: p.description,
-			image: p.image
+			imageSrc: p.image
 		};
 	})}
 />
