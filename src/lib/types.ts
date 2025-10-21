@@ -16,6 +16,38 @@ export type Comment = {
 	}>;
 };
 
+export type Reaction = {
+	emoji: string;
+	related_items: Array<{
+		collection: string;
+		item: string;
+	}>;
+};
+
+export type VacationDay = {
+	id: string;
+	vacation: string;
+	date: string;
+	title: string;
+	text: string;
+	location: {
+		coordinates: number[];
+	};
+	images: Array<{
+		image: string;
+		description: string;
+	}>;
+	comments?: Array<{
+		id: string;
+		author?: string;
+		text: string;
+	}>;
+	reactions?: Array<{
+		id: string;
+		value: string;
+	}>;
+};
+
 export type ItadmContent = {
 	sort: number;
 	date_created: Date;

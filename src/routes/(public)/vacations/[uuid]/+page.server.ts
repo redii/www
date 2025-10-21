@@ -33,9 +33,28 @@ export const load: PageServerLoad = async ({ params }) => {
 			}
 		});
 
+		const reactions = await readItems('reactions', {
+			fields: ['*.*'],
+			sort: ['date_created'],
+			filter: {
+				related_items: {
+					_some: {
+						item: {
+							_in: vacationDays.map((vd) => vd.id)
+						}
+					}
+				}
+			}
+		});
+
 		for (const day of vacationDays) {
 			day.comments = comments.filter((c) => {
 				const related_items = c.related_items.map((i: any) => i.item);
+				return related_items.includes(day.id);
+			});
+
+			day.reactions = reactions.filter((r) => {
+				const related_items = r.related_items.map((i: any) => i.item);
 				return related_items.includes(day.id);
 			});
 		}

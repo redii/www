@@ -154,7 +154,7 @@
 					<LightboxItem gallery={`locations-${data.vacation.id}`}>
 						<Button variant="outline">
 							<MapPinned class="size-5" />
-							Karte
+							<span class="sr-only md:not-sr-only">Karte anzeigen</span>
 						</Button>
 						{#snippet lightboxContent()}
 							<Gmaps
@@ -177,7 +177,7 @@
 						<Drawer.Trigger>
 							<Button variant="outline">
 								<MessageCircleHeart class="size-5" />
-								<span class="sr-only">Kommentare</span>
+								<span class="sr-only md:not-sr-only">Kommentare</span>
 							</Button>
 						</Drawer.Trigger>
 						<Drawer.Content class="mx-auto max-w-2xl">
@@ -228,9 +228,9 @@
 					</Drawer.Root>
 				{:else}
 					<Dialog.Root>
-						<Dialog.Trigger class={buttonVariants({ variant: 'outline', size: 'icon' })}>
+						<Dialog.Trigger class={buttonVariants({ variant: 'outline' })}>
 							<MessageCirclePlus class="size-5" />
-							<span class="sr-only">Kommentieren</span>
+							<span class="sr-only md:not-sr-only">Kommentieren</span>
 						</Dialog.Trigger>
 						<Dialog.Content>
 							<Dialog.Header>
@@ -249,11 +249,27 @@
 					</Dialog.Root>
 				{/if}
 
-				<!-- <Reactions
+				<Reactions
 					collection="vacation_days"
 					id={day.id}
-					counters={{ heart: 0, cowboy: 0, oh: 0 }}
-				/> -->
+					emojis={[
+						{
+							text: '❤️',
+							value: 'red-heart',
+							counter: day.reactions.filter((r: any) => r.emoji === 'red-heart').length
+						},
+						{
+							text: '🤠',
+							value: 'cowboy-hat-face',
+							counter: day.reactions.filter((r: any) => r.emoji === 'cowboy-hat-face').length
+						},
+						{
+							text: '😮',
+							value: 'face-with-open-mouth',
+							counter: day.reactions.filter((r: any) => r.emoji === 'face-with-open-mouth').length
+						}
+					]}
+				/>
 			</div>
 		</li>
 	{/each}
