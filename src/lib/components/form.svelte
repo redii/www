@@ -8,6 +8,8 @@
 		method: 'POST' | 'dialog' | 'get' | 'post' | 'DIALOG' | 'GET' | null | undefined;
 		action: string;
 		class?: string;
+		onsuccess?: Function;
+		onfailure?: Function;
 		children?: import('svelte').Snippet;
 	}
 
@@ -16,6 +18,8 @@
 		method = 'POST',
 		action = '',
 		class: className = '',
+		onsuccess,
+		onfailure,
 		children,
 		...restProps
 	}: Props = $props();
@@ -35,6 +39,10 @@
 
 				// enable submitButtons after form action
 				setSubmitButtonDisableState(false);
+
+				// execute followup functions if given
+				if (onsuccess && result.data?.success) onsuccess();
+				if (onfailure && !result.data?.success) onfailure();
 
 				// display toast if returned
 				const toastData: Toast = result.data?.toast;

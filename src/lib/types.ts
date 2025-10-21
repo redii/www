@@ -7,6 +7,15 @@ export type Post = {
 	draft?: boolean;
 };
 
+export type Comment = {
+	author: string;
+	text: string;
+	related_items: Array<{
+		collection: string;
+		item: string;
+	}>;
+};
+
 export type ItadmContent = {
 	sort: number;
 	date_created: Date;

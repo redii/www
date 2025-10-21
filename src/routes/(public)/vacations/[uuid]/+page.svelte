@@ -1,19 +1,29 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
+	import * as Drawer from '$lib/components/ui/drawer';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import { Input } from '$lib/components/ui/input';
+	import { Textarea } from '$lib/components/ui/textarea';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
+	import Form from '$lib/components/form.svelte';
+	import Reactions from './reactions.svelte';
 	import Gmaps from '$lib/components/gmaps.svelte';
 	import Share2 from '@lucide/svelte/icons/share-2';
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
+	import MessageCirclePlus from '@lucide/svelte/icons/message-circle-plus';
+	import MessageCircleHeart from '@lucide/svelte/icons/message-circle-heart';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
-	export let data;
+	let { data } = $props();
 
 	const startDate = new Date(data.vacation.start_date);
 	const vacationMonth = startDate.toLocaleString('de', { month: 'long' });
 	const vacationYear = startDate.getFullYear();
+
+	let commentDialogIsOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -51,7 +61,7 @@
 				onclick={async () => {
 					const url = new URL(window.location.href);
 					url.search = '';
-					url.searchParams.set('password', data.vacationPassword);
+					url.searchParams.set('password', data.vacationPassword || '');
 					if (navigator.share) {
 						await navigator.share({
 							title: `${data.vacation.title} · ${vacationMonth} ${vacationYear}`,
@@ -139,10 +149,13 @@
 				</div>
 			{/if}
 
-			{#if longitude && latitude}
-				<div class="mt-4">
+			<div class="mt-4 flex flex-row gap-2">
+				{#if longitude && latitude}
 					<LightboxItem gallery={`locations-${data.vacation.id}`}>
-						<Button variant="outline">📍 Karte anzeigen</Button>
+						<Button variant="outline">
+							<MapPinned class="size-5" />
+							Karte
+						</Button>
 						{#snippet lightboxContent()}
 							<Gmaps
 								location={{
@@ -155,8 +168,93 @@
 							/>
 						{/snippet}
 					</LightboxItem>
-				</div>
-			{/if}
+				{/if}
+
+				<div class="grow"></div>
+
+				{#if day.comments.length}
+					<Drawer.Root>
+						<Drawer.Trigger>
+							<Button variant="outline">
+								<MessageCircleHeart class="size-5" />
+								<span class="sr-only">Kommentare</span>
+							</Button>
+						</Drawer.Trigger>
+						<Drawer.Content class="mx-auto max-w-2xl">
+							<Drawer.Header>
+								<Drawer.Title>{day.title}</Drawer.Title>
+								<Drawer.Description>
+									Kommentare zum {dayDate.toLocaleDateString('de')}
+								</Drawer.Description>
+							</Drawer.Header>
+							<div class="flex flex-col gap-2 px-4">
+								{#each day.comments as comment}
+									<div class="rounded-md bg-secondary px-3 py-2">
+										<small class="block">
+											<span class="font-semibold">{comment.author || 'Anonym'}</span>
+											am {new Date(comment.date_created).toLocaleDateString('de')}
+										</small>
+										{comment.text}
+									</div>
+								{/each}
+							</div>
+							<hr class="mt-4" />
+							<Drawer.Footer>
+								<Dialog.Root bind:open={commentDialogIsOpen}>
+									<Dialog.Trigger class={buttonVariants()}>Kommentar schreiben</Dialog.Trigger>
+									<Dialog.Content>
+										<Dialog.Header>
+											<Dialog.Title>Kommentieren...</Dialog.Title>
+											<Dialog.Description>
+												{day.title} - {dayDate.toLocaleDateString('de')}
+											</Dialog.Description>
+										</Dialog.Header>
+										<Form
+											method="POST"
+											action="?/postComment"
+											onsuccess={() => (commentDialogIsOpen = false)}
+											class="flex flex-col gap-2"
+										>
+											<Input name="author" type="text" placeholder="Anonym" maxlength={32} />
+											<Textarea name="text" placeholder="Dein Kommentar..." rows={5} />
+											<input name="vacation_day" type="hidden" value={day.id} />
+											<Button type="submit">Speichern</Button>
+										</Form>
+									</Dialog.Content>
+								</Dialog.Root>
+								<Drawer.Close>Schließen</Drawer.Close>
+							</Drawer.Footer>
+						</Drawer.Content>
+					</Drawer.Root>
+				{:else}
+					<Dialog.Root>
+						<Dialog.Trigger class={buttonVariants({ variant: 'outline', size: 'icon' })}>
+							<MessageCirclePlus class="size-5" />
+							<span class="sr-only">Kommentieren</span>
+						</Dialog.Trigger>
+						<Dialog.Content>
+							<Dialog.Header>
+								<Dialog.Title>Kommentieren...</Dialog.Title>
+								<Dialog.Description>
+									{day.title} - {dayDate.toLocaleDateString('de')}
+								</Dialog.Description>
+							</Dialog.Header>
+							<Form method="POST" action="?/postComment" class="flex flex-col gap-2">
+								<Input name="author" type="text" placeholder="Anonym" maxlength={32} />
+								<Textarea name="text" placeholder="Dein Kommentar..." rows={5} />
+								<input name="vacation_day" type="hidden" value={day.id} />
+								<Button type="submit">Speichern</Button>
+							</Form>
+						</Dialog.Content>
+					</Dialog.Root>
+				{/if}
+
+				<!-- <Reactions
+					collection="vacation_days"
+					id={day.id}
+					counters={{ heart: 0, cowboy: 0, oh: 0 }}
+				/> -->
+			</div>
 		</li>
 	{/each}
 </ul>
