@@ -5,9 +5,10 @@
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import { Button } from '$lib/components/ui/button';
+	import LogOut from '@lucide/svelte/icons/log-out';
 	import HouseIcon from '@lucide/svelte/icons/house';
 	import GraduationCap from '@lucide/svelte/icons/graduation-cap';
-	import Sprout from '@lucide/svelte/icons/sprout';
 	import ChevronUp from '@lucide/svelte/icons/chevron-up';
 
 	const items = [
@@ -21,11 +22,6 @@
 			title: 'ITADM Kurs',
 			url: '/app/itadm',
 			icon: GraduationCap
-		},
-		{
-			title: 'Pflanzen',
-			url: '/app/plants',
-			icon: Sprout
 		}
 	];
 </script>
@@ -95,11 +91,12 @@
 							<DropdownMenu.Item class="cursor-pointer">
 								<a href="/" class="w-full">Startseite</a>
 							</DropdownMenu.Item>
-							<DropdownMenu.Item class="cursor-pointer">
-								<a href="/logout" data-sveltekit-preload-data="off" class="w-full font-semibold">
+							<form method="POST" action="/logout">
+								<Button variant="ghost" size="sm" type="submit" class="w-full">
+									<LogOut class="size-3" />
 									Logout
-								</a>
-							</DropdownMenu.Item>
+								</Button>
+							</form>
 						</DropdownMenu.Content>
 					</DropdownMenu.Root>
 				{/if}

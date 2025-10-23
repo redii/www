@@ -6,5 +6,4 @@
 
 <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
 	<li><Button variant="link" href="/app/itadm">ITADM Kurs</Button></li>
-	<li><Button variant="link" href="/app/plants">Pflanzen</Button></li>
 </ul>

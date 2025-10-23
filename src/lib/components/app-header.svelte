@@ -4,6 +4,8 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
+	import { Button } from '$lib/components/ui/button';
+	import LogOut from '@lucide/svelte/icons/log-out';
 </script>
 
 <header class="sticky flex h-[64px] w-full flex-row items-center justify-between border-b px-8">
@@ -31,11 +33,12 @@
 					<DropdownMenu.Item>
 						<a href="/" class="w-full">Startseite</a>
 					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<a href="/logout" class="w-full font-semibold" data-sveltekit-preload-data="off">
+					<form method="POST" action="/logout">
+						<Button variant="ghost" size="sm" type="submit" class="w-full">
+							<LogOut class="size-3" />
 							Logout
-						</a>
-					</DropdownMenu.Item>
+						</Button>
+					</form>
 				</DropdownMenu.Group>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>

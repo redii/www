@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
-	import { invalidateAll, goto } from '$app/navigation';
+	import { invalidateAll as sv_invalidateAll, goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
 
 	interface Props {
 		form?: HTMLFormElement | undefined;
-		method: 'POST' | 'dialog' | 'get' | 'post' | 'DIALOG' | 'GET' | null | undefined;
+		method: 'POST' | 'GET' | 'DIALOG' | null | undefined;
 		action: string;
-		class?: string;
+		invalidateAll?: Boolean;
 		onsuccess?: Function;
 		onfailure?: Function;
+		class?: string;
 		children?: import('svelte').Snippet;
 	}
 
@@ -17,9 +18,10 @@
 		form = $bindable(undefined),
 		method = 'POST',
 		action = '',
-		class: className = '',
+		invalidateAll = true,
 		onsuccess,
 		onfailure,
+		class: className = '',
 		children,
 		...restProps
 	}: Props = $props();
@@ -34,15 +36,15 @@
 					goto(result.location);
 				} else {
 					await applyAction(result); // updates form variable
-					await invalidateAll(); // causes reloading data from the server
+					if (invalidateAll) await sv_invalidateAll(); // causes reloading data from the server
 				}
 
 				// enable submitButtons after form action
 				setSubmitButtonDisableState(false);
 
 				// execute followup functions if given
-				if (onsuccess && result.data?.success) onsuccess();
-				if (onfailure && !result.data?.success) onfailure();
+				if (onsuccess && result.data?.success === true) onsuccess();
+				if (onfailure && result.data?.success === false) onfailure();
 
 				// display toast if returned
 				const toastData: Toast = result.data?.toast;

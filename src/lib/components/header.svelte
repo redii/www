@@ -7,7 +7,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
-	import { Button, buttonVariants } from '$lib/components/ui/button';
+	import { Button } from '$lib/components/ui/button';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { toggleMode } from 'mode-watcher';
 	import Menu from '@lucide/svelte/icons/menu';
@@ -140,9 +140,12 @@
 							<DropdownMenu.Item>
 								<a href="/app">Dashboard</a>
 							</DropdownMenu.Item>
-							<DropdownMenu.Item>
-								<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
-							</DropdownMenu.Item>
+							<form method="POST" action="/logout">
+								<Button variant="ghost" size="sm" type="submit" class="w-full">
+									<LogOut class="size-3" />
+									Logout
+								</Button>
+							</form>
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
 				</DropdownMenu.Root>
