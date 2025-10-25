@@ -29,7 +29,7 @@
 		transition:fade={{ duration: 200 }}
 	>
 		<Carousel.Root
-			setApi={(emblaApi) => (api = emblaApi)}
+			setApi={(emblaApi: any) => (api = emblaApi)}
 			opts={{
 				startIndex: $currentElementIndex
 			}}
