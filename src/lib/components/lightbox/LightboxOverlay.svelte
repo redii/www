@@ -44,7 +44,7 @@
 				</Button>
 			</div>
 
-			<Carousel.Content id="lightbox-content" class="mt-8 max-h-[calc(100dvh-200px)] px-2">
+			<Carousel.Content id="lightbox-content" class="mt-8 h-[calc(100dvh-200px)] px-2">
 				{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
 					<Carousel.Item>
 						{@render element?.()}
