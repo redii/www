@@ -25,7 +25,7 @@
 {#if typeof $currentElementIndex === 'number'}
 	<div
 		id="lightbox-overlay"
-		class="fixed inset-0 z-50 h-[100vh] w-[100vw] bg-black/80"
+		class="fixed inset-0 z-50 bg-black/80"
 		transition:fade={{ duration: 200 }}
 	>
 		<Carousel.Root
