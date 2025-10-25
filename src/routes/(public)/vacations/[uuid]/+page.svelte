@@ -38,7 +38,7 @@
 	<img
 		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?format=webp&width=1024`}
 		alt={data.vacation.title}
-		class="max-h-80 w-full rounded-2xl border border-foreground/10 bg-muted object-cover object-center shadow-sm sm:max-h-[400px]"
+		class="h-80 w-full rounded-2xl border border-foreground/10 bg-muted object-cover object-center shadow-sm sm:h-[400px]"
 	/>
 {/if}
 

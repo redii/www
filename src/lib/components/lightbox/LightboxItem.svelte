@@ -11,18 +11,25 @@
 
 	let { gallery = 'default', children, lightboxContent }: Props = $props();
 	let elementIndex = 0 as number;
+	let id = crypto.randomUUID();
 
 	onMount(() => {
 		elementIndex = registerElement(lightboxContent || children, gallery);
+		document.getElementById(id)?.addEventListener('click', handleClick);
 	});
 
 	onDestroy(() => {
-		if (browser) removeElement(elementIndex);
+		if (browser) {
+			removeElement(elementIndex);
+			document.getElementById(id)?.removeEventListener('click', handleClick);
+		}
 	});
+
+	function handleClick() {
+		openLightbox(elementIndex, gallery);
+	}
 </script>
 
-<button onclick={() => openLightbox(elementIndex, gallery)}>
-	<div>
-		{@render children?.()}
-	</div>
-</button>
+<div {id} class="cursor-pointer">
+	{@render children?.()}
+</div>
