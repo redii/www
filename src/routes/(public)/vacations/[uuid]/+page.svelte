@@ -130,19 +130,33 @@
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1}>
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&height=320&width=320`}
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail || entry.image}?format=webp&height=320&width=320`}
 									alt={entry.description}
 									class="h-full w-full rounded-xl bg-muted object-cover"
 									loading="lazy"
 								/>
 							</AspectRatio>
 							{#snippet lightboxContent()}
-								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
-									alt={entry.description}
-									class="h-full w-full object-contain"
-									loading="lazy"
-								/>
+								{#if entry.media_type === 'video'}
+									<video
+										controls
+										poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+										class="h-full"
+									>
+										<source
+											src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
+											type="video/quicktime"
+										/>
+										<track kind="captions" />
+									</video>
+								{:else}
+									<img
+										src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+										alt={entry.description}
+										class="h-full w-full object-contain"
+										loading="lazy"
+									/>
+								{/if}
 							{/snippet}
 						</LightboxItem>
 					{/each}
