@@ -15,7 +15,8 @@ export const load: PageServerLoad = async ({ params }) => {
 			fields: ['*.*'],
 			sort: [sort],
 			filter: {
-				vacation: { _eq: vacation.id }
+				vacation: { _eq: vacation.id },
+				draft: { _eq: false }
 			}
 		});
 
