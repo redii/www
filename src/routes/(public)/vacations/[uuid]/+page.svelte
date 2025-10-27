@@ -143,10 +143,7 @@
 										poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
 										class="h-full"
 									>
-										<source
-											src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
-											type="video/quicktime"
-										/>
+										<source src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`} type="video/mp4" />
 										<track kind="captions" />
 									</video>
 								{:else}
