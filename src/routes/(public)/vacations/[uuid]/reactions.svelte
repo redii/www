@@ -21,6 +21,7 @@
 
 	onMount(() => {
 		if (browser) {
+			// parse stored reactions from local storage
 			const storedReactionsString = localStorage.getItem('vacation_day_reactions');
 			if (storedReactionsString) {
 				const storedReactions = JSON.parse(storedReactionsString) || [];
@@ -43,15 +44,17 @@
 			})
 		});
 
+		// add reaction to local storage
 		let storedReactions = [];
 		const storedReactionsString = localStorage.getItem('vacation_day_reactions');
 		if (storedReactionsString) storedReactions = JSON.parse(storedReactionsString);
 		storedReactions.push({ id, reaction: emoji });
 		localStorage.setItem('vacation_day_reactions', JSON.stringify(storedReactions));
+		reactions.push(emoji);
 
+		// increase counter
 		const emojiIndex = reactiveEmojis.map((e) => e.value).indexOf(emoji);
 		reactiveEmojis[emojiIndex].counter += 1;
-		reactions.push(emoji);
 	}
 </script>
 
