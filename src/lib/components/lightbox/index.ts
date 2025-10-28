@@ -35,6 +35,7 @@ export async function openLightbox(elementIndex: number, galleryName: string = '
 	currentElementIndex.set(elementIndex);
 	await tick();
 	document.body.style.overflow = 'hidden';
+	document.body.style.pointerEvents = 'none';
 	const overlayOverlay = document.getElementById('lightbox-overlay');
 	const lightboxContent = document.getElementById('lightbox-content');
 	overlayOverlay?.addEventListener('click', (event) => {
@@ -45,6 +46,7 @@ export async function openLightbox(elementIndex: number, galleryName: string = '
 export function closeLightbox() {
 	currentElementIndex.set(null);
 	document.body.style.overflow = 'auto';
+	document.body.style.removeProperty('pointer-events');
 }
 
 function getGalleryIndex(galleryName: string): number {
