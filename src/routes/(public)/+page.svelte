@@ -71,7 +71,7 @@
 				<Card.Header class="py-6 md:w-1/2">
 					<Card.Title aria-level={2}>Urlaube</Card.Title>
 					<Card.Description>
-						Hier teile ich meinen Urlaubsblog – damit die schönen Erinnerungen nicht verloren gehen.
+						Damit die schönen Erinnerungen nicht so schnell verloren gehen.
 					</Card.Description>
 					<span
 						class="mt-6 text-sm leading-none font-medium duration-200 group-hover:text-emerald-500"
@@ -79,9 +79,9 @@
 						Zur Übersicht <span aria-hidden="true">&rarr;</span>
 					</span>
 				</Card.Header>
-				<div class="order-first flex flex-row items-stretch md:order-last md:w-1/2">
+				<div class="order-first flex h-32 flex-row items-stretch md:order-last md:h-auto md:w-1/2">
 					{#each data.vacations as vacation}
-						<div class="relative w-1/5">
+						<div class="relative border-l">
 							<img
 								src={`${PUBLIC_DIRECTUS_URL}/assets/${vacation.image}?format=webp&quality=75&width=480`}
 								alt={vacation.title}
