@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { compile } from 'mdsvex';
 import { readItems } from '$lib/utils/directus';
 import { getDropletsByTag } from '$lib/utils/digitalocean';
@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 		},
 		fields: ['*', 'childs.*']
 	});
-	if (!pageList.length) throw error(404, 'Content not found');
+	if (!pageList.length) return fail(404, 'Content not found');
 	const page = pageList[0];
 	const html = await compile(page.text);
 

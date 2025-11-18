@@ -1,7 +1,12 @@
-import type { Post } from '$lib/types';
+import { readItems } from '$lib/utils/directus';
+import type { PageServerLoad } from './$types';
 
-export async function load({ fetch }) {
-	const response = await fetch('/api/posts');
-	const posts: Post[] = await response.json();
-	return { posts };
-}
+export const load: PageServerLoad = async () => {
+	const pageList = await readItems('posts', {
+		filter: import.meta.env.DEV
+			? { status: { _neq: 'archived' } }
+			: { status: { _eq: 'published' } }
+	});
+
+	return { pageList };
+};

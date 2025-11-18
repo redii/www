@@ -11,13 +11,12 @@
 </p>
 
 <PageList
-	pages={data.posts.map((p) => {
+	pages={data.pageList.map((p) => {
 		return {
 			title: p.title,
 			href: `/posts/${p.slug}`,
 			date: p.date,
-			description: p.description,
-			imageSrc: p.image
+			imageId: p.image
 		};
 	})}
 />

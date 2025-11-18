@@ -1,10 +1,10 @@
 export type Post = {
 	slug: string;
-	title: string;
-	description: string;
 	date: string;
+	title: string;
+	description?: string;
 	image?: string;
-	draft?: boolean;
+	status: 'draft' | 'published' | 'archived' | 'hidden';
 };
 
 export type Comment = {
