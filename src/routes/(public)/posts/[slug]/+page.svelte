@@ -6,7 +6,7 @@
 
 {#if data.post?.image}
 	<img
-		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain md:mb-16"
+		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain object-center shadow-sm md:mb-16"
 		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.post.image}`}
 		alt={data.post.title}
 	/>
