@@ -3,7 +3,7 @@ import type { Droplet } from '$lib/types';
 
 export async function getDropletsByTag(tag: string) {
 	try {
-		const response = await fetch(`${PRIVATE_DO_URL}/droplets?tag_name=${tag}`, {
+		const response = await fetch(`${PRIVATE_DO_URL}/droplets?tag_name=${tag}&per_page=200`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
