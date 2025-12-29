@@ -4,6 +4,7 @@
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import * as Drawer from '$lib/components/ui/drawer';
 	import * as Dialog from '$lib/components/ui/dialog';
+	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import { Input } from '$lib/components/ui/input';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
@@ -128,10 +129,19 @@
 
 			{#if day.steps}
 				<div class="mt-3">
-					<Badge class="bg-indigo-500 text-white">
-						<Footprints />
-						{day.steps.toLocaleString('de-DE')}
-					</Badge>
+					<Tooltip.Provider>
+						<Tooltip.Root>
+							<Tooltip.Trigger>
+								<Badge class="bg-indigo-500 text-white">
+									<Footprints />
+									{day.steps.toLocaleString('de-DE')}
+								</Badge>
+							</Tooltip.Trigger>
+							<Tooltip.Content>
+								<p>Schritte gesammelt</p>
+							</Tooltip.Content>
+						</Tooltip.Root>
+					</Tooltip.Provider>
 				</div>
 			{/if}
 
