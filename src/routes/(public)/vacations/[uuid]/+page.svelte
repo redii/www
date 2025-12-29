@@ -17,6 +17,7 @@
 	import MessageCirclePlus from '@lucide/svelte/icons/message-circle-plus';
 	import MessageCircleHeart from '@lucide/svelte/icons/message-circle-heart';
 	import Footprints from '@lucide/svelte/icons/footprints';
+	import Gauge from '@lucide/svelte/icons/gauge';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
@@ -127,21 +128,38 @@
 				{@html day.text.trim().replace(/\n/g, '<br>')}
 			</p>
 
-			{#if day.steps}
+			{#if day.steps || day.kilometers}
 				<div class="mt-3">
-					<Tooltip.Provider>
-						<Tooltip.Root>
-							<Tooltip.Trigger>
-								<Badge class="bg-indigo-500 text-white">
-									<Footprints />
-									{day.steps.toLocaleString('de-DE')}
-								</Badge>
-							</Tooltip.Trigger>
-							<Tooltip.Content>
-								<p>Schritte gesammelt</p>
-							</Tooltip.Content>
-						</Tooltip.Root>
-					</Tooltip.Provider>
+					{#if day.steps}
+						<Tooltip.Provider>
+							<Tooltip.Root>
+								<Tooltip.Trigger>
+									<Badge class="bg-teal-100 text-gray-900">
+										<Footprints />
+										{day.steps.toLocaleString('de-DE')}
+									</Badge>
+								</Tooltip.Trigger>
+								<Tooltip.Content>
+									<p>Schritte gesammelt</p>
+								</Tooltip.Content>
+							</Tooltip.Root>
+						</Tooltip.Provider>
+					{/if}
+					{#if day.kilometers}
+						<Tooltip.Provider>
+							<Tooltip.Root>
+								<Tooltip.Trigger>
+									<Badge class="mr-2 bg-pink-200 text-gray-800">
+										<Gauge />
+										{day.kilometers} km
+									</Badge>
+								</Tooltip.Trigger>
+								<Tooltip.Content>
+									<p>Kilometer gefahren</p>
+								</Tooltip.Content>
+							</Tooltip.Root>
+						</Tooltip.Provider>
+					{/if}
 				</div>
 			{/if}
 
