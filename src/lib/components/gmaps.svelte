@@ -387,7 +387,7 @@
 					},
 					icon: {
 						url: '/images/round-pushpin.png',
-						scaledSize: new google.maps.Size(22, 22)
+						scaledSize: new google.maps.Size(20, 20)
 					},
 					map
 				});
@@ -401,7 +401,7 @@
 					},
 					icon: {
 						url: '/images/round-pushpin.png',
-						scaledSize: new google.maps.Size(22, 22)
+						scaledSize: new google.maps.Size(20, 20)
 					},
 					map
 				});
