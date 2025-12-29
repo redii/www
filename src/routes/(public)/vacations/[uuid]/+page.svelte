@@ -6,6 +6,7 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
 	import { Textarea } from '$lib/components/ui/textarea';
+	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 	import Form from '$lib/components/form.svelte';
 	import Reactions from './reactions.svelte';
@@ -14,6 +15,7 @@
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
 	import MessageCirclePlus from '@lucide/svelte/icons/message-circle-plus';
 	import MessageCircleHeart from '@lucide/svelte/icons/message-circle-heart';
+	import Footprints from '@lucide/svelte/icons/footprints';
 
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
@@ -123,6 +125,15 @@
 			<p class="leading-7 [&:not(:first-child)]:mt-6">
 				{@html day.text.trim().replace(/\n/g, '<br>')}
 			</p>
+
+			{#if day.steps}
+				<div class="mt-3">
+					<Badge class="bg-indigo-500 text-white">
+						<Footprints />
+						{day.steps.toLocaleString('de-DE')}
+					</Badge>
+				</div>
+			{/if}
 
 			{#if day.images.length}
 				<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
