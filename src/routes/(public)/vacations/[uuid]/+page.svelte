@@ -134,7 +134,7 @@
 						<Tooltip.Provider>
 							<Tooltip.Root>
 								<Tooltip.Trigger>
-									<Badge class="bg-teal-100 text-gray-900">
+									<Badge class="bg-indigo-500">
 										<Footprints />
 										{day.steps.toLocaleString('de-DE')}
 									</Badge>
