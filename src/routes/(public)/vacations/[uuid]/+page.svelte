@@ -149,7 +149,7 @@
 						<Tooltip.Provider>
 							<Tooltip.Root>
 								<Tooltip.Trigger>
-									<Badge class="mr-2 bg-pink-200 text-gray-800">
+									<Badge class="bg-pink-500">
 										<Gauge />
 										{day.kilometers} km
 									</Badge>
