@@ -20,4 +20,4 @@ jobs:
             cd /opt/www
             git pull
             npm run build
-            sudo systemctl restart www
+            systemctl restart www --user
