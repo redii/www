@@ -7,7 +7,7 @@
 	import Form from '$lib/components/form.svelte';
 	import Trash from '@lucide/svelte/icons/trash';
 
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 
 	export let data;
 </script>
@@ -65,14 +65,14 @@
 				</Table.Row>
 			{:else}
 				{#each data.servers as server}
-					{@const claimCode = server.tags.find((t: string) => t !== 'itadm')}
+					{@const claimCode = server.tags.find((t) => t !== 'itadm')}
 					<Table.Row>
 						<Table.Cell class="font-medium">{server.name}</Table.Cell>
 						<Table.Cell>
-							{server.networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))?.ip_address}
+							{server.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address}
 						</Table.Cell>
 						<Table.Cell>root</Table.Cell>
-						<Table.Cell>{env.PUBLIC_DO_VPS_PASSWORD}</Table.Cell>
+						<Table.Cell>{PUBLIC_DO_VPS_PASSWORD}</Table.Cell>
 						<Table.Cell>
 							{#if claimCode}
 								<Badge variant="secondary" class="font-mono">

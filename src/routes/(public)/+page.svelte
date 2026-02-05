@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
 	export let data;
 </script>
@@ -83,7 +83,7 @@
 					{#each data.vacations as vacation}
 						<div class="relative border-l">
 							<img
-								src={`${env.PUBLIC_DIRECTUS_URL}/assets/${vacation.image}?format=webp&quality=75&width=480`}
+								src={`${PUBLIC_DIRECTUS_URL}/assets/${vacation.image}?format=webp&quality=75&width=480`}
 								alt={vacation.title}
 								class="h-full object-cover"
 							/>

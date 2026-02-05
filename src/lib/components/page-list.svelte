@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
 
 	interface Props {
 		pages: {
@@ -28,7 +28,7 @@
 						<img
 							src={page.imageSrc
 								? page.imageSrc
-								: `${env.PUBLIC_DIRECTUS_URL}/assets/${page.imageId}?format=webp&quality=75&width=1024`}
+								: `${PUBLIC_DIRECTUS_URL}/assets/${page.imageId}?format=webp&quality=75&width=1024`}
 							alt={page.title}
 							class="absolute inset-0 -z-10 size-full object-cover"
 						/>
