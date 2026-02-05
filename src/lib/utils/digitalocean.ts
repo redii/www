@@ -12,7 +12,7 @@ export async function getDropletsByTag(tag: string) {
 		});
 		if (!response.ok) throw new Error(`Error fetching droplets: ${response.statusText}`);
 		const data = await response.json();
-		data.droplets = data.droplets.sort((a, b) => (a.name > b.name ? 1 : -1));
+		data.droplets = data.droplets.sort((a: any, b: any) => (a.name > b.name ? 1 : -1));
 		return data;
 	} catch (error) {
 		console.error(error);
@@ -30,7 +30,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 		let droplet;
 
 		if (claimCode) {
-			droplet = droplets.find((d) => d.tags.includes(claimCode));
+			droplet = droplets.find((d: any) => d.tags.includes(claimCode));
 			if (!droplet) {
 				return {
 					success: false,
@@ -49,7 +49,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 						name: droplet.name,
 						region: droplet.region.slug,
 						size: droplet.size.slug,
-						ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
+						ipv4: droplet.networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))?.ip_address,
 						claimCode
 					} satisfies Droplet,
 					toast: {
@@ -61,7 +61,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 			}
 		}
 
-		droplet = droplets.find((d) => d.tags.length === 1);
+		droplet = droplets.find((d: any) => d.tags.length === 1);
 		if (!droplet) {
 			return {
 				success: false,
@@ -85,7 +85,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 				name: droplet.name,
 				region: droplet.region.slug,
 				size: droplet.size.slug,
-				ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
+				ipv4: droplet.networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))?.ip_address,
 				claimCode
 			} satisfies Droplet,
 			toast: {
