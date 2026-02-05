@@ -19,7 +19,7 @@
 	import Footprints from '@lucide/svelte/icons/footprints';
 	import Gauge from '@lucide/svelte/icons/gauge';
 
-	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	let { data } = $props();
 
@@ -40,7 +40,7 @@
 
 {#if data.vacation.image}
 	<img
-		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?format=webp&width=1024`}
+		src={`${env.PUBLIC_DIRECTUS_URL}/assets/${data.vacation.image}?format=webp&width=1024`}
 		alt={data.vacation.title}
 		class="h-80 w-full rounded-2xl border border-foreground/10 bg-muted object-cover object-center shadow-sm sm:h-[400px]"
 	/>
@@ -169,7 +169,7 @@
 						<LightboxItem gallery={`ìmages-${data.vacation.id}`}>
 							<AspectRatio ratio={1}>
 								<img
-									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail || entry.image}?format=webp&height=320&width=320`}
+									src={`${env.PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail || entry.image}?format=webp&height=320&width=320`}
 									alt={entry.description}
 									class="h-full w-full rounded-xl bg-muted object-cover"
 									loading="lazy"
@@ -179,15 +179,18 @@
 								{#if entry.media_type === 'video'}
 									<video
 										controls
-										poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+										poster={`${env.PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
 										class="h-full"
 									>
-										<source src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`} type="video/mp4" />
+										<source
+											src={`${env.PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
+											type="video/mp4"
+										/>
 										<track kind="captions" />
 									</video>
 								{:else}
 									<img
-										src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+										src={`${env.PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
 										alt={entry.description}
 										class="h-full w-full object-contain"
 										loading="lazy"

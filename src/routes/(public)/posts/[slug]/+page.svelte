@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	export let data;
 </script>
@@ -7,7 +7,7 @@
 {#if data.post?.image}
 	<img
 		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain object-center shadow-sm md:mb-16"
-		src={`${PUBLIC_DIRECTUS_URL}/assets/${data.post.image}`}
+		src={`${env.PUBLIC_DIRECTUS_URL}/assets/${data.post.image}`}
 		alt={data.post.title}
 	/>
 {/if}

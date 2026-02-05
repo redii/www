@@ -12,7 +12,7 @@
 	import Terminal from '@lucide/svelte/icons/terminal';
 	import Lock from '@lucide/svelte/icons/lock';
 	import Unplug from '@lucide/svelte/icons/unplug';
-	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	export let data;
 
@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>Henry Akmann · {data.page.title}</title>
+	<title>Henry Akmann · {data.page?.title}</title>
 </svelte:head>
 
 {#if data.droplet}
@@ -66,7 +66,7 @@
 					</div>
 					<div class="flex flex-col gap-1.5">
 						<Label for="droplet-password">Password</Label>
-						<Input type="text" id="droplet-password" readonly value={PUBLIC_DO_VPS_PASSWORD} />
+						<Input type="text" id="droplet-password" readonly value={env.PUBLIC_DO_VPS_PASSWORD} />
 					</div>
 					<div class="flex flex-col gap-1.5">
 						<Label for="droplet-ssh-command">Verbinden per SSH</Label>
@@ -127,7 +127,7 @@
 	</Alert.Root>
 {/if}
 
-{#if data.page.image}
+{#if data.page?.image}
 	<img
 		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain md:mb-16"
 		src={`https://cms.akmann.dev/assets/${data.page.image}`}
@@ -136,13 +136,13 @@
 {/if}
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-	{data.page.title}
+	{data.page?.title}
 </h1>
 <time
-	datetime={data.page.date_updated}
+	datetime={data.page?.date_updated}
 	class="mt-4 inline-block text-sm leading-none font-medium text-muted-foreground"
 >
-	Letztes Update am {new Date(data.page.date_updated).toLocaleDateString('de')}
+	Letztes Update am {new Date(data.page?.date_updated).toLocaleDateString('de')}
 </time>
 
 <article class="my-12 prose max-w-full lg:prose-lg dark:prose-invert">
@@ -152,7 +152,7 @@
 </article>
 
 <PageList
-	pages={data.page.childs.map((c) => {
+	pages={data.page?.childs.map((c: any) => {
 		return {
 			title: c.title,
 			href: `${page.url.pathname}/${c.slug}`,

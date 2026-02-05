@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { PRIVATE_VACATIONS_PASSWORD } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
@@ -26,8 +26,8 @@ export const actions = {
 			};
 		}
 
-		if (data.get('password') === PRIVATE_VACATIONS_PASSWORD) {
-			cookies.set('vacations_password', PRIVATE_VACATIONS_PASSWORD, {
+		if (data.get('password') === env.PRIVATE_VACATIONS_PASSWORD) {
+			cookies.set('vacations_password', env.PRIVATE_VACATIONS_PASSWORD, {
 				path: '/',
 				maxAge: 60 * 60 * 24 * 365 // 365 days
 			});

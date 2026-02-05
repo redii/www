@@ -6,7 +6,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import Form from '$lib/components/form.svelte';
 	import Terminal from '@lucide/svelte/icons/terminal';
-	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import type { PageProps } from './$types';
 
 	let { form }: PageProps = $props();
@@ -42,7 +42,7 @@
 				</div>
 				<div class="flex flex-col gap-1.5">
 					<Label for="droplet-password">Passwort</Label>
-					<Input type="text" id="droplet-password" readonly value={PUBLIC_DO_VPS_PASSWORD} />
+					<Input type="text" id="droplet-password" readonly value={env.PUBLIC_DO_VPS_PASSWORD} />
 				</div>
 			</Card.Content>
 		</Card.Root>

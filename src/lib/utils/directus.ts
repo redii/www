@@ -7,11 +7,11 @@ import {
 	readItems as d_readItems
 } from '@directus/sdk';
 
-import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
-import { PRIVATE_DIRECTUS_TOKEN } from '$env/static/private';
+import { env as publicEnv } from '$env/dynamic/public';
+import { env as privateEnv } from '$env/dynamic/private';
 
-const client = createDirectus(PUBLIC_DIRECTUS_URL)
-	.with(staticToken(PRIVATE_DIRECTUS_TOKEN))
+const client = createDirectus(publicEnv.PUBLIC_DIRECTUS_URL)
+	.with(staticToken(privateEnv.PRIVATE_DIRECTUS_TOKEN))
 	.with(rest({ credentials: 'include' }));
 
 async function createItem(collection: string, data: object) {

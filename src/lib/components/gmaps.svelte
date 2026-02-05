@@ -4,7 +4,7 @@
 	import { closeLightbox } from '$lib/components/lightbox';
 	import loadGoogleMapsAPI from 'load-google-maps-api';
 
-	import { PUBLIC_GMAPS_API_KEY } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	interface Props {
 		id?: string;
@@ -370,7 +370,7 @@
 
 	onMount(async () => {
 		try {
-			const googleMaps = await loadGoogleMapsAPI({ key: PUBLIC_GMAPS_API_KEY });
+			const googleMaps = await loadGoogleMapsAPI({ key: env.PUBLIC_GMAPS_API_KEY });
 
 			const map = new googleMaps.Map(mapElement, {
 				center: location,

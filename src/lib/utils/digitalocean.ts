@@ -1,18 +1,18 @@
-import { PRIVATE_DO_URL, PRIVATE_DO_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { Droplet } from '$lib/types';
 
 export async function getDropletsByTag(tag: string) {
 	try {
-		const response = await fetch(`${PRIVATE_DO_URL}/droplets?tag_name=${tag}&per_page=200`, {
+		const response = await fetch(`${env.PRIVATE_DO_URL}/droplets?tag_name=${tag}&per_page=200`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${PRIVATE_DO_TOKEN}`
+				Authorization: `Bearer ${env.PRIVATE_DO_TOKEN}`
 			}
 		});
 		if (!response.ok) throw new Error(`Error fetching droplets: ${response.statusText}`);
 		const data = await response.json();
-		data.droplets = data.droplets.sort((a, b) => (a.name > b.name ? 1 : -1));
+		data.droplets = data.droplets.sort((a: Droplet, b: Droplet) => (a.name > b.name ? 1 : -1));
 		return data;
 	} catch (error) {
 		console.error(error);
@@ -20,7 +20,7 @@ export async function getDropletsByTag(tag: string) {
 	}
 }
 
-export async function claimDroplet(claimCode?: string): Promise<{
+export async function claimDroplet(claimCode: string): Promise<{
 	success: boolean;
 	toast: Toast;
 	droplet?: Droplet;
@@ -30,7 +30,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 		let droplet;
 
 		if (claimCode) {
-			droplet = droplets.find((d) => d.tags.includes(claimCode));
+			droplet = droplets.find((d: any) => d.tags.includes(claimCode));
 			if (!droplet) {
 				return {
 					success: false,
@@ -49,7 +49,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 						name: droplet.name,
 						region: droplet.region.slug,
 						size: droplet.size.slug,
-						ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
+						ipv4: droplet.networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))?.ip_address,
 						claimCode
 					} satisfies Droplet,
 					toast: {
@@ -61,7 +61,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 			}
 		}
 
-		droplet = droplets.find((d) => d.tags.length === 1);
+		droplet = droplets.find((d: any) => d.tags.length === 1);
 		if (!droplet) {
 			return {
 				success: false,
@@ -85,7 +85,7 @@ export async function claimDroplet(claimCode?: string): Promise<{
 				name: droplet.name,
 				region: droplet.region.slug,
 				size: droplet.size.slug,
-				ipv4: droplet.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address,
+				ipv4: droplet.networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))?.ip_address,
 				claimCode
 			} satisfies Droplet,
 			toast: {
@@ -111,11 +111,11 @@ function generateClaimCode(): string {
 
 export async function createTag(tagName: string) {
 	try {
-		const response = await fetch(`${PRIVATE_DO_URL}/tags`, {
+		const response = await fetch(`${env.PRIVATE_DO_URL}/tags`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${PRIVATE_DO_TOKEN}`
+				Authorization: `Bearer ${env.PRIVATE_DO_TOKEN}`
 			},
 			body: JSON.stringify({ name: tagName })
 		});
@@ -129,11 +129,11 @@ export async function createTag(tagName: string) {
 
 export async function tagDroplet(dropletId: number | string, tagName: string) {
 	try {
-		const response = await fetch(`${PRIVATE_DO_URL}/tags/${tagName}/resources`, {
+		const response = await fetch(`${env.PRIVATE_DO_URL}/tags/${tagName}/resources`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${PRIVATE_DO_TOKEN}`
+				Authorization: `Bearer ${env.PRIVATE_DO_TOKEN}`
 			},
 			body: JSON.stringify({
 				resources: [{ resource_id: String(dropletId), resource_type: 'droplet' }]
@@ -149,11 +149,11 @@ export async function tagDroplet(dropletId: number | string, tagName: string) {
 
 export async function deleteDropletsByTag(tagName: string) {
 	try {
-		const response = await fetch(`${PRIVATE_DO_URL}/droplets?tag_name=${tagName}`, {
+		const response = await fetch(`${env.PRIVATE_DO_URL}/droplets?tag_name=${tagName}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${PRIVATE_DO_TOKEN}`
+				Authorization: `Bearer ${env.PRIVATE_DO_TOKEN}`
 			}
 		});
 		if (!response.ok) throw new Error(`Error deleting droplets: ${response.statusText}`);
