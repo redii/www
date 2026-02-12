@@ -10,13 +10,22 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 
 	const pageList = await readItems('itadm_content', {
 		filter: {
-			slug: { _eq: slug }
+			slug: { _eq: slug },
+			hidden: { _eq: false }
 		},
 		fields: ['*', 'childs.*']
 	});
 	if (!pageList.length) return fail(404, 'Content not found');
 	const page = pageList[0];
 	const html = await compile(page.text);
+
+	const childs = await readItems('itadm_content', {
+		filter: {
+			parent: { _eq: page.id },
+			hidden: { _eq: false }
+		},
+		fields: ['*']
+	});
 
 	let droplet = null;
 	let totalDropletsCount = 0;
@@ -31,7 +40,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 				name: result.droplets[0].name,
 				region: result.droplets[0].region.slug,
 				size: result.droplets[0].size.slug,
-				ipv4: result.droplets[0].networks.v4.find((a) => !a.ip_address.startsWith('10.'))
+				ipv4: result.droplets[0].networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))
 					?.ip_address,
 				claimCode
 			} satisfies Droplet;
@@ -43,11 +52,12 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	if (!droplet) {
 		const allDroplets = (await getDropletsByTag('itadm'))?.droplets || [];
 		totalDropletsCount = allDroplets.length;
-		freeDropletsCount = allDroplets.filter((d) => d.tags.length === 1).length;
+		freeDropletsCount = allDroplets.filter((d: any) => d.tags.length === 1).length;
 	}
 
 	return {
 		page,
+		childs,
 		html,
 		droplet,
 		totalDropletsCount,

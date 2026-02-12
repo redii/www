@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>Henry Akmann · {data.page.title}</title>
+	<title>{data.page?.title} · Henry Akmann</title>
 </svelte:head>
 
 {#if data.droplet}
@@ -127,7 +127,7 @@
 	</Alert.Root>
 {/if}
 
-{#if data.page.image}
+{#if data.page?.image}
 	<img
 		class="mb-12 w-full rounded-2xl border border-foreground/10 bg-muted object-contain md:mb-16"
 		src={`https://cms.akmann.dev/assets/${data.page.image}`}
@@ -136,29 +136,31 @@
 {/if}
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-	{data.page.title}
+	{data.page?.title}
 </h1>
 <time
-	datetime={data.page.date_updated}
+	datetime={data.page?.date_updated}
 	class="mt-4 inline-block text-sm leading-none font-medium text-muted-foreground"
 >
-	Letztes Update am {new Date(data.page.date_updated).toLocaleDateString('de')}
+	Letztes Update am {new Date(data.page?.date_updated).toLocaleDateString('de')}
 </time>
 
 <article class="my-12 prose max-w-full lg:prose-lg dark:prose-invert">
-	{@html data.html.code
+	{@html data.html?.code
 		.replace(/>{@html `<code class="language-/g, '><code class="language-')
 		.replace(/<\/code>`}<\/pre>/g, '</code></pre>')}
 </article>
 
-<PageList
-	pages={data.page.childs.map((c) => {
-		return {
-			title: c.title,
-			href: `${page.url.pathname}/${c.slug}`,
-			date: c.date_updated,
-			description: c.description,
-			imageId: c.image
-		};
-	})}
-/>
+{#if data.childs?.length}
+	<PageList
+		pages={data.childs?.map((c) => {
+			return {
+				title: c.title,
+				href: `${page.url.pathname}/${c.slug}`,
+				date: c.date_updated,
+				description: c.description,
+				imageId: c.image
+			};
+		})}
+	/>
+{/if}
