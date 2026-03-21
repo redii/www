@@ -4,8 +4,9 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import Form from '$lib/components/form.svelte';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 <div class="mx-auto max-w-lg">

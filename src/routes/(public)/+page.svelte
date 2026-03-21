@@ -1,8 +1,9 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 <div class="flex flex-col items-center gap-14 md:mt-12 lg:flex-row">

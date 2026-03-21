@@ -68,3 +68,16 @@ export type Droplet = {
 	size: string;
 	claimCode: string;
 };
+
+/** Raw DigitalOcean API droplet shape (subset of fields we use). */
+export interface DODropletRaw {
+	id: number;
+	status: string;
+	name: string;
+	tags: string[];
+	region: { slug: string };
+	size: { slug: string };
+	networks: {
+		v4: Array<{ ip_address: string; type: string }>;
+	};
+}

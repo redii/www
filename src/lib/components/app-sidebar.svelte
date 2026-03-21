@@ -48,7 +48,7 @@
 									? item.pathMatching(page.url)
 									: page.url.pathname.startsWith(item.url)}
 							>
-								{#snippet child({ props })}
+								{#snippet child({ props }: { props: Record<string, unknown> })}
 									<a href={item.url} {...props}>
 										<item.icon />
 										<span>{item.title}</span>

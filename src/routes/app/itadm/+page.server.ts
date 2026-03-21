@@ -1,15 +1,14 @@
 import { fail } from '@sveltejs/kit';
-import { getDropletsByTag, deleteDropletsByTag } from '$lib/utils/digitalocean';
+import { getItadmDroplets, deleteDropletsByTag } from '$lib/utils/digitalocean';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async () => {
 	try {
-		const response = await getDropletsByTag('itadm');
-		return {
-			servers: response.droplets
-		};
+		const servers = await getItadmDroplets();
+		return { servers };
 	} catch (error) {
 		console.error(error);
+		return { servers: [] };
 	}
 };
 

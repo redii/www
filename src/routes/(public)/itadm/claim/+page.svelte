@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
 	import Form from '$lib/components/form.svelte';
@@ -61,8 +61,8 @@
 					<Button type="submit" class="w-full">Server anfordern</Button>
 				</Form>
 				<Dialog.Root>
-					<Dialog.Trigger class="mt-2 w-full text-center">
-						<Button variant="link">Du hast einen Claim Code?</Button>
+					<Dialog.Trigger class={`mt-2 w-full text-center ${buttonVariants({ variant: 'link' })}`}>
+						Du hast einen Claim Code?
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>

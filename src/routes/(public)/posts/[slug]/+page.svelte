@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 {#if data.post?.image}
@@ -21,5 +22,5 @@
 </time>
 
 <article class="prose mt-12 max-w-full lg:prose-lg dark:prose-invert">
-	{@html data.html.code}
+	{@html data.html?.code}
 </article>

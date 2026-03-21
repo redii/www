@@ -8,8 +8,9 @@
 	import Trash from '@lucide/svelte/icons/trash';
 
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">ITADM Server</h1>
@@ -59,24 +60,21 @@
 		<Table.Body>
 			{#if data.servers.length === 0}
 				<Table.Row>
-					<Table.Cell colspan={6} class="text-center text-muted-foreground">
+					<Table.Cell colspan={5} class="text-center text-muted-foreground">
 						Keine Server gefunden
 					</Table.Cell>
 				</Table.Row>
 			{:else}
 				{#each data.servers as server}
-					{@const claimCode = server.tags.find((t) => t !== 'itadm')}
 					<Table.Row>
 						<Table.Cell class="font-medium">{server.name}</Table.Cell>
-						<Table.Cell>
-							{server.networks.v4.find((a) => !a.ip_address.startsWith('10.'))?.ip_address}
-						</Table.Cell>
+						<Table.Cell>{server.ipv4}</Table.Cell>
 						<Table.Cell>root</Table.Cell>
 						<Table.Cell>{PUBLIC_DO_VPS_PASSWORD}</Table.Cell>
 						<Table.Cell>
-							{#if claimCode}
+							{#if server.claimCode}
 								<Badge variant="secondary" class="font-mono">
-									{claimCode}
+									{server.claimCode}
 								</Badge>
 							{:else}
 								<Badge variant="outline">Frei</Badge>

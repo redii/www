@@ -1,7 +1,8 @@
 <script lang="ts">
 	import PageList from '$lib/components/page-list.svelte';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Blog Posts</h1>

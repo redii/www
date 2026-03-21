@@ -1,9 +1,8 @@
 import { fail } from '@sveltejs/kit';
 import { compile } from 'mdsvex';
 import { readItems } from '$lib/utils/directus';
-import { getDropletsByTag } from '$lib/utils/digitalocean';
+import { getDropletByClaimCode, getItadmDropletCounts } from '$lib/utils/digitalocean';
 import type { PageServerLoad } from './$types';
-import type { Droplet } from '$lib/types';
 
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const slug = params.slug ? params.slug.split('/').pop() : '/';
@@ -32,27 +31,16 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	let freeDropletsCount = 0;
 	const claimCode = cookies.get('droplet_claimCode');
 	if (claimCode) {
-		const result = await getDropletsByTag(claimCode);
-		if (result.droplets.length) {
-			droplet = {
-				id: result.droplets[0].id,
-				status: result.droplets[0].status,
-				name: result.droplets[0].name,
-				region: result.droplets[0].region.slug,
-				size: result.droplets[0].size.slug,
-				ipv4: result.droplets[0].networks.v4.find((a: any) => !a.ip_address.startsWith('10.'))
-					?.ip_address,
-				claimCode
-			} satisfies Droplet;
-		} else {
+		droplet = await getDropletByClaimCode(claimCode);
+		if (!droplet) {
 			cookies.delete('droplet_claimCode', { path: '/' });
 		}
 	}
 
 	if (!droplet) {
-		const allDroplets = (await getDropletsByTag('itadm'))?.droplets || [];
-		totalDropletsCount = allDroplets.length;
-		freeDropletsCount = allDroplets.filter((d: any) => d.tags.length === 1).length;
+		const counts = await getItadmDropletCounts();
+		totalDropletsCount = counts.total;
+		freeDropletsCount = counts.free;
 	}
 
 	return {

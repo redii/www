@@ -1,42 +1,23 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { afterNavigate } from '$app/navigation';
-	import { toast } from 'svelte-sonner';
+	import { showToast } from '$lib/utils/show-toast';
 
-	const redirectToasts = [
+	const redirectToasts: Toast[] = [
 		{
-			name: 'logged-out',
+			type: 'success',
 			title: 'Du wurdest ausgeloggt',
-			description: 'Deine Sitzung wurde erfolgreich beendet',
-			type: 'success'
+			description: 'Deine Sitzung wurde erfolgreich beendet'
 		}
 	];
 
+	const redirectToastNames = ['logged-out'];
+
 	afterNavigate(() => {
 		for (const [key] of page.url.searchParams.entries()) {
-			const rt = redirectToasts.find((rt) => rt.name === key);
-			if (!rt) return;
-			if (rt.type === 'success') {
-				toast.success(rt.title, {
-					description: rt.description
-				});
-			} else if (rt.type === 'info') {
-				toast.info(rt.title, {
-					description: rt.description
-				});
-			} else if (rt.type === 'warning') {
-				toast.warning(rt.title, {
-					description: rt.description
-				});
-			} else if (rt.type === 'error') {
-				toast.error(rt.title, {
-					description: rt.description
-				});
-			} else {
-				toast(rt.title, {
-					description: rt.description
-				});
-			}
+			const index = redirectToastNames.indexOf(key);
+			if (index === -1) return;
+			showToast(redirectToasts[index]);
 			break;
 		}
 	});

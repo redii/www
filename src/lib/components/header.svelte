@@ -7,7 +7,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import { toggleMode } from 'mode-watcher';
 	import Menu from '@lucide/svelte/icons/menu';
@@ -68,19 +68,17 @@
 				</Tooltip.Root>
 			</Tooltip.Provider>
 			<Dialog.Root>
-				<Dialog.Trigger>
-					<Tooltip.Provider>
-						<Tooltip.Root>
-							<Tooltip.Trigger>
-								<Button variant="ghost" size="icon">
-									<span class="sr-only">Kontaktdaten</span>
-									<Mail />
-								</Button>
-							</Tooltip.Trigger>
-							<Tooltip.Content>Kontaktdaten</Tooltip.Content>
-						</Tooltip.Root>
-					</Tooltip.Provider>
-				</Dialog.Trigger>
+				<Tooltip.Provider>
+					<Tooltip.Root>
+						<Tooltip.Trigger>
+							<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+								<span class="sr-only">Kontaktdaten</span>
+								<Mail />
+							</Dialog.Trigger>
+						</Tooltip.Trigger>
+						<Tooltip.Content>Kontaktdaten</Tooltip.Content>
+					</Tooltip.Root>
+				</Tooltip.Provider>
 				<Dialog.Content>
 					<Dialog.Header>
 						<Dialog.Title>Kontaktdaten</Dialog.Title>

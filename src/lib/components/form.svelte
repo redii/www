@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { enhance, applyAction } from '$app/forms';
+	import type { ActionResult } from '@sveltejs/kit';
 	import { invalidateAll as sv_invalidateAll, goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
+	import { showToast } from '$lib/utils/show-toast';
 
 	interface Props {
 		form?: HTMLFormElement | undefined;
@@ -31,7 +33,7 @@
 			// disable submitButtons
 			setSubmitButtonDisableState(true);
 
-			return async ({ result }) => {
+			return async ({ result }: { result: ActionResult }) => {
 				if (result.type === 'redirect') {
 					goto(result.location);
 				} else {
@@ -42,34 +44,16 @@
 				// enable submitButtons after form action
 				setSubmitButtonDisableState(false);
 
+				const data = result.type === 'success' || result.type === 'failure' ? result.data : null;
+
 				// execute followup functions if given
-				if (onsuccess && result.data?.success === true) onsuccess();
-				if (onfailure && result.data?.success === false) onfailure();
+				if (onsuccess && data?.success === true) onsuccess();
+				if (onfailure && data?.success === false) onfailure();
 
 				// display toast if returned
-				const toastData: Toast = result.data?.toast;
+				const toastData: Toast | undefined = data?.toast;
 				if (toastData) {
-					if (toastData.type === 'success') {
-						toast.success(toastData.title, {
-							description: toastData.description
-						});
-					} else if (toastData.type === 'info') {
-						toast.info(toastData.title, {
-							description: toastData.description
-						});
-					} else if (toastData.type === 'warning') {
-						toast.warning(toastData.title, {
-							description: toastData.description
-						});
-					} else if (toastData.type === 'error') {
-						toast.error(toastData.title, {
-							description: toastData.description
-						});
-					} else {
-						toast(toastData.title, {
-							description: toastData.description
-						});
-					}
+					showToast(toastData);
 				}
 			};
 		} catch (err) {

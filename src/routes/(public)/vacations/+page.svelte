@@ -1,8 +1,9 @@
 <script lang="ts">
 	import PageList from '$lib/components/page-list.svelte';
 	import Gmaps from '$lib/components/gmaps.svelte';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 </script>
 
 <svelte:head>

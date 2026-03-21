@@ -14,9 +14,11 @@
 	import Unplug from '@lucide/svelte/icons/unplug';
 	import { PUBLIC_DO_VPS_PASSWORD } from '$env/static/public';
 
-	export let data;
+	import type { PageProps } from './$types';
 
-	let confirmDropletDisconnect = false;
+	let { data }: PageProps = $props();
+
+	let confirmDropletDisconnect = $state(false);
 </script>
 
 <svelte:head>

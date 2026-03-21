@@ -10,26 +10,37 @@
 	}
 
 	let { gallery = 'default', children, lightboxContent }: Props = $props();
-	let elementIndex = 0 as number;
-	let id = crypto.randomUUID();
+	let elementIndex = 0;
 
 	onMount(() => {
 		elementIndex = registerElement(lightboxContent || children, gallery);
-		document.getElementById(id)?.addEventListener('click', handleClick);
 	});
 
 	onDestroy(() => {
 		if (browser) {
 			removeElement(elementIndex);
-			document.getElementById(id)?.removeEventListener('click', handleClick);
 		}
 	});
 
-	function handleClick() {
+	function handleOpen() {
 		openLightbox(elementIndex, gallery);
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			handleOpen();
+		}
 	}
 </script>
 
-<div {id} class="cursor-pointer">
+<div
+	class="cursor-pointer"
+	role="button"
+	tabindex="0"
+	aria-label="Bild vergrößern"
+	onclick={handleOpen}
+	onkeydown={handleKeydown}
+>
 	{@render children?.()}
 </div>
