@@ -19,6 +19,28 @@
 	let { data }: PageProps = $props();
 
 	let confirmDropletDisconnect = $state(false);
+
+	function injectScripts(node: HTMLElement, html: string) {
+		function run(src: string) {
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(src, 'text/html');
+			for (const orig of doc.querySelectorAll('script')) {
+				const script = document.createElement('script');
+				for (const attr of orig.attributes) {
+					script.setAttribute(attr.name, attr.value);
+				}
+				script.textContent = orig.textContent;
+				node.appendChild(script);
+			}
+		}
+		run(html);
+		return {
+			update(newHtml: string) {
+				node.querySelectorAll('script').forEach((s) => s.remove());
+				run(newHtml);
+			}
+		};
+	}
 </script>
 
 <svelte:head>
@@ -147,7 +169,10 @@
 	Letztes Update am {new Date(data.page?.date_updated).toLocaleDateString('de')}
 </time>
 
-<article class="my-12 prose max-w-full lg:prose-lg dark:prose-invert">
+<article
+	class="my-12 prose max-w-full lg:prose-lg dark:prose-invert"
+	use:injectScripts={data.html?.code ?? ''}
+>
 	{@html data.html?.code
 		.replace(/>{@html `<code class="language-/g, '><code class="language-')
 		.replace(/<\/code>`}<\/pre>/g, '</code></pre>')}
