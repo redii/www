@@ -5,7 +5,6 @@
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import { Button } from '$lib/components/ui/button';
 	import LogOut from '@lucide/svelte/icons/log-out';
 	import HouseIcon from '@lucide/svelte/icons/house';
 	import GraduationCap from '@lucide/svelte/icons/graduation-cap';
@@ -89,13 +88,25 @@
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content side="top" class="w-(--bits-dropdown-menu-anchor-width)">
 							<DropdownMenu.Item class="cursor-pointer">
-								<a href="/" class="w-full">Startseite</a>
+								{#snippet child({ props })}
+									<a href="/" {...props} class="{props.class} flex w-full items-center">
+										Startseite
+									</a>
+								{/snippet}
 							</DropdownMenu.Item>
-							<form method="POST" action="/logout">
-								<Button variant="ghost" size="sm" type="submit" class="w-full">
-									<LogOut class="size-3" />
-									Logout
-								</Button>
+							<form method="POST" action="/logout" class="w-full">
+								<DropdownMenu.Item class="cursor-pointer">
+									{#snippet child({ props })}
+										<button
+											type="submit"
+											{...props}
+											class="{props.class} flex w-full items-center gap-2"
+										>
+											<LogOut class="size-3" />
+											Logout
+										</button>
+									{/snippet}
+								</DropdownMenu.Item>
 							</form>
 						</DropdownMenu.Content>
 					</DropdownMenu.Root>

@@ -129,20 +129,32 @@
 							</Avatar.Fallback>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
-					<DropdownMenu.Content class="mr-2">
+					<DropdownMenu.Content class="mr-2 min-w-40">
 						<DropdownMenu.Group>
 							<DropdownMenu.Label>
 								{user?.name}
 							</DropdownMenu.Label>
 							<DropdownMenu.Separator />
 							<DropdownMenu.Item>
-								<a href="/app">Dashboard</a>
+								{#snippet child({ props })}
+									<a href="/app" {...props} class="{props.class} flex w-full items-center">
+										Dashboard
+									</a>
+								{/snippet}
 							</DropdownMenu.Item>
-							<form method="POST" action="/logout">
-								<Button variant="ghost" size="sm" type="submit" class="w-full">
-									<LogOut class="size-3" />
-									Logout
-								</Button>
+							<form method="POST" action="/logout" class="w-full">
+								<DropdownMenu.Item class="cursor-pointer">
+									{#snippet child({ props })}
+										<button
+											type="submit"
+											{...props}
+											class="{props.class} flex w-full items-center gap-2"
+										>
+											<LogOut class="size-3" />
+											Logout
+										</button>
+									{/snippet}
+								</DropdownMenu.Item>
 							</form>
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
