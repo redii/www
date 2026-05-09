@@ -47,7 +47,7 @@
 {/if}
 
 <section id="vacation-heading" class="mt-8 mb-16">
-	<div class="flex flex-col items-center items-start justify-between gap-4 sm:flex-row">
+	<div class="flex flex-col items-start justify-between gap-4 sm:flex-row">
 		<div>
 			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 				{data.vacation.title}
@@ -134,7 +134,7 @@
 						<Tooltip.Provider>
 							<Tooltip.Root>
 								<Tooltip.Trigger>
-									<Badge class="bg-indigo-500">
+									<Badge variant="outline">
 										<Footprints />
 										{day.steps.toLocaleString('de-DE')}
 									</Badge>
@@ -149,7 +149,7 @@
 						<Tooltip.Provider>
 							<Tooltip.Root>
 								<Tooltip.Trigger>
-									<Badge class="bg-pink-500">
+									<Badge variant="outline">
 										<Gauge />
 										{day.kilometers} km
 									</Badge>
