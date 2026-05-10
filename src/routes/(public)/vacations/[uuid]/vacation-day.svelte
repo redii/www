@@ -93,9 +93,9 @@
 						</AspectRatio>
 						{#if entry.url}
 							<div
-								class="absolute right-2.5 bottom-2.5 flex size-5 items-center justify-center rounded-full bg-background/80 shadow-sm"
+								class="absolute right-1.5 bottom-1.5 flex size-4 items-center justify-center rounded-full bg-background/80 shadow-sm sm:right-2.5 sm:bottom-2.5 sm:size-5"
 							>
-								<Info class="size-3.5" />
+								<Info class="size-3 sm:size-3.5" />
 							</div>
 						{/if}
 					</div>
