@@ -9,7 +9,7 @@
 	import Footprints from '@lucide/svelte/icons/footprints';
 	import Gauge from '@lucide/svelte/icons/gauge';
 	import SquareArrowOutUpRight from '@lucide/svelte/icons/square-arrow-out-up-right';
-	import Navigation from '@lucide/svelte/icons/navigation';
+	import Info from '@lucide/svelte/icons/info';
 	import DayComments from './day-comments.svelte';
 	import Reactions from './day-reactions.svelte';
 
@@ -95,7 +95,7 @@
 							<div
 								class="absolute right-2.5 bottom-2.5 flex size-5 items-center justify-center rounded-full bg-background/80 shadow-sm"
 							>
-								<Navigation class="relative top-[1px] size-3" />
+								<Info class="size-3.5" />
 							</div>
 						{/if}
 					</div>
