@@ -8,6 +8,8 @@
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
 	import Footprints from '@lucide/svelte/icons/footprints';
 	import Gauge from '@lucide/svelte/icons/gauge';
+	import SquareArrowOutUpRight from '@lucide/svelte/icons/square-arrow-out-up-right';
+	import Navigation from '@lucide/svelte/icons/navigation';
 	import DayComments from './day-comments.svelte';
 	import Reactions from './day-reactions.svelte';
 
@@ -80,32 +82,62 @@
 		<div class="mt-4 grid grid-cols-3 items-center justify-center gap-2">
 			{#each day.images as entry}
 				<LightboxItem gallery={`ìmages-${vacationId}`}>
-					<AspectRatio ratio={1}>
-						<img
-							src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail || entry.image}?format=webp&height=320&width=320`}
-							alt={entry.description}
-							class="h-full w-full rounded-xl bg-muted object-cover"
-							loading="lazy"
-						/>
-					</AspectRatio>
-					{#snippet lightboxContent()}
-						{#if entry.media_type === 'video'}
-							<video
-								controls
-								poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
-								class="h-full"
-							>
-								<source src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`} type="video/mp4" />
-								<track kind="captions" />
-							</video>
-						{:else}
+					<div class="relative">
+						<AspectRatio ratio={1}>
 							<img
-								src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+								src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail || entry.image}?format=webp&height=320&width=320`}
 								alt={entry.description}
-								class="h-full w-full object-contain"
+								class="h-full w-full rounded-xl bg-muted object-cover"
 								loading="lazy"
 							/>
+						</AspectRatio>
+						{#if entry.url}
+							<div
+								class="absolute right-2.5 bottom-2.5 flex size-5 items-center justify-center rounded-full bg-background/80 shadow-sm"
+							>
+								<Navigation class="relative top-[1px] size-3" />
+							</div>
 						{/if}
+					</div>
+					{#snippet lightboxContent()}
+						<div class="flex h-full flex-col">
+							{#if entry.media_type === 'video'}
+								<video
+									controls
+									poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+									class="min-h-0 flex-1"
+								>
+									<source src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`} type="video/mp4" />
+									<track kind="captions" />
+								</video>
+							{:else}
+								<img
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
+									alt={entry.description}
+									class="min-h-0 w-full flex-1 object-contain"
+									loading="lazy"
+								/>
+							{/if}
+							{#if entry.description || entry.url}
+								<div class="mt-3 flex items-center justify-center gap-2 text-white">
+									{#if entry.description && entry.url}
+										<div class="text-center">
+											<a
+												href={entry.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												aria-label="Link öffnen"
+											>
+												{entry.description || 'Link'}
+												<SquareArrowOutUpRight class="relative bottom-0.5 inline size-4" />
+											</a>
+										</div>
+									{:else if entry.description}
+										<div class="text-center">{entry.description}</div>
+									{/if}
+								</div>
+							{/if}
+						</div>
 					{/snippet}
 				</LightboxItem>
 			{/each}
