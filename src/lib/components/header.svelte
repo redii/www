@@ -48,10 +48,12 @@
 			<Tooltip.Provider>
 				<Tooltip.Root>
 					<Tooltip.Trigger>
-						<Button href="/vacations" variant="ghost" size="icon">
-							<span class="sr-only">Urlaube</span>
-							<TreePalm />
-						</Button>
+						{#snippet child({ props })}
+							<Button {...props} href="/vacations" variant="ghost" size="icon">
+								<span class="sr-only">Urlaube</span>
+								<TreePalm />
+							</Button>
+						{/snippet}
 					</Tooltip.Trigger>
 					<Tooltip.Content>Urlaube</Tooltip.Content>
 				</Tooltip.Root>
@@ -59,10 +61,18 @@
 			<Tooltip.Provider>
 				<Tooltip.Root>
 					<Tooltip.Trigger>
-						<Button href="https://github.com/redii" target="_blank" variant="ghost" size="icon">
-							<span class="sr-only">Github Profil</span>
-							<Github />
-						</Button>
+						{#snippet child({ props })}
+							<Button
+								{...props}
+								href="https://github.com/redii"
+								target="_blank"
+								variant="ghost"
+								size="icon"
+							>
+								<span class="sr-only">Github Profil</span>
+								<Github />
+							</Button>
+						{/snippet}
 					</Tooltip.Trigger>
 					<Tooltip.Content>Github Profil</Tooltip.Content>
 				</Tooltip.Root>
@@ -71,10 +81,15 @@
 				<Tooltip.Provider>
 					<Tooltip.Root>
 						<Tooltip.Trigger>
-							<Dialog.Trigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
-								<span class="sr-only">Kontaktdaten</span>
-								<Mail />
-							</Dialog.Trigger>
+							{#snippet child({ props })}
+								<Dialog.Trigger
+									{...props}
+									class={buttonVariants({ variant: 'ghost', size: 'icon' })}
+								>
+									<span class="sr-only">Kontaktdaten</span>
+									<Mail />
+								</Dialog.Trigger>
+							{/snippet}
 						</Tooltip.Trigger>
 						<Tooltip.Content>Kontaktdaten</Tooltip.Content>
 					</Tooltip.Root>
@@ -99,15 +114,17 @@
 			<Tooltip.Provider>
 				<Tooltip.Root>
 					<Tooltip.Trigger>
-						<Button onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
-							<Sun
-								class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-							/>
-							<Moon
-								class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-							/>
-							<span class="sr-only">Theme umschalten</span>
-						</Button>
+						{#snippet child({ props })}
+							<Button {...props} onclick={toggleMode} variant="ghost" size="icon" class="ml-2">
+								<Sun
+									class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+								/>
+								<Moon
+									class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+								/>
+								<span class="sr-only">Theme umschalten</span>
+							</Button>
+						{/snippet}
 					</Tooltip.Trigger>
 					<Tooltip.Content>
 						<span class="dark:hidden">Lightmode</span>
