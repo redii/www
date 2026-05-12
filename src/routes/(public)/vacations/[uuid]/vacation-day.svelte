@@ -5,6 +5,7 @@
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import LightboxItem from '$lib/components/lightbox/LightboxItem.svelte';
 	import Gmaps from '$lib/components/gmaps.svelte';
+	import VideoPlayer from '$lib/components/video-player.svelte';
 	import MapPinned from '@lucide/svelte/icons/map-pinned';
 	import Footprints from '@lucide/svelte/icons/footprints';
 	import Gauge from '@lucide/svelte/icons/gauge';
@@ -102,14 +103,11 @@
 					{#snippet lightboxContent()}
 						<div class="flex h-full flex-col items-center justify-center gap-3">
 							{#if entry.media_type === 'video'}
-								<video
-									controls
+								<VideoPlayer
+									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`}
 									poster={`${PUBLIC_DIRECTUS_URL}/assets/${entry.thumbnail}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
 									class="min-h-0 max-h-full max-w-full"
-								>
-									<source src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}`} type="video/mp4" />
-									<track kind="captions" />
-								</video>
+								/>
 							{:else}
 								<img
 									src={`${PUBLIC_DIRECTUS_URL}/assets/${entry.image}?format=webp&quality=75&width=1600&withoutEnlargement=true`}
