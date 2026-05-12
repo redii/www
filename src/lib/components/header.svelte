@@ -207,7 +207,7 @@
 				<div class="flex min-h-[60dvh] flex-col items-center justify-center gap-6 py-6">
 					<a
 						href="/vacations"
-						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+						class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
 						<TreePalm class="mr-2 inline" size={24} />
@@ -216,7 +216,7 @@
 					<a
 						href="https://github.com"
 						target="_blank"
-						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+						class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Github class="mr-2 inline" size={24} />
@@ -224,7 +224,7 @@
 					</a>
 					<a
 						href="mailto:moin@akmann.dev"
-						class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+						class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold text-foreground hover:bg-foreground/10"
 						onclick={() => (mobileMenuOpen = false)}
 					>
 						<Mail class="mr-2 inline" size={24} />
@@ -233,7 +233,7 @@
 					{#if !page?.data?.session}
 						<a
 							href="/login"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+							class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold text-foreground hover:bg-foreground/10"
 							onclick={() => (mobileMenuOpen = false)}
 						>
 							<LogIn class="mr-2 inline" size={24} />
@@ -243,7 +243,7 @@
 						{@const user = page?.data?.session?.user}
 						<a
 							href="/app"
-							class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-xl font-semibold text-foreground hover:bg-foreground/10"
+							class="-mx-3 block rounded-lg px-3 py-2 text-xl font-semibold text-foreground hover:bg-foreground/10"
 							onclick={() => (mobileMenuOpen = false)}
 						>
 							Dashboard
