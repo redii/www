@@ -75,9 +75,11 @@
 			</div>
 
 			<Carousel.Content id="lightbox-content" class="mt-8 h-[calc(100dvh-200px)] px-2">
-				{#each $lightboxGalleries[$currentGalleryIndex].elements as element}
+				{#each $lightboxGalleries[$currentGalleryIndex].elements as element, i}
 					<Carousel.Item>
-						{@render element?.()}
+						{#if Math.abs(i - ($currentElementIndex ?? 0)) <= 1}
+							{@render element?.()}
+						{/if}
 					</Carousel.Item>
 				{/each}
 			</Carousel.Content>
