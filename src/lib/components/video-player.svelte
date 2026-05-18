@@ -25,6 +25,7 @@
 	let isFullscreen = $state(false);
 	let controlsVisible = $state(true);
 	let canHover = $state(false);
+	let posterVisible = $state(true);
 	let idleTimer: ReturnType<typeof setTimeout> | null = null;
 
 	function showControls() {
@@ -84,12 +85,20 @@
 
 <div
 	bind:this={containerEl}
-	class={cn('group relative inline-flex bg-black', className)}
+	class={cn('group relative inline-block bg-black', className)}
 	role="region"
 	aria-label="Videoplayer"
 	onmousemove={showControls}
 	ontouchstart={showControls}
 >
+	{#if poster}
+		<img
+			src={poster}
+			alt=""
+			aria-hidden="true"
+			class={cn('block max-h-full max-w-full', !posterVisible && 'hidden')}
+		/>
+	{/if}
 	<!-- svelte-ignore a11y_media_has_caption -->
 	<video
 		bind:this={videoEl}
@@ -97,9 +106,12 @@
 		bind:duration
 		bind:paused
 		bind:muted
-		{poster}
 		onclick={togglePlay}
-		class="block max-h-full max-w-full"
+		onplaying={() => (posterVisible = false)}
+		class={cn(
+			'block max-h-full max-w-full',
+			posterVisible && poster && 'absolute inset-0 h-full w-full opacity-0'
+		)}
 	>
 		<source {src} type="video/mp4" />
 	</video>
